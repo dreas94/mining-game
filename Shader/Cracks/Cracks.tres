@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c1nkj436djpxy"]
+
+[ext_resource type="Shader" uid="uid://dxlr4w6r6w7gr" path="res://Shader/Cracks/Cracks.gdshader" id="1_nk7sm"]
+
+[resource]
+shader = ExtResource("1_nk7sm")
+shader_parameter/crack_depth = 1.268
+shader_parameter/crack_scale = 4.0
+shader_parameter/crack_zebra_scale = 2.67
+shader_parameter/crack_zebra_amp = 0.0
+shader_parameter/crack_profile = 0.032
+shader_parameter/crack_slope = 1.0
+shader_parameter/crack_width = 0.03
+shader_parameter/crack_alpha = 0.0
+shader_parameter/custom_crack_color = Color(0, 0, 0, 0)
