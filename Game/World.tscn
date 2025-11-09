@@ -1,7 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://c72f4ti8pjn7d"]
+[gd_scene load_steps=4 format=3 uid="uid://c72f4ti8pjn7d"]
 
 [ext_resource type="PackedScene" uid="uid://cr7vr5ke2lgfn" path="res://Game/Player/Player.tscn" id="1_4r2v7"]
+[ext_resource type="Script" uid="uid://cp4q2b1cr83xn" path="res://Game/World.gd" id="1_rio8u"]
+[ext_resource type="PackedScene" uid="uid://b0uvqxmjdu4ae" path="res://Resources/CaveGenerator.tscn" id="4_dyu4a"]
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" node_paths=PackedStringArray("player")]
+script = ExtResource("1_rio8u")
+player = NodePath("Player")
+
+[node name="CaveGenerator" parent="." instance=ExtResource("4_dyu4a")]
 
 [node name="Player" parent="." instance=ExtResource("1_4r2v7")]

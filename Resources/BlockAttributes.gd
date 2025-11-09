@@ -6,8 +6,8 @@ var template: BlockTemplate
 var name: String
 
 # Values
-var color: AnyAttribute
-var durability: IntAttribute
+var color: AnyAttribute = AnyAttribute.new(null)
+var durability: IntAttribute = IntAttribute.new(0)
 
 
 func _init(block_template: BlockTemplate) -> void:
