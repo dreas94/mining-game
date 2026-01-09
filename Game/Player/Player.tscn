@@ -375,6 +375,7 @@ states/Start/position = Vector2(167, 100)
 states/Walk/node = SubResource("AnimationNodeBlendSpace1D_hf5e6")
 states/Walk/position = Vector2(295, 50)
 transitions = ["Start", "Walk", SubResource("AnimationNodeStateMachineTransition_e0asf"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_e0wbv"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_4672b"), "Walk", "Run", SubResource("AnimationNodeStateMachineTransition_fd82q"), "Run", "Walk", SubResource("AnimationNodeStateMachineTransition_2nirr"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_kt3un")]
+graph_offset = Vector2(-190, 7)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4672b"]
 size = Vector2(13, 18)
@@ -400,8 +401,8 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_e0asf")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
-parameters/Idle/blend_position = 0.0
-parameters/Run/blend_position = -0.857143
+parameters/Idle/blend_position = -0.151163
+parameters/Run/blend_position = 0.0
 parameters/Walk/blend_position = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

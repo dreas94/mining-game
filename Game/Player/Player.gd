@@ -42,10 +42,10 @@ func _physics_process(_delta: float) -> void:
 	
 	self.velocity = velocity_value
 	
-	var idle: bool = !self.velocity
-	
-	if !idle:
+	if self.velocity.x != 0 and self.velocity.y != 0:
 		last_facing_direction.value = move_direction
+	
+	print(last_facing_direction.value)
 	
 	animation_tree.set("parameters/Idle/blend_position", last_facing_direction.value)
 	animation_tree.set("parameters/Run/blend_position", last_facing_direction.value)

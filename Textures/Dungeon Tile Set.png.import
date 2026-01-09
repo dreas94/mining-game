@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cte3vcktvooko"
-path="res://.godot/imported/Cave_decorations.png-a344361e9a8d972de5d8f0a9530e35f0.ctex"
+uid="uid://bqqenji8ubf7r"
+path="res://.godot/imported/Dungeon Tile Set.png-b1766f9adc6aeaae2543320790f71ae7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Cave_decorations.png"
-dest_files=["res://.godot/imported/Cave_decorations.png-a344361e9a8d972de5d8f0a9530e35f0.ctex"]
+source_file="res://Textures/Dungeon Tile Set.png"
+dest_files=["res://.godot/imported/Dungeon Tile Set.png-b1766f9adc6aeaae2543320790f71ae7.ctex"]
 
 [params]
 
