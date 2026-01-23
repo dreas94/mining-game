@@ -1,10 +1,12 @@
 class_name iPlayer
 extends CharacterBody2D
+signal mine_attempt()
 
 @export var speed: float = 100
 @export var gravity: float = 20.0
 @export var jump_speed: float = -300
 @export var animation_tree: AnimationTree
+@export var camera: Camera2D
 
 var last_facing_direction: Range
 var _is_running: bool
@@ -45,9 +47,18 @@ func _physics_process(_delta: float) -> void:
 	if self.velocity.x != 0 and self.velocity.y != 0:
 		last_facing_direction.value = move_direction
 	
-	print(last_facing_direction.value)
-	
 	animation_tree.set("parameters/Idle/blend_position", last_facing_direction.value)
 	animation_tree.set("parameters/Run/blend_position", last_facing_direction.value)
 	animation_tree.set("parameters/Walk/blend_position", last_facing_direction.value)
 	move_and_slide()
+
+
+func _input(event: InputEvent) -> void:
+	if not event.is_pressed():
+		return
+	
+	if event is InputEventMouseButton:
+		if not event.button_index == MouseButton.MOUSE_BUTTON_LEFT:
+			return
+		
+		mine_attempt.emit()

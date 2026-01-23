@@ -378,16 +378,18 @@ transitions = ["Start", "Walk", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(-190, 7)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4672b"]
-size = Vector2(13, 18)
+size = Vector2(13, 14)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "camera")]
 script = ExtResource("1_4672b")
 animation_tree = NodePath("AnimationTree")
+camera = NodePath("Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -3)
 texture = ExtResource("1_e0wbv")
 hframes = 8
 vframes = 6
@@ -406,5 +408,5 @@ parameters/Run/blend_position = 0.0
 parameters/Walk/blend_position = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3)
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_4672b")

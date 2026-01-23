@@ -1,7 +1,6 @@
 extends Node2D
 @export var map_width: int = 80
-@export var map_height: int = 50
-@export var map_size: Vector2i = Vector2i(110, 60)
+@export var map_height: int = 80
 @export var world_seed: String = "4_20_69"
 @export var fractal_octaves: int = 4
 @export var fractal_gain: float = 0.5
@@ -32,14 +31,19 @@ func generate():
 	self.simplex_noise.fractal_weighted_strength = self.fractal_weighted_strength
 	self.simplex_noise.frequency = self.frequency
 	
-
-	for x in range(-self.map_width / 2.0, self.map_width / 2.0):
-		for y in range(-self.map_height / 2.0, self.map_height / 2.0):
-			var noise_val: float = simplex_noise.get_noise_2d(x, y)
-			
-			noise_val_array.append(noise_val)
-			
-			if noise_val < self.noise_threshold:
+	var min_width: int = floor(-(self.map_width + 2) / 2.0)
+	var max_width: int = floor((self.map_width + 2) / 2.0)
+	var min_height: int = floor(-(self.map_width + 2) / 2.0)
+	var max_height: int = floor((self.map_width + 2) / 2.0)
+	for x in range(min_width, max_width):
+		for y in range(min_height, max_height):
+			if x in range(min_width, min_width + 2) or x in range(max_width - 2, max_width):
 				space_tiles_array.append(Vector2i(x,y))
-			
-		tile_map.set_cells_terrain_connect(space_tiles_array, 0, 0)
+			elif y in range(min_height, min_height + 2) or y in range(max_height - 2, max_height):
+				space_tiles_array.append(Vector2i(x,y))
+			elif (not x in range(0, 2)) or (not y in range(-2, 0)):
+				var noise_val: float = simplex_noise.get_noise_2d(x, y)
+				if noise_val < self.noise_threshold:
+					space_tiles_array.append(Vector2i(x,y))
+	
+	tile_map.set_cells_terrain_connect(space_tiles_array, 0, 0)
