@@ -2,55 +2,103 @@ class_name iPlayer
 extends CharacterBody2D
 signal mine_attempt()
 
-@export var speed: float = 100
-@export var gravity: float = 20.0
-@export var jump_speed: float = -300
 @export var animation_tree: AnimationTree
 @export var camera: Camera2D
 
-var last_facing_direction: Range
-var _is_running: bool
+enum State {IDLE, WALK, JUMP, DOWN}
+var _current_state: State = State.IDLE
+
+var speed: float = 100.0
+var acceleration: float = 100.0
+var deacceleration: float = acceleration * 4.0
+var jump_speed: float = -200.0
+var gravity: float = 400.0
+
+
+var move_direction: float
+var last_facing_direction: float
+var collided: bool = false
 
 
 func _ready() -> void:
-	last_facing_direction = Range.new()
-	last_facing_direction.max_value = 1.0
-	last_facing_direction.min_value = -1.0
-	last_facing_direction.value = last_facing_direction.max_value
+	animation_tree.active = true
 
 
-func _physics_process(_delta: float) -> void:
-	var velocity_value: Vector2 = Vector2.ZERO
+func _physics_process(delta: float) -> void:
+	_handle_input(delta)
+	_handle_collision()
+	_update_movement(delta)
+	_update_states()
+	_update_animation()
 	
-	#Gravity
-	velocity_value.y = self.velocity.y + gravity
-	
-	#Jumping
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity_value.y = jump_speed
-	
-	var move_direction: float = 0
-	#Movement
-	if Input.is_action_pressed("move_left"):
-		move_direction = -1
-	elif Input.is_action_pressed("move_right"):
-		move_direction = 1
-	
-	_is_running = Input.is_action_pressed("run")
-	if _is_running:
-		velocity_value.x = move_direction * speed * 2.0
-	else:
-		velocity_value.x = move_direction * speed
-	
-	self.velocity = velocity_value
-	
-	if self.velocity.x != 0 and self.velocity.y != 0:
-		last_facing_direction.value = move_direction
-	
-	animation_tree.set("parameters/Idle/blend_position", last_facing_direction.value)
-	animation_tree.set("parameters/Run/blend_position", last_facing_direction.value)
-	animation_tree.set("parameters/Walk/blend_position", last_facing_direction.value)
 	move_and_slide()
+
+
+func _handle_collision() -> void:
+	if get_slide_collision_count() == 0:
+		return
+	
+	for index: int in range(get_slide_collision_count()):
+		var collision: KinematicCollision2D = get_slide_collision(index)
+		if collision.get_normal().x != 0:
+			return
+
+
+func _handle_input(delta: float) -> void:
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = jump_speed
+		_current_state = State.JUMP
+	
+	move_direction = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
+	if move_direction == 0:
+		velocity.x = move_toward(velocity.x, 0, deacceleration * delta)
+	elif Input.is_action_pressed("run"):
+		velocity.x = move_toward(velocity.x, 2.0 * speed * move_direction, acceleration * delta)
+	else:
+		velocity.x = move_toward(velocity.x, speed * move_direction, acceleration * delta)
+
+
+func _update_movement(delta: float) -> void:
+	#Gravity
+	if is_on_floor():
+		return
+	
+	velocity.y += gravity * delta
+
+
+func _update_states() -> void:
+	match _current_state:
+		State.IDLE when velocity.x != 0:
+			_current_state = State.WALK
+		State.WALK:
+			if velocity.x == 0:
+				_current_state = State.IDLE
+			if not is_on_floor() && velocity.y > 0:
+				_current_state = State.DOWN
+		State.JUMP when velocity.y > 0:
+			_current_state = State.DOWN
+		State.DOWN when is_on_floor():
+			if velocity.x == 0:
+				_current_state = State.IDLE
+			else:
+				_current_state = State.WALK
+
+
+func _update_animation() -> void:
+	var time_scale: float = 1.0
+	
+	if move_direction != 0:
+		animation_tree.set("parameters/PlayerStates/Down/blend_position", move_direction)
+		animation_tree.set("parameters/PlayerStates/Up/blend_position", move_direction)
+		animation_tree.set("parameters/PlayerStates/Idle/blend_position", move_direction)
+		animation_tree.set("parameters/PlayerStates/Run/blend_position", move_direction)
+		animation_tree.set("parameters/PlayerStates/Walk/blend_position", move_direction)
+		
+		if Input.is_action_pressed("run"):
+			time_scale = 2.0
+	
+	if animation_tree.get("parameters/TimeScale/scale") != time_scale:
+		animation_tree.set("parameters/TimeScale/scale", time_scale)
 
 
 func _input(event: InputEvent) -> void:
@@ -62,3 +110,8 @@ func _input(event: InputEvent) -> void:
 			return
 		
 		mine_attempt.emit(25)
+
+
+func _play_footstep() -> void:
+	if is_on_floor():
+		App.sfx.play(DefaultSoundEffects.GRAVEL)

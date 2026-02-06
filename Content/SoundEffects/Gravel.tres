@@ -1,0 +1,58 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=24 format=3 uid="uid://7s5mb61hbs0s"]
+
+[ext_resource type="Script" uid="uid://d23jiu7f3wq8w" path="res://App/Sound/SoundEffect.gd" id="1_lhc1g"]
+[ext_resource type="AudioStream" uid="uid://d1lsd75pwmmcp" path="res://Content/RawSounds/Gravel/Steps_gravel-001.ogg" id="2_jjb3k"]
+[ext_resource type="AudioStream" uid="uid://fninuqfcyh64" path="res://Content/RawSounds/Gravel/Steps_gravel-002.ogg" id="3_xxtyh"]
+[ext_resource type="AudioStream" uid="uid://p7i5lofvdugg" path="res://Content/RawSounds/Gravel/Steps_gravel-011.ogg" id="4_kndxf"]
+[ext_resource type="AudioStream" uid="uid://b07qh54rklpk3" path="res://Content/RawSounds/Gravel/Steps_gravel-012.ogg" id="5_qh4m2"]
+[ext_resource type="AudioStream" uid="uid://ddch6r66rxikb" path="res://Content/RawSounds/Gravel/Steps_gravel-013.ogg" id="6_4huvg"]
+[ext_resource type="AudioStream" uid="uid://hhvdlh462x1f" path="res://Content/RawSounds/Gravel/Steps_gravel-014.ogg" id="7_iwpgu"]
+[ext_resource type="AudioStream" uid="uid://dwsvc3k6xqnop" path="res://Content/RawSounds/Gravel/Steps_gravel-015.ogg" id="8_s1r0i"]
+[ext_resource type="AudioStream" uid="uid://2mpd07auboqb" path="res://Content/RawSounds/Gravel/Steps_gravel-016.ogg" id="9_qtrcp"]
+[ext_resource type="AudioStream" uid="uid://3dk3wjelal4d" path="res://Content/RawSounds/Gravel/Steps_gravel-017.ogg" id="10_25gak"]
+[ext_resource type="AudioStream" uid="uid://b3j07d2jb2cvd" path="res://Content/RawSounds/Gravel/Steps_gravel-018.ogg" id="11_jfxjs"]
+[ext_resource type="AudioStream" uid="uid://c3n3kgvra30bx" path="res://Content/RawSounds/Gravel/Steps_gravel-019.ogg" id="12_pmq1x"]
+[ext_resource type="AudioStream" uid="uid://b8rs2qa2qkmyf" path="res://Content/RawSounds/Gravel/Steps_gravel-020.ogg" id="13_n88jo"]
+[ext_resource type="AudioStream" uid="uid://b7cyvuwfputxl" path="res://Content/RawSounds/Gravel/Steps_gravel-003.ogg" id="14_c63nw"]
+[ext_resource type="AudioStream" uid="uid://bc66og267babv" path="res://Content/RawSounds/Gravel/Steps_gravel-021.ogg" id="15_2lr08"]
+[ext_resource type="AudioStream" uid="uid://bbqy4jpuv77qh" path="res://Content/RawSounds/Gravel/Steps_gravel-004.ogg" id="16_uly77"]
+[ext_resource type="AudioStream" uid="uid://ccyg2pbqb867b" path="res://Content/RawSounds/Gravel/Steps_gravel-005.ogg" id="17_bkexl"]
+[ext_resource type="AudioStream" uid="uid://dx83k8tldkped" path="res://Content/RawSounds/Gravel/Steps_gravel-006.ogg" id="18_3brdl"]
+[ext_resource type="AudioStream" uid="uid://s0bjil3fu4wv" path="res://Content/RawSounds/Gravel/Steps_gravel-007.ogg" id="19_ihh2h"]
+[ext_resource type="AudioStream" uid="uid://deky35u2tsva6" path="res://Content/RawSounds/Gravel/Steps_gravel-008.ogg" id="20_pojyi"]
+[ext_resource type="AudioStream" uid="uid://cm3wlk7nd24fi" path="res://Content/RawSounds/Gravel/Steps_gravel-009.ogg" id="21_ur8ht"]
+[ext_resource type="AudioStream" uid="uid://cedh2xl8arhm0" path="res://Content/RawSounds/Gravel/Steps_gravel-010.ogg" id="22_5h15j"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vni1x"]
+streams_count = 21
+stream_0/stream = ExtResource("2_jjb3k")
+stream_1/stream = ExtResource("3_xxtyh")
+stream_2/stream = ExtResource("14_c63nw")
+stream_3/stream = ExtResource("16_uly77")
+stream_4/stream = ExtResource("17_bkexl")
+stream_5/stream = ExtResource("18_3brdl")
+stream_6/stream = ExtResource("19_ihh2h")
+stream_7/stream = ExtResource("20_pojyi")
+stream_8/stream = ExtResource("21_ur8ht")
+stream_9/stream = ExtResource("22_5h15j")
+stream_10/stream = ExtResource("4_kndxf")
+stream_11/stream = ExtResource("5_qh4m2")
+stream_12/stream = ExtResource("6_4huvg")
+stream_13/stream = ExtResource("7_iwpgu")
+stream_14/stream = ExtResource("8_s1r0i")
+stream_15/stream = ExtResource("9_qtrcp")
+stream_16/stream = ExtResource("10_25gak")
+stream_17/stream = ExtResource("11_jfxjs")
+stream_18/stream = ExtResource("12_pmq1x")
+stream_19/stream = ExtResource("13_n88jo")
+stream_20/stream = ExtResource("15_2lr08")
+
+[resource]
+script = ExtResource("1_lhc1g")
+stream = SubResource("AudioStreamRandomizer_vni1x")
+bus = "Effects"
+volume_db = 0.0
+pitch_scale = 1.0
+fade_start = -1.0
+fade_time = -1.0
+metadata/_custom_type_script = "uid://d23jiu7f3wq8w"

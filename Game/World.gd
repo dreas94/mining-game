@@ -8,12 +8,14 @@ var custom_cell_data: Dictionary = {}
 
 
 func _ready() -> void:
-	player.global_position.y = -tile_map.rendering_quadrant_size
+	player.global_position.y = -tile_map.rendering_quadrant_size - 1.0
 	player.mine_attempt.connect(_attempt_to_clear_cell_from_position)
 	for cell: Vector2i in tile_map.get_used_cells():
 		if not tile_map.get_cell_tile_data(cell).has_custom_data("Health"):
 			continue
 		custom_cell_data[cell] = tile_map.get_cell_tile_data(cell).get_custom_data("Health")
+	
+	App.music.play(DefaultMusic.BEYOND)
 
 
 func _attempt_to_clear_cell_from_position(damage: int):

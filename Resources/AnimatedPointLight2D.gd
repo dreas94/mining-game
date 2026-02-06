@@ -13,6 +13,7 @@ func _process(delta: float) -> void:
 		return
 	if images.is_empty():
 		return
+	
 	time_elapsed_for_image += delta
 	
 	if time_elapsed_for_image < duration_per_image:
