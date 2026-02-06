@@ -4,3 +4,4 @@
 
 [node name="CaveGenerator" type="Node2D"]
 script = ExtResource("1_ams8q")
+world_seed = "ijdsnfguiohsduhbisdaf"

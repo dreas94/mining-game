@@ -47,3 +47,4 @@ func generate():
 					space_tiles_array.append(Vector2i(x,y))
 	
 	tile_map.set_cells_terrain_connect(space_tiles_array, 0, 0)
+	#tile_map.set_cells_terrain_connect(empty_tiles_array, 0, 1, false)

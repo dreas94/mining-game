@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dw20bf28dph1o"
-path="res://.godot/imported/tileset_cave.png-7019ffcfa103870bcc2694922839cd9a.ctex"
+uid="uid://cq254veb6dqms"
+path="res://.godot/imported/Pickaxe.png-00d26aaae309eabde7b089b4fd173a1c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/tileset_cave.png"
-dest_files=["res://.godot/imported/tileset_cave.png-7019ffcfa103870bcc2694922839cd9a.ctex"]
+source_file="res://Textures/Pickaxe.png"
+dest_files=["res://.godot/imported/Pickaxe.png-00d26aaae309eabde7b089b4fd173a1c.ctex"]
 
 [params]
 

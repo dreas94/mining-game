@@ -2,19 +2,25 @@
 
 [ext_resource type="PackedScene" uid="uid://cr7vr5ke2lgfn" path="res://Game/Player/Player.tscn" id="1_4r2v7"]
 [ext_resource type="Script" uid="uid://cp4q2b1cr83xn" path="res://Game/World.gd" id="1_rio8u"]
+[ext_resource type="TileSet" uid="uid://cvmpxeksqaf2m" path="res://Resources/Newer.tres" id="2_dyu4a"]
 [ext_resource type="PackedScene" uid="uid://b0uvqxmjdu4ae" path="res://Resources/CaveGenerator.tscn" id="4_dyu4a"]
-[ext_resource type="TileSet" uid="uid://duyb4ttdeh81c" path="res://Resources/TileSet.tres" id="4_p8frc"]
 
-[node name="World" type="Node2D" node_paths=PackedStringArray("player", "tilemap")]
+[node name="World" type="Node2D" node_paths=PackedStringArray("player", "tile_map")]
 script = ExtResource("1_rio8u")
 player = NodePath("Player")
-tilemap = NodePath("TileMapLayer")
+tile_map = NodePath("TileMapLayer")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+modulate = Color(0.425781, 0.425781, 0.425781, 1)
+texture_filter = 1
+tile_set = ExtResource("2_dyu4a")
+
+[node name="CaveGenerator" parent="TileMapLayer" instance=ExtResource("4_dyu4a")]
+position = Vector2(1, 0)
 
 [node name="Player" parent="." instance=ExtResource("1_4r2v7")]
 z_index = 1
+position = Vector2(8, 0)
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
-texture_filter = 1
-tile_set = ExtResource("4_p8frc")
-
-[node name="CaveGenerator" parent="TileMapLayer" instance=ExtResource("4_dyu4a")]
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0, 0, 0, 1)

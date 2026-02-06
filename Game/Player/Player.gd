@@ -61,4 +61,4 @@ func _input(event: InputEvent) -> void:
 		if not event.button_index == MouseButton.MOUSE_BUTTON_LEFT:
 			return
 		
-		mine_attempt.emit()
+		mine_attempt.emit(25)
