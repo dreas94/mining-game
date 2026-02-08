@@ -1,4 +1,5 @@
-extends Node2D
+class_name CaveGenerator
+extends Node
 @export var map_width: int = 80
 @export var map_height: int = 80
 @export var world_seed: String = "4_20_69"
@@ -17,12 +18,9 @@ var world_ref: WeakRef
 var noise_val_array: Array[float]
 var space_tiles_array: Array[Vector2i]
 
-func _ready():
-	self.tile_map = get_parent() as TileMapLayer
-	generate()
 
-
-func generate():
+func generate(tile_map: TileMapLayer):
+	self.tile_map = tile_map
 	self.simplex_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
 	self.simplex_noise.seed = self.world_seed.hash()
 	self.simplex_noise.fractal_octaves = self.fractal_octaves

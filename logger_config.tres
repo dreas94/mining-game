@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LoggerConfig" load_steps=2 format=3 uid="uid://u876hchbrtdk"]
+
+[ext_resource type="Script" uid="uid://c32qb756w3mhd" path="res://Utilities/Logger/LoggerConfig.gd" id="1_ydssx"]
+
+[resource]
+script = ExtResource("1_ydssx")
+log_confirms = true
+log_hints = false
+log_warnings = true
+log_errors = true
+assert_errors = true
+metadata/_custom_type_script = "uid://c32qb756w3mhd"

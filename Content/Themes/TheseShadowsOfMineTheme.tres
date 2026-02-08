@@ -1,0 +1,39 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bprg36i3mssg3"]
+
+[ext_resource type="StyleBox" uid="uid://ljxllhg1r10i" path="res://Content/Themes/Styles/empty.tres" id="1_iox86"]
+[ext_resource type="FontFile" uid="uid://0ifxl5ugo7rv" path="res://Content/Themes/antiquity-print.ttf" id="2_m2xdc"]
+
+[resource]
+default_font = ExtResource("2_m2xdc")
+default_font_size = 26
+Label/colors/font_color = Color(1, 1, 1, 1)
+TabContainer/styles/panel = ExtResource("1_iox86")
+TabContainer/styles/tab_disabled = ExtResource("1_iox86")
+TabContainer/styles/tab_focus = ExtResource("1_iox86")
+TabContainer/styles/tab_hovered = ExtResource("1_iox86")
+TabContainer/styles/tab_selected = ExtResource("1_iox86")
+TabContainer/styles/tab_unselected = ExtResource("1_iox86")
+TabContainer/styles/tabbar_background = ExtResource("1_iox86")
+TitleButton/base_type = &"Button"
+TitleButton/colors/font_color = Color(1, 1, 1, 1)
+TitleButton/colors/font_disabled_color = Color(0.501961, 0.501961, 0.501961, 1)
+TitleButton/colors/font_focus_color = Color(0, 0.788235, 1, 1)
+TitleButton/colors/font_hover_color = Color(0, 0.788235, 1, 1)
+TitleButton/colors/font_hover_pressed_color = Color(0, 0.788235, 1, 1)
+TitleButton/colors/font_pressed_color = Color(0, 0, 0, 1)
+TitleButton/font_sizes/font_size = 39
+TitleButton/styles/disabled = ExtResource("1_iox86")
+TitleButton/styles/disabled_mirrored = ExtResource("1_iox86")
+TitleButton/styles/focus = ExtResource("1_iox86")
+TitleButton/styles/hover = ExtResource("1_iox86")
+TitleButton/styles/hover_mirrored = ExtResource("1_iox86")
+TitleButton/styles/hover_pressed = ExtResource("1_iox86")
+TitleButton/styles/hover_pressed_mirrored = ExtResource("1_iox86")
+TitleButton/styles/normal = ExtResource("1_iox86")
+TitleButton/styles/normal_mirrored = ExtResource("1_iox86")
+TitleButton/styles/pressed = ExtResource("1_iox86")
+TitleButton/styles/pressed_mirrored = ExtResource("1_iox86")
+TitleLabel/base_type = &"Label"
+TitleLabel/font_sizes/font_size = 59
+TitlePanelContainer/base_type = &"PanelContainer"
+TitlePanelContainer/styles/panel = ExtResource("1_iox86")

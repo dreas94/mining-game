@@ -9,6 +9,8 @@ const MAXIMUM_STREAMS: int = 64
 var _streams: Array[Node] = []
 
 func _init(parent: Node) -> void:
+	if not parent is AppRoot:
+		return
 	parent.add_child(self)
 
 
@@ -68,6 +70,7 @@ func play_3D(effect: SoundEffect, global_position: Vector3) -> void:
 
 func _on_stream_finished(s: Node) -> void:
 	if s.has_meta("tween"):
+		@warning_ignore("unsafe_method_access")
 		s.get_meta("tween").kill()
 		s.remove_meta("tween")
 	if s in _streams:

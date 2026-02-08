@@ -1,13 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://cr7vr5ke2lgfn"]
+[gd_scene load_steps=18 format=3 uid="uid://cr7vr5ke2lgfn"]
 
 [ext_resource type="Script" uid="uid://bwd7weq3u2ywv" path="res://Game/Player/Player.gd" id="1_4672b"]
 [ext_resource type="Texture2D" uid="uid://drjxkesrh35pn" path="res://Textures/Little Guy.png" id="2_65y41"]
-[ext_resource type="Script" uid="uid://df23wi1not8cn" path="res://Resources/AnimatedPointLight2D.gd" id="3_65y41"]
 [ext_resource type="Texture2D" uid="uid://cq254veb6dqms" path="res://Textures/Pickaxe.png" id="3_sfkwu"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://jt22eswvd8ck" path="res://Game/Player/PlayerStates.tres" id="4_1khw3"]
-[ext_resource type="Texture2D" uid="uid://cbyf66o8fuoql" path="res://Textures/Light/0.png" id="4_sfkwu"]
-[ext_resource type="Texture2D" uid="uid://bsjef8ceuf2m0" path="res://Textures/Light/1.png" id="5_1khw3"]
-[ext_resource type="Texture2D" uid="uid://bkyq8dippbapg" path="res://Textures/Light/2.png" id="6_hf5e6"]
+[ext_resource type="PackedScene" uid="uid://dsr0f5ealpe4e" path="res://Content/VFX/LightSource/LightSource.tscn" id="5_kt3un"]
 [ext_resource type="Texture2D" uid="uid://cir74d5jhh3qk" path="res://Textures/Light/3.png" id="7_e0asf"]
 
 [sub_resource type="Animation" id="Animation_4672b"]
@@ -533,7 +530,7 @@ _data = {
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_1khw3"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_1khw3"]
-graph_offset = Vector2(-661.6, -196.934)
+graph_offset = Vector2(-383, 78)
 nodes/PlayerStates/node = ExtResource("4_1khw3")
 nodes/PlayerStates/position = Vector2(-160, 0)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_1khw3")
@@ -542,7 +539,7 @@ nodes/output/position = Vector2(420, 0)
 node_connections = [&"TimeScale", 0, &"PlayerStates", &"output", 0, &"TimeScale"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4672b"]
-size = Vector2(13, 11)
+size = Vector2(8, 9)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "camera")]
 script = ExtResource("1_4672b")
@@ -583,12 +580,8 @@ parameters/PlayerStates/Walk/blend_position = 0
 parameters/TimeScale/scale = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2.5)
+position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_4672b")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-blend_mode = 2
-shadow_filter = 2
-script = ExtResource("3_65y41")
-images = Array[CompressedTexture2D]([ExtResource("4_sfkwu"), ExtResource("5_1khw3"), ExtResource("6_hf5e6"), ExtResource("7_e0asf"), ExtResource("6_hf5e6"), ExtResource("5_1khw3")])
-duration_per_image = 0.15
+[node name="PointLight2D" parent="." instance=ExtResource("5_kt3un")]
+texture = ExtResource("7_e0asf")

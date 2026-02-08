@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="SoundEffect" load_steps=24 format=3 uid="uid://7s5mb61hbs0s"]
 
-[ext_resource type="Script" uid="uid://d23jiu7f3wq8w" path="res://App/Sound/SoundEffect.gd" id="1_lhc1g"]
+[ext_resource type="Script" uid="uid://c7d3ccupogtwi" path="res://App/Sound/SoundEffect.gd" id="1_lhc1g"]
 [ext_resource type="AudioStream" uid="uid://d1lsd75pwmmcp" path="res://Content/RawSounds/Gravel/Steps_gravel-001.ogg" id="2_jjb3k"]
 [ext_resource type="AudioStream" uid="uid://fninuqfcyh64" path="res://Content/RawSounds/Gravel/Steps_gravel-002.ogg" id="3_xxtyh"]
 [ext_resource type="AudioStream" uid="uid://p7i5lofvdugg" path="res://Content/RawSounds/Gravel/Steps_gravel-011.ogg" id="4_kndxf"]

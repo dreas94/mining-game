@@ -1,21 +1,38 @@
-extends Node2D
+extends GameMode
 const ADJ_VECS: Array[Vector2i] = [Vector2i(0, -1), Vector2i(1, 0), Vector2i(-1, 0),
 Vector2i(1, 1), Vector2i(-1, 1), Vector2i(1, -1), Vector2i(-1, -1)]
 
-@export var player: iPlayer
 @export var tile_map: TileMapLayer
+@export var cave_generator: CaveGenerator
+
+var player: iPlayer
 var custom_cell_data: Dictionary = {}
 
+var player_scene: PackedScene = preload("uid://cr7vr5ke2lgfn")
 
-func _ready() -> void:
-	player.global_position.y = -tile_map.rendering_quadrant_size - 1.0
-	player.mine_attempt.connect(_attempt_to_clear_cell_from_position)
+
+func _init() -> void:
+	visible = false
+
+
+func _enabled() -> void:
+	cave_generator.generate(tile_map)
 	for cell: Vector2i in tile_map.get_used_cells():
 		if not tile_map.get_cell_tile_data(cell).has_custom_data("Health"):
 			continue
 		custom_cell_data[cell] = tile_map.get_cell_tile_data(cell).get_custom_data("Health")
 	
+	player = player_scene.instantiate()
+	add_child(player)
+	player.mine_attempt.connect(_attempt_to_clear_cell_from_position)
 	App.music.play(DefaultMusic.BEYOND)
+	visible = true
+	enabled.emit()
+
+
+func _disabled() -> void:
+	player.mine_attempt.disconnect(_attempt_to_clear_cell_from_position)
+	player.queue_free()
 
 
 func _attempt_to_clear_cell_from_position(damage: int):

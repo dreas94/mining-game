@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmn6yod73w421"]
+
+[ext_resource type="Texture2D" uid="uid://eod0ubatfnfj" path="res://Interface/Fluff/Campfire/Campfire.png" id="1_r4j1w"]
+[ext_resource type="Script" uid="uid://08n10r5p5tlr" path="res://Interface/Fluff/Campfire/campfire.gd" id="1_w5vc3"]
+[ext_resource type="PackedScene" uid="uid://dsr0f5ealpe4e" path="res://Content/VFX/LightSource/LightSource.tscn" id="2_et48t"]
+[ext_resource type="Texture2D" uid="uid://bsjef8ceuf2m0" path="res://Textures/Light/1.png" id="4_w5vc3"]
+
+[node name="Campfire" type="Node2D" node_paths=PackedStringArray("_light_source")]
+script = ExtResource("1_w5vc3")
+light_scale = Vector2(1, 1)
+_light_source = NodePath("PointLight2D")
+
+[node name="Texture2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_r4j1w")
+
+[node name="PointLight2D" parent="." instance=ExtResource("2_et48t")]
+position = Vector2(0, 3)
+enabled = false
+texture = ExtResource("4_w5vc3")
+texture_scale = 2.0

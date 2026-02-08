@@ -5,8 +5,8 @@ signal mine_attempt()
 @export var animation_tree: AnimationTree
 @export var camera: Camera2D
 
-enum State {IDLE, WALK, JUMP, DOWN}
-var _current_state: State = State.IDLE
+enum PlayerState {IDLE, WALK, JUMP, DOWN}
+var _current_state: PlayerState = PlayerState.IDLE
 
 var speed: float = 100.0
 var acceleration: float = 100.0
@@ -21,6 +21,7 @@ var collided: bool = false
 
 
 func _ready() -> void:
+	global_position.y = -World.tile_map.rendering_quadrant_size - 1.0
 	animation_tree.active = true
 
 
@@ -47,7 +48,7 @@ func _handle_collision() -> void:
 func _handle_input(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_speed
-		_current_state = State.JUMP
+		_current_state = PlayerState.JUMP
 	
 	move_direction = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 	if move_direction == 0:
@@ -68,20 +69,20 @@ func _update_movement(delta: float) -> void:
 
 func _update_states() -> void:
 	match _current_state:
-		State.IDLE when velocity.x != 0:
-			_current_state = State.WALK
-		State.WALK:
+		PlayerState.IDLE when velocity.x != 0:
+			_current_state = PlayerState.WALK
+		PlayerState.WALK:
 			if velocity.x == 0:
-				_current_state = State.IDLE
+				_current_state = PlayerState.IDLE
 			if not is_on_floor() && velocity.y > 0:
-				_current_state = State.DOWN
-		State.JUMP when velocity.y > 0:
-			_current_state = State.DOWN
-		State.DOWN when is_on_floor():
+				_current_state = PlayerState.DOWN
+		PlayerState.JUMP when velocity.y > 0:
+			_current_state = PlayerState.DOWN
+		PlayerState.DOWN when is_on_floor():
 			if velocity.x == 0:
-				_current_state = State.IDLE
+				_current_state = PlayerState.IDLE
 			else:
-				_current_state = State.WALK
+				_current_state = PlayerState.WALK
 
 
 func _update_animation() -> void:

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MusicTrack" load_steps=3 format=3 uid="uid://bxc7qk3q843gv"]
+
+[ext_resource type="Script" uid="uid://s2clt34hr461" path="res://App/Sound/MusicTrack.gd" id="1_7s3u5"]
+[ext_resource type="AudioStream" uid="uid://p7umquvoxop1" path="res://Content/RawMusic/StockmanMusic/stockman.ogg" id="2_l8tr7"]
+
+[resource]
+script = ExtResource("1_7s3u5")
+stream = ExtResource("2_l8tr7")
+bus = "Music"
+volume_db = 0.0
+metadata/_custom_type_script = "uid://s2clt34hr461"

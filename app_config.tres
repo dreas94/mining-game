@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AppConfig" load_steps=2 format=3 uid="uid://c1626k6v5xndh"]
+
+[ext_resource type="Script" uid="uid://dscsc10je200f" path="res://App/AppConfig.gd" id="1_7bgx2"]
+
+[resource]
+script = ExtResource("1_7bgx2")
+save_file_format_version = 1
+settings_file_version = 1
+metadata/_custom_type_script = "uid://dscsc10je200f"

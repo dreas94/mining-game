@@ -11,24 +11,35 @@ config_version=5
 [application]
 
 config/name="These Shadows of Mine"
-run/main_scene="uid://c72f4ti8pjn7d"
+run/main_scene="uid://d4liuh80no827"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="uid://bkyq8dippbapg"
 
 [autoload]
 
 App="*res://App/App.gd"
+Interface="*res://Interface/Interface.gd"
+Game="*res://Game/Game.gd"
+World="*res://Game/World/World.tscn"
 
 [display]
 
-window/stretch/mode="canvas_items"
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=3
+window/stretch/mode="viewport"
 
 [file_customization]
 
 folder_colors={
 "res://Content/": "yellow",
-"res://Game/": "purple"
+"res://Game/": "purple",
+"res://Interface/": "green"
 }
+
+[gui]
+
+theme/custom="uid://bprg36i3mssg3"
 
 [input]
 
@@ -58,3 +69,4 @@ jump={
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)
+lights_and_shadows/size/initial_position_type=3

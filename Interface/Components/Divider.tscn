@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://is4n63fcx7n4"]
+
+[node name="Divider" type="VBoxContainer"]
+offset_bottom = 25.0
+theme_override_constants/separation = 0
+
+[node name="DividerSpace1" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="DividerArt2" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="DividerSpace2" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
