@@ -7,10 +7,8 @@ extends Menu
 @export_group("Menus")
 @export var tab_container: TabContainer
 @export_group("Background")
-@export var canvas_layer: CanvasLayer
-@export var tile_map: TileMapLayer
-@export var directional_light: DirectionalLight2D
-@export var camp_fire: CampFire
+@export var background: iBackground
+
 
 
 func _ready() -> void:
@@ -32,10 +30,7 @@ func _disable() -> void:
 
 
 func toggle_stuff(toggle: bool) -> void:
-	canvas_layer.visible = toggle
-	tile_map.enabled = toggle
-	directional_light.enabled = toggle
-	camp_fire.enabled = toggle
+	background.toggle_stuff(toggle)
 	visible = toggle
 
 

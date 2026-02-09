@@ -1,11 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://cr7vr5ke2lgfn"]
+[gd_scene load_steps=17 format=3 uid="uid://cr7vr5ke2lgfn"]
 
 [ext_resource type="Script" uid="uid://bwd7weq3u2ywv" path="res://Game/Player/Player.gd" id="1_4672b"]
 [ext_resource type="Texture2D" uid="uid://drjxkesrh35pn" path="res://Textures/Little Guy.png" id="2_65y41"]
 [ext_resource type="Texture2D" uid="uid://cq254veb6dqms" path="res://Textures/Pickaxe.png" id="3_sfkwu"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://jt22eswvd8ck" path="res://Game/Player/PlayerStates.tres" id="4_1khw3"]
 [ext_resource type="PackedScene" uid="uid://dsr0f5ealpe4e" path="res://Content/VFX/LightSource/LightSource.tscn" id="5_kt3un"]
-[ext_resource type="Texture2D" uid="uid://cir74d5jhh3qk" path="res://Textures/Light/3.png" id="7_e0asf"]
 
 [sub_resource type="Animation" id="Animation_4672b"]
 resource_name = "Idle"
@@ -584,4 +583,5 @@ position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_4672b")
 
 [node name="PointLight2D" parent="." instance=ExtResource("5_kt3un")]
-texture = ExtResource("7_e0asf")
+energy = 0.907596
+texture_scale = 1.08793

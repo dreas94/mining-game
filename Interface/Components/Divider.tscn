@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://is4n63fcx7n4"]
+[gd_scene load_steps=2 format=3 uid="uid://is4n63fcx7n4"]
+
+[ext_resource type="Material" uid="uid://dvdnygwk8g12t" path="res://Shader/Unshaded/Unshaded.tres" id="1_t53t2"]
 
 [node name="Divider" type="VBoxContainer"]
 offset_bottom = 25.0
@@ -9,6 +11,7 @@ custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
 [node name="DividerArt2" type="ColorRect" parent="."]
+material = ExtResource("1_t53t2")
 custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 

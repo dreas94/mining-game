@@ -8,9 +8,14 @@ extends Node2D
 		if _light_source == null:
 			return
 		_light_source.enabled = value
-@export var light_scale: Vector2:
+@export var light_energy: float:
 	get:
-		return _light_scale
+		return _light_source.base_energy
+	set(value):
+		_light_energy = value
+@export var light_scale: float:
+	get:
+		return _light_source.base_scale
 	set(value):
 		_light_scale = value
 @export var light_layer: Vector2:
@@ -20,12 +25,19 @@ extends Node2D
 		_light_layer = value
 @export var _light_source: AnimatedPointLight2D
 
-var _light_scale: Vector2:
+var _light_energy: float:
+	set(value):
+		_light_energy = value
+		if _light_source == null:
+			return
+		_light_source.base_energy = _light_energy
+		
+var _light_scale: float:
 	set(value):
 		_light_scale = value
 		if _light_source == null:
 			return
-		_light_source.scale = _light_scale
+		_light_source.base_scale = _light_scale
 
 var _light_layer: Vector2:
 	set(value):
@@ -38,4 +50,4 @@ var _light_layer: Vector2:
 
 func _ready() -> void:
 	enabled = false
-	_light_scale = _light_source.scale
+	_light_energy = _light_source.base_energy
