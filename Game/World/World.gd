@@ -3,6 +3,7 @@ const ADJ_VECS: Array[Vector2i] = [Vector2i(0, -1), Vector2i(1, 0), Vector2i(-1,
 Vector2i(1, 1), Vector2i(-1, 1), Vector2i(1, -1), Vector2i(-1, -1)]
 
 @export var tile_map: TileMapLayer
+@export var campfire: CampFire
 @export var cave_generator: CaveGenerator
 
 var player: iPlayer
@@ -16,7 +17,7 @@ func _init() -> void:
 
 
 func _enabled() -> void:
-	cave_generator.generate(tile_map)
+	#cave_generator.generate(tile_map)
 	for cell: Vector2i in tile_map.get_used_cells():
 		if not tile_map.get_cell_tile_data(cell).has_custom_data("Health"):
 			continue
@@ -24,7 +25,9 @@ func _enabled() -> void:
 	
 	player = player_scene.instantiate()
 	add_child(player)
+	player.global_position = Vector2(-20.8, 40.0)
 	player.mine_attempt.connect(_attempt_to_clear_cell_from_position)
+	campfire.enabled = true
 	App.music.play(DefaultMusic.BEYOND)
 	visible = true
 	enabled.emit()

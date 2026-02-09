@@ -19,8 +19,8 @@ var noise_val_array: Array[float]
 var space_tiles_array: Array[Vector2i]
 
 
-func generate(tile_map: TileMapLayer):
-	self.tile_map = tile_map
+func generate(new_tile_map: TileMapLayer):
+	self.tile_map = new_tile_map
 	self.simplex_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
 	self.simplex_noise.seed = self.world_seed.hash()
 	self.simplex_noise.fractal_octaves = self.fractal_octaves

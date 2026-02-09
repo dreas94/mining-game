@@ -21,7 +21,7 @@ var collided: bool = false
 
 
 func _ready() -> void:
-	global_position.y = -World.tile_map.rendering_quadrant_size - 1.0
+	#global_position.y = -World.tile_map.rendering_quadrant_size - 1.0
 	animation_tree.active = true
 
 

@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://df23wi1not8cn" path="res://Resources/AnimatedPointLight2D.gd" id="1_bajuk"]
 
 [node name="PointLight2D" type="PointLight2D"]
-blend_mode = 2
 shadow_filter = 2
 texture = ExtResource("1_2b6k1")
+texture_scale = 0.912984
 script = ExtResource("1_bajuk")
 scale_range = 0.1
