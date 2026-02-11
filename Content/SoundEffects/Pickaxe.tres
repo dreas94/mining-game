@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=3 format=3 uid="uid://bo5qw4p1c8sdb"]
+
+[ext_resource type="Script" uid="uid://c7d3ccupogtwi" path="res://App/Sound/SoundEffect.gd" id="1_xr8dc"]
+[ext_resource type="AudioStream" uid="uid://dsl64e42xthd5" path="res://Content/RawSounds/Stockman/Weapon_Melee_Parry.ogg" id="2_qtotj"]
+
+[resource]
+script = ExtResource("1_xr8dc")
+stream = ExtResource("2_qtotj")
+bus = "Effects"
+volume_db = -10.0
+pitch_scale = 1.2
+fade_start = -1.0
+fade_time = -1.0
+metadata/_custom_type_script = "uid://c7d3ccupogtwi"
