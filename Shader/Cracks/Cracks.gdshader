@@ -107,5 +107,7 @@ void fragment()
 	vec4 crack = generate_cracks(UV, color, crack_color);
 	
 	if (color.a < crack.a * 0.75)
-		COLOR = crack; 
+		COLOR = crack;
+	else
+		COLOR = color;
 }

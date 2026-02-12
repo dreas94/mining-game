@@ -30,7 +30,7 @@ func attempt_to_clear_cell_from_position(damage: int, rid: RID, player_position:
 	if _custom_cell_data.get(cell) == null:
 		var global_position_of_tile = to_global(map_to_local(cell))
 		_custom_cell_data[cell] = BreakableTile.new(tile_set.tile_size, global_position_of_tile)
-		add_child(_custom_cell_data[cell])
+		World.add_child(_custom_cell_data[cell])
 	
 	breakable_tile = _custom_cell_data[cell]
 	breakable_tile.health.value -= damage

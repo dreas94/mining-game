@@ -12,6 +12,7 @@ signal mine_attempt(damage: int, rid: RID)
 @export var mining_speed: float = 1.0
 
 
+var _can_mine: bool = true
 enum PlayerState {IDLE, WALK, JUMP, DOWN}
 var _current_state: PlayerState = PlayerState.IDLE
 
@@ -23,6 +24,7 @@ var _move_direction: float
 func _ready() -> void:
 	#global_position.y = -World.tile_map.rendering_quadrant_size - 1.0
 	animation_tree.active = true
+	mine_attempt.connect(_on_mine_attempt)
 
 
 func _physics_process(delta: float) -> void:
@@ -30,13 +32,13 @@ func _physics_process(delta: float) -> void:
 	_handle_collision()
 	_handle_input(delta)
 	_update_movement(delta)
-	if _knockback_value.y > 0.0:
-		velocity += Vector2(_knockback_value.x, 0.0)
-	elif _knockback_value.x != 0.0:
-		velocity.x = 0.0
-		velocity += _knockback_value
-	else:
-		velocity += _knockback_value
+	#if _knockback_value != Vector2.ZERO:
+		#if _knockback_value.y < 0.0:
+			#velocity = _knockback_value
+		#else:
+			#_knockback_value.y += gravity * delta
+			#velocity = _knockback_value
+	
 	_update_states()
 	_update_animation()
 	
@@ -58,21 +60,23 @@ func _handle_collision() -> void:
 	
 	var already_triggered_rid: Array[RID]
 	for index: int in range(get_slide_collision_count()):
+		if _can_mine == false:
+			return
 		var collision: KinematicCollision2D = get_slide_collision(index)
 		if already_triggered_rid.find(collision.get_collider_rid()) != -1:
 			continue 
 		if collision.get_normal().x != 0 and collision.get_normal().x == -_move_direction:
 			already_triggered_rid.append(collision.get_collider_rid())
 			mine_attempt.emit(25, already_triggered_rid.back())
-			apply_knockback(collision.get_normal(), 10.0, mining_speed)
+			#apply_knockback(collision.get_normal(), 10.0, mining_speed)
 		elif collision.get_normal().y > 0.0 and _current_state == PlayerState.JUMP:
 			already_triggered_rid.append(collision.get_collider_rid())
 			mine_attempt.emit(25, already_triggered_rid.back())
-			apply_knockback(collision.get_normal(), 8.0, mining_speed)
+			#apply_knockback(collision.get_normal(), 8.0, mining_speed)
 		elif is_on_floor() and collision.get_normal().y < 0.0 and Input.is_action_pressed("move_down"):
 			already_triggered_rid.append(collision.get_collider_rid())
 			mine_attempt.emit(25, already_triggered_rid.back())
-			apply_knockback(collision.get_normal(), 8.0, mining_speed)
+			#apply_knockback(collision.get_normal(), 8.0, mining_speed)
 
 
 func _handle_input(delta: float) -> void:
@@ -138,13 +142,14 @@ func _update_animation() -> void:
 func apply_knockback(direction: Vector2, force: float, duration: float) -> void:
 	print("Knockback applied towards " + str(direction))
 	
-	if direction.x != 0.0 and direction.y != 0.0:
-		breakpoint
 	_knockback_value = direction * force
 	
+	#if _knockback_value.y < 0.0:
+		#velocity.y = _knockback_value.y
+		#_knockback_value.y = 0.0
 	_knock_back_tween = create_tween()
-	_knock_back_tween.set_parallel()
-	_knock_back_tween.tween_property(self, "_knockback_value", Vector2.ZERO, duration)
+	_knock_back_tween.tween_interval(duration)
+	_knock_back_tween.tween_property(self, "_knockback_value", Vector2.ZERO, 0.0)
 
 
 func _input(event: InputEvent) -> void:
@@ -159,3 +164,10 @@ func _input(event: InputEvent) -> void:
 func _play_footstep() -> void:
 	if is_on_floor():
 		App.sfx.play(DefaultSoundEffects.GRAVEL)
+
+
+func _on_mine_attempt(_damage: int, _rid: RID) -> void:
+	_can_mine = false
+	var mine_tween: Tween = create_tween()
+	mine_tween.tween_interval(mining_speed)
+	mine_tween.tween_property(self, "_can_mine", true, 0.0)

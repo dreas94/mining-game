@@ -584,4 +584,4 @@ shape = SubResource("RectangleShape2D_4672b")
 
 [node name="PointLight2D" parent="." instance=ExtResource("5_kt3un")]
 energy = 0.907596
-texture_scale = 0.925109
+texture_scale = 1.09607
