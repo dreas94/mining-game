@@ -78,3 +78,13 @@ material = ExtResource("3_bwcia")
 layout_mode = 2
 theme_type_variation = &"TitleButton"
 text = "Exit"
+
+[node name="Divider2" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer" instance=ExtResource("1_vak0p")]
+layout_mode = 2
+
+[node name="Disclaimer" type="RichTextLabel" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer"]
+material = ExtResource("3_bwcia")
+layout_mode = 2
+theme_type_variation = &"Disclaimer"
+text = "The following game experience contains only movement options and destructive capabilities. We currently seek input on these things first, but feel free to give ideas."
+fit_content = true

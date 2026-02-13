@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cr7vr5ke2lgfn"]
+[gd_scene load_steps=45 format=3 uid="uid://cr7vr5ke2lgfn"]
 
 [ext_resource type="Script" uid="uid://bwd7weq3u2ywv" path="res://Game/Player/Player.gd" id="1_4672b"]
 [ext_resource type="Texture2D" uid="uid://drjxkesrh35pn" path="res://Textures/Little Guy.png" id="2_65y41"]
@@ -201,6 +201,40 @@ tracks/4/keys = {
 "values": [Vector2(-2, -2)]
 }
 
+[sub_resource type="Animation" id="Animation_ee8ni"]
+resource_name = "Idle_Pickaxe_Left"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pickaxe:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [0.0, 0.436332]
+}
+
+[sub_resource type="Animation" id="Animation_6upfr"]
+resource_name = "Idle_Pickaxe_Right"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pickaxe:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [0.0, -0.436332]
+}
+
 [sub_resource type="Animation" id="Animation_2nirr"]
 resource_name = "Idle_Right"
 length = 0.001
@@ -328,16 +362,29 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(2, -2)]
 }
-tracks/5/type = "bezier"
+tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Pickaxe:rotation")
+tracks/5/path = NodePath("Pickaxe:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0.436, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.415686, 0.415686, 0.415686, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Pickaxe:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_65y41"]
@@ -495,6 +542,90 @@ tracks/5/keys = {
 "values": [{
 "args": [],
 "method": &"_play_footstep"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_e0asf"]
+resource_name = "Swing_Pickaxe_Left"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pickaxe:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.436332, -0.872665, 0.436332]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pickaxe:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Color(0.415686, 0.415686, 0.415686, 1), Color(0.635294, 0.160784, 0, 1)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_enter_pickaxe_recovery"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_q7ak8"]
+resource_name = "Swing_Pickaxe_Right"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pickaxe:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.436332, 0.872665, -0.436332]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pickaxe:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Color(0.415686, 0.415686, 0.415686, 1), Color(0.635294, 0.160784, 0, 1)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_enter_pickaxe_recovery"
 }]
 }
 
@@ -656,19 +787,19 @@ tracks/5/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_e0asf"]
-resource_name = "Swing_Pickaxe_Left"
-loop_mode = 1
-tracks/0/type = "bezier"
+[sub_resource type="Animation" id="Animation_px0gh"]
+resource_name = "Recover_Pickaxe"
+tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Pickaxe:rotation")
+tracks/0/path = NodePath("Pickaxe:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(-0.436, -0.25, 0, 0.25, 0, 1.309, -0.25, 0, 0.25, 0, -0.436, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.75, 1)
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.635294, 0.160784, 0, 1), Color(0.415686, 0.415686, 0.415686, 1)]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -681,42 +812,13 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"_attempt_to_mine"
+"method": &"_recover_pickaxe"
 }]
 }
 
-[sub_resource type="Animation" id="Animation_q7ak8"]
-resource_name = "Swing_Pickaxe_Right"
-loop_mode = 1
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Pickaxe:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(0.436, -0.25, 0, 0.25, 0, 1.309, -0.25, 0, 0.25, 0, 0.436, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.766667, 1)
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"_attempt_to_mine"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_6upfr"]
-resource_name = "Idle_Pickaxe_Right"
-length = 3.0
+[sub_resource type="Animation" id="Animation_fdftm"]
+resource_name = "Ready_Pickaxe_Left"
+length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -725,16 +827,15 @@ tracks/0/path = NodePath("Pickaxe:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.5),
-"transitions": PackedFloat32Array(-2, -2),
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(-2),
 "update": 0,
-"values": [0.436, 0.0]
+"values": [0.436332]
 }
 
-[sub_resource type="Animation" id="Animation_ee8ni"]
-resource_name = "Idle_Pickaxe_Left"
-length = 3.0
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_nbrqn"]
+resource_name = "Ready_Pickaxe_Right"
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -742,10 +843,10 @@ tracks/0/path = NodePath("Pickaxe:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.5),
-"transitions": PackedFloat32Array(-2, -2),
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(-2),
 "update": 0,
-"values": [-0.436332, 0.0]
+"values": [-0.436332]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kt3un"]
@@ -757,6 +858,9 @@ _data = {
 &"Idle_Pickaxe_Right": SubResource("Animation_6upfr"),
 &"Idle_Right": SubResource("Animation_2nirr"),
 &"RESET": SubResource("Animation_fd82q"),
+&"Ready_Pickaxe_Left": SubResource("Animation_fdftm"),
+&"Ready_Pickaxe_Right": SubResource("Animation_nbrqn"),
+&"Recover_Pickaxe": SubResource("Animation_px0gh"),
 &"Run_Left": SubResource("Animation_65y41"),
 &"Run_Right": SubResource("Animation_hf5e6"),
 &"Swing_Pickaxe_Left": SubResource("Animation_e0asf"),
@@ -793,31 +897,61 @@ blend_point_0/node = SubResource("AnimationNodeAnimation_65y41")
 blend_point_0/pos = -1.0
 blend_point_1/node = SubResource("AnimationNodeAnimation_sfkwu")
 blend_point_1/pos = 1.0
+blend_mode = 1
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_65y41"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1khw3"]
+animation = &"Recover_Pickaxe"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_65y41"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sfkwu"]
-advance_mode = 2
-advance_expression = "_is_mining"
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1khw3"]
 advance_mode = 2
-advance_expression = "!_is_mining"
+advance_expression = "_current_pickaxe_state == PickaxeState.READY"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hf5e6"]
+advance_mode = 2
+advance_expression = "_current_pickaxe_state == PickaxeState.IDLE"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_e0asf"]
+advance_mode = 2
+advance_expression = "_current_pickaxe_state == PickaxeState.SWING"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q7ak8"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ee8ni"]
+advance_mode = 2
+advance_expression = "_current_pickaxe_state == PickaxeState.READY"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6upfr"]
+advance_mode = 2
+advance_expression = "_current_pickaxe_state == PickaxeState.IDLE"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kt3un"]
+advance_mode = 2
+advance_expression = "_current_pickaxe_state == PickaxeState.SWING"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_kt3un"]
 states/Idle/node = SubResource("AnimationNodeBlendSpace1D_kt3un")
-states/Idle/position = Vector2(400, 100)
+states/Idle/position = Vector2(403, 100)
 states/Mining/node = SubResource("AnimationNodeBlendSpace1D_o2hno")
-states/Mining/position = Vector2(598, 100)
+states/Mining/position = Vector2(708, 100)
+states/Ready/node = SubResource("AnimationNodeBlendSpace1D_65y41")
+states/Ready/position = Vector2(550, -1)
+states/Recover_Pickaxe/node = SubResource("AnimationNodeAnimation_1khw3")
+states/Recover_Pickaxe/position = Vector2(555, 167)
 states/Start/position = Vector2(199, 100)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_65y41"), "Idle", "Mining", SubResource("AnimationNodeStateMachineTransition_sfkwu"), "Mining", "Idle", SubResource("AnimationNodeStateMachineTransition_1khw3")]
-graph_offset = Vector2(-24, 7)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_65y41"), "Idle", "Ready", SubResource("AnimationNodeStateMachineTransition_1khw3"), "Ready", "Idle", SubResource("AnimationNodeStateMachineTransition_hf5e6"), "Ready", "Mining", SubResource("AnimationNodeStateMachineTransition_e0asf"), "Mining", "Recover_Pickaxe", SubResource("AnimationNodeStateMachineTransition_q7ak8"), "Recover_Pickaxe", "Ready", SubResource("AnimationNodeStateMachineTransition_ee8ni"), "Recover_Pickaxe", "Idle", SubResource("AnimationNodeStateMachineTransition_6upfr"), "Recover_Pickaxe", "Mining", SubResource("AnimationNodeStateMachineTransition_kt3un")]
+graph_offset = Vector2(7, 12)
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_1khw3"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_1khw3"]
-graph_offset = Vector2(-761.582, -168.176)
+graph_offset = Vector2(-573, -281)
 nodes/Combine/node = SubResource("AnimationNodeAdd2_kt3un")
 nodes/Combine/position = Vector2(440, -180)
 nodes/Mining/node = SubResource("AnimationNodeStateMachine_kt3un")
@@ -838,6 +972,7 @@ size = Vector2(8, 9)
 script = ExtResource("1_4672b")
 animation_tree = NodePath("AnimationTree")
 camera = NodePath("Camera2D")
+mining_speed = 2.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(5, 5)
@@ -849,10 +984,9 @@ texture = ExtResource("2_65y41")
 hframes = 6
 
 [node name="Pickaxe" type="Sprite2D" parent="."]
-modulate = Color(0.601563, 0.601563, 0.601563, 1)
+modulate = Color(0.415686, 0.415686, 0.415686, 1)
 texture_filter = 1
 position = Vector2(5.5, 5)
-rotation = 0.436
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("3_sfkwu")
 offset = Vector2(2, -2)
@@ -869,7 +1003,8 @@ advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Combine/add_amount = 1.0
 parameters/Mining/Idle/blend_position = 0
-parameters/Mining/Mining/blend_position = 0
+parameters/Mining/Mining/blend_position = 0.232558
+parameters/Mining/Ready/blend_position = 0
 "parameters/Mining Speed/scale" = 1.0
 parameters/PlayerStates/Crouch/blend_position = 0.0
 parameters/PlayerStates/Down/blend_position = 0
@@ -884,4 +1019,4 @@ shape = SubResource("RectangleShape2D_4672b")
 
 [node name="PointLight2D" parent="." instance=ExtResource("5_kt3un")]
 energy = 0.907596
-texture_scale = 0.943632
+texture_scale = 1.01229

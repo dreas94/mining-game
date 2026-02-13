@@ -1,11 +1,14 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bprg36i3mssg3"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://bprg36i3mssg3"]
 
 [ext_resource type="StyleBox" uid="uid://ljxllhg1r10i" path="res://Content/Themes/Styles/empty.tres" id="1_iox86"]
+[ext_resource type="FontFile" uid="uid://0v5lh5cpxe3j" path="res://Content/Themes/Roboto-VariableFont_wdth,wght.ttf" id="1_m2xdc"]
 [ext_resource type="FontFile" uid="uid://0ifxl5ugo7rv" path="res://Content/Themes/antiquity-print.ttf" id="2_m2xdc"]
 
 [resource]
 default_font = ExtResource("2_m2xdc")
 default_font_size = 26
+Disclaimer/base_type = &"RichTextLabel"
+Disclaimer/fonts/normal_font = ExtResource("1_m2xdc")
 Label/colors/font_color = Color(1, 1, 1, 1)
 TabContainer/styles/panel = ExtResource("1_iox86")
 TabContainer/styles/tab_disabled = ExtResource("1_iox86")

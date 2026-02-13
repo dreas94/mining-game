@@ -9,24 +9,30 @@ signal mine_attempt(damage: int, rid: RID)
 @export var deacceleration: float = acceleration * 4.0
 @export var jump_speed: float = -200.0
 @export var gravity: float = 400.0
-@export var mining_speed: float = 1.0
+@export var mining_speed: float = 1.0:
+	set(value):
+		if animation_tree != null:
+			animation_tree.set("parameters/Mining Speed/scale", value)
+	get:
+		if animation_tree == null:
+			return 1
+		return animation_tree.get("parameters/Mining Speed/scale")
 
 
-var _latest_rid_to_mine: RID
 enum PlayerState {IDLE, WALK, JUMP, DOWN, CROUCH}
-enum PickaxeState {IDLE, WIND_UP, READY, SWING}
+enum PickaxeState {IDLE, READY, SWING, RECOVER}
 var _current_state: PlayerState = PlayerState.IDLE
 var _current_pickaxe_state: PickaxeState = PickaxeState.IDLE
 
-var _knockback_value: Vector2 = Vector2.ZERO
-var _knock_back_tween: Tween
 var _move_direction: float = 1.0
 
 
 func _ready() -> void:
-	#global_position.y = -World.tile_map.rendering_quadrant_size - 1.0
 	animation_tree.active = true
 	
+	animation_tree.set("parameters/Mining/Idle/blend_position", 1.0)
+	animation_tree.set("parameters/Mining/Ready/blend_position", 1.0)
+	animation_tree.set("parameters/Mining/Mining/blend_position", 1.0)
 	animation_tree.set("parameters/PlayerStates/Crouch/blend_position", 1.0)
 	animation_tree.set("parameters/PlayerStates/Down/blend_position", 1.0)
 	animation_tree.set("parameters/PlayerStates/Up/blend_position", 1.0)
@@ -40,39 +46,36 @@ func _physics_process(delta: float) -> void:
 	_handle_collision()
 	_handle_input(delta)
 	_update_movement(delta)
-	#if _knockback_value != Vector2.ZERO:
-		#if _knockback_value.y < 0.0:
-			#velocity = _knockback_value
-		#else:
-			#_knockback_value.y += gravity * delta
-			#velocity = _knockback_value
 	
 	_update_states()
 	_update_animation()
 	
 	move_and_slide()
 
-func _pickaxe_ready() -> void:
-	_current_pickaxe_state = PickaxeState.READY
-	
 
-func _attempt_to_mine() -> void:
-	_current_pickaxe_state = PickaxeState.IDLE
-	mine_attempt.emit(25, _latest_rid_to_mine)
+func _recover_pickaxe() -> void:
+	if Input.is_action_pressed("mouse_left"):
+		_current_pickaxe_state = PickaxeState.READY
+	else:
+		_current_pickaxe_state = PickaxeState.IDLE
+
+
+func _enter_pickaxe_recovery() -> void:
+	_current_pickaxe_state = PickaxeState.RECOVER
+
+
+func _attempt_to_mine(rid_to_mine: RID) -> void:
+	_current_pickaxe_state = PickaxeState.SWING
+	mine_attempt.emit(25, rid_to_mine)
+	print("Pickaxe struck")
 
 
 func _handle_collision() -> void:
 	if get_slide_collision_count() == 0:
 		return
-	
-	if _knockback_value != Vector2.ZERO:
-		return
-	
-	if _knock_back_tween != null and _knock_back_tween.is_running():
-		return
 		
-	if _current_pickaxe_state == PickaxeState.READY:
-			return
+	if _current_pickaxe_state != PickaxeState.READY:
+		return
 	
 	var already_triggered_rid: Array[RID]
 	for index: int in range(get_slide_collision_count()):
@@ -80,38 +83,34 @@ func _handle_collision() -> void:
 		if already_triggered_rid.find(collision.get_collider_rid()) != -1:
 			continue 
 		if collision.get_normal().x != 0 and collision.get_normal().x == -_move_direction:
-			_latest_rid_to_mine = collision.get_collider_rid()
-			_current_pickaxe_state = PickaxeState.SWING
-			return
+			_attempt_to_mine(collision.get_collider_rid())
+			break
 			#apply_knockback(collision.get_normal(), 10.0, mining_speed)
 		elif collision.get_normal().y > 0.0 and _current_state == PlayerState.JUMP:
-			_latest_rid_to_mine = collision.get_collider_rid()
-			_current_pickaxe_state = PickaxeState.SWING
-			return
+			_attempt_to_mine(collision.get_collider_rid())
+			break
 			#apply_knockback(collision.get_normal(), 8.0, mining_speed)
 		elif is_on_floor() and collision.get_normal().y < 0.0 and Input.is_action_pressed("move_down"):
-			_latest_rid_to_mine = collision.get_collider_rid()
-			_current_pickaxe_state = PickaxeState.SWING
-			return
+			_attempt_to_mine(collision.get_collider_rid())
+			break
 			#apply_knockback(collision.get_normal(), 8.0, mining_speed)
 
 
 func _handle_input(delta: float) -> void:
-	if _knockback_value != Vector2.ZERO:
-		velocity.x = 0.0
-		return
-	
-	if Input.is_action_pressed("mouse_left") and _current_pickaxe_state == PickaxeState.IDLE:
-		_current_pickaxe_state = PickaxeState.WIND_UP
+	match _current_pickaxe_state:
+		PickaxeState.IDLE when Input.is_action_pressed("mouse_left"):
+			_current_pickaxe_state = PickaxeState.READY
+		PickaxeState.READY when not Input.is_action_pressed("mouse_left"):
+			_current_pickaxe_state = PickaxeState.IDLE
 	
 	if _current_state != PlayerState.CROUCH and Input.is_action_pressed("jump") and is_on_floor():
 		velocity.y = jump_speed
 		_current_state = PlayerState.JUMP
 	if _current_state != PlayerState.JUMP and Input.is_action_pressed("move_down") and is_on_floor():
 		_current_state = PlayerState.CROUCH
-		velocity.x = move_toward(velocity.x, 0, 1.0)
+		velocity.x = move_toward(velocity.x, 0.0, deacceleration * delta)
 	elif _move_direction == 0:
-		velocity.x = move_toward(velocity.x, 0, deacceleration * delta)
+		velocity.x = move_toward(velocity.x, 0.0, deacceleration * delta)
 	else:
 		if Input.is_action_pressed("run"):
 			velocity.x = move_toward(velocity.x, 2.0 * speed * _move_direction, acceleration * delta)
@@ -156,6 +155,7 @@ func _update_animation() -> void:
 	
 	if _move_direction != 0:
 		animation_tree.set("parameters/Mining/Idle/blend_position", _move_direction)
+		animation_tree.set("parameters/Mining/Ready/blend_position", _move_direction)
 		animation_tree.set("parameters/Mining/Mining/blend_position", _move_direction)
 		animation_tree.set("parameters/PlayerStates/Crouch/blend_position", _move_direction)
 		animation_tree.set("parameters/PlayerStates/Down/blend_position", _move_direction)
@@ -169,19 +169,6 @@ func _update_animation() -> void:
 	
 	if animation_tree.get("parameters/TimeScale/scale") != time_scale:
 		animation_tree.set("parameters/TimeScale/scale", time_scale)
-
-
-func apply_knockback(direction: Vector2, force: float, duration: float) -> void:
-	print("Knockback applied towards " + str(direction))
-	
-	_knockback_value = direction * force
-	
-	#if _knockback_value.y < 0.0:
-		#velocity.y = _knockback_value.y
-		#_knockback_value.y = 0.0
-	_knock_back_tween = create_tween()
-	_knock_back_tween.tween_interval(duration)
-	_knock_back_tween.tween_property(self, "_knockback_value", Vector2.ZERO, 0.0)
 
 
 func _input(event: InputEvent) -> void:
