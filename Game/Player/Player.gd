@@ -12,19 +12,27 @@ signal mine_attempt(damage: int, rid: RID)
 @export var mining_speed: float = 1.0
 
 
-var _can_mine: bool = true
-enum PlayerState {IDLE, WALK, JUMP, DOWN}
+var _latest_rid_to_mine: RID
+enum PlayerState {IDLE, WALK, JUMP, DOWN, CROUCH}
+enum PickaxeState {IDLE, WIND_UP, READY, SWING}
 var _current_state: PlayerState = PlayerState.IDLE
+var _current_pickaxe_state: PickaxeState = PickaxeState.IDLE
 
 var _knockback_value: Vector2 = Vector2.ZERO
 var _knock_back_tween: Tween
-var _move_direction: float
+var _move_direction: float = 1.0
 
 
 func _ready() -> void:
 	#global_position.y = -World.tile_map.rendering_quadrant_size - 1.0
 	animation_tree.active = true
-	mine_attempt.connect(_on_mine_attempt)
+	
+	animation_tree.set("parameters/PlayerStates/Crouch/blend_position", 1.0)
+	animation_tree.set("parameters/PlayerStates/Down/blend_position", 1.0)
+	animation_tree.set("parameters/PlayerStates/Up/blend_position", 1.0)
+	animation_tree.set("parameters/PlayerStates/Idle/blend_position", 1.0)
+	animation_tree.set("parameters/PlayerStates/Run/blend_position", 1.0)
+	animation_tree.set("parameters/PlayerStates/Walk/blend_position", 1.0)
 
 
 func _physics_process(delta: float) -> void:
@@ -44,6 +52,14 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 
+func _pickaxe_ready() -> void:
+	_current_pickaxe_state = PickaxeState.READY
+	
+
+func _attempt_to_mine() -> void:
+	_current_pickaxe_state = PickaxeState.IDLE
+	mine_attempt.emit(25, _latest_rid_to_mine)
+
 
 func _handle_collision() -> void:
 	if get_slide_collision_count() == 0:
@@ -54,28 +70,29 @@ func _handle_collision() -> void:
 	
 	if _knock_back_tween != null and _knock_back_tween.is_running():
 		return
-	
-	if not Input.is_action_pressed("mouse_left"):
-		return
+		
+	if _current_pickaxe_state == PickaxeState.READY:
+			return
 	
 	var already_triggered_rid: Array[RID]
 	for index: int in range(get_slide_collision_count()):
-		if _can_mine == false:
-			return
 		var collision: KinematicCollision2D = get_slide_collision(index)
 		if already_triggered_rid.find(collision.get_collider_rid()) != -1:
 			continue 
 		if collision.get_normal().x != 0 and collision.get_normal().x == -_move_direction:
-			already_triggered_rid.append(collision.get_collider_rid())
-			mine_attempt.emit(25, already_triggered_rid.back())
+			_latest_rid_to_mine = collision.get_collider_rid()
+			_current_pickaxe_state = PickaxeState.SWING
+			return
 			#apply_knockback(collision.get_normal(), 10.0, mining_speed)
 		elif collision.get_normal().y > 0.0 and _current_state == PlayerState.JUMP:
-			already_triggered_rid.append(collision.get_collider_rid())
-			mine_attempt.emit(25, already_triggered_rid.back())
+			_latest_rid_to_mine = collision.get_collider_rid()
+			_current_pickaxe_state = PickaxeState.SWING
+			return
 			#apply_knockback(collision.get_normal(), 8.0, mining_speed)
 		elif is_on_floor() and collision.get_normal().y < 0.0 and Input.is_action_pressed("move_down"):
-			already_triggered_rid.append(collision.get_collider_rid())
-			mine_attempt.emit(25, already_triggered_rid.back())
+			_latest_rid_to_mine = collision.get_collider_rid()
+			_current_pickaxe_state = PickaxeState.SWING
+			return
 			#apply_knockback(collision.get_normal(), 8.0, mining_speed)
 
 
@@ -83,11 +100,17 @@ func _handle_input(delta: float) -> void:
 	if _knockback_value != Vector2.ZERO:
 		velocity.x = 0.0
 		return
-	if Input.is_action_pressed("jump") and is_on_floor():
+	
+	if Input.is_action_pressed("mouse_left") and _current_pickaxe_state == PickaxeState.IDLE:
+		_current_pickaxe_state = PickaxeState.WIND_UP
+	
+	if _current_state != PlayerState.CROUCH and Input.is_action_pressed("jump") and is_on_floor():
 		velocity.y = jump_speed
 		_current_state = PlayerState.JUMP
-	
-	if _move_direction == 0:
+	if _current_state != PlayerState.JUMP and Input.is_action_pressed("move_down") and is_on_floor():
+		_current_state = PlayerState.CROUCH
+		velocity.x = move_toward(velocity.x, 0, 1.0)
+	elif _move_direction == 0:
 		velocity.x = move_toward(velocity.x, 0, deacceleration * delta)
 	else:
 		if Input.is_action_pressed("run"):
@@ -106,8 +129,9 @@ func _update_movement(delta: float) -> void:
 
 func _update_states() -> void:
 	match _current_state:
-		PlayerState.IDLE when velocity.x != 0:
-			_current_state = PlayerState.WALK
+		PlayerState.IDLE:
+			if velocity.x != 0:
+				_current_state = PlayerState.WALK
 		PlayerState.WALK:
 			if velocity.x == 0:
 				_current_state = PlayerState.IDLE
@@ -115,6 +139,11 @@ func _update_states() -> void:
 				_current_state = PlayerState.DOWN
 		PlayerState.JUMP when velocity.y > 0:
 			_current_state = PlayerState.DOWN
+		PlayerState.CROUCH when not Input.is_action_pressed("move_down"):
+			if is_on_floor() and velocity.x == 0:
+				_current_state = PlayerState.IDLE
+			elif is_on_floor() and velocity.x != 0:
+				_current_state = PlayerState.WALK
 		PlayerState.DOWN when is_on_floor():
 			if velocity.x == 0:
 				_current_state = PlayerState.IDLE
@@ -126,6 +155,9 @@ func _update_animation() -> void:
 	var time_scale: float = 1.0
 	
 	if _move_direction != 0:
+		animation_tree.set("parameters/Mining/Idle/blend_position", _move_direction)
+		animation_tree.set("parameters/Mining/Mining/blend_position", _move_direction)
+		animation_tree.set("parameters/PlayerStates/Crouch/blend_position", _move_direction)
 		animation_tree.set("parameters/PlayerStates/Down/blend_position", _move_direction)
 		animation_tree.set("parameters/PlayerStates/Up/blend_position", _move_direction)
 		animation_tree.set("parameters/PlayerStates/Idle/blend_position", _move_direction)
@@ -164,10 +196,3 @@ func _input(event: InputEvent) -> void:
 func _play_footstep() -> void:
 	if is_on_floor():
 		App.sfx.play(DefaultSoundEffects.GRAVEL)
-
-
-func _on_mine_attempt(_damage: int, _rid: RID) -> void:
-	_can_mine = false
-	var mine_tween: Tween = create_tween()
-	mine_tween.tween_interval(mining_speed)
-	mine_tween.tween_property(self, "_can_mine", true, 0.0)
