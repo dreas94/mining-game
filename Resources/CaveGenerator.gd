@@ -10,16 +10,14 @@ extends Node
 @export var fractal_weighted_strength: float = 0.1
 @export var frequency: float = 0.1
 
-var tile_map : TileMapLayer
+var tile_map : BreakableTileMapLayer
 var simplex_noise: FastNoiseLite = FastNoiseLite.new()
 
-var map: Array[Vector2i]
+var cells_array: Array[Vector2i]
 var world_ref: WeakRef
-var noise_val_array: Array[float]
-var space_tiles_array: Array[Vector2i]
 
 
-func generate(new_tile_map: TileMapLayer):
+func generate(new_tile_map: BreakableTileMapLayer):
 	self.tile_map = new_tile_map
 	self.simplex_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
 	self.simplex_noise.seed = self.world_seed.hash()
@@ -35,14 +33,16 @@ func generate(new_tile_map: TileMapLayer):
 	var max_height: int = floor((self.map_width + 2) / 2.0)
 	for x in range(min_width, max_width):
 		for y in range(min_height, max_height):
-			if x in range(min_width, min_width + 2) or x in range(max_width - 2, max_width):
-				space_tiles_array.append(Vector2i(x,y))
+			if x in range(-2, 2) and y == 1:
+				new_tile_map.create_cell_data(Vector2i(x,y), 1, 100)
+			elif x in range(min_width, min_width + 2) or x in range(max_width - 2, max_width):
+				new_tile_map.create_cell_data(Vector2i(x,y), 1, 100)
 			elif y in range(min_height, min_height + 2) or y in range(max_height - 2, max_height):
-				space_tiles_array.append(Vector2i(x,y))
-			elif (not x in range(0, 2)) or (not y in range(-2, 0)):
+				new_tile_map.create_cell_data(Vector2i(x,y), 1, 100)
+			elif (not x in range(-2, 2)) or (not y in range(-2, 0)):
 				var noise_val: float = simplex_noise.get_noise_2d(x, y)
 				if noise_val < self.noise_threshold:
-					space_tiles_array.append(Vector2i(x,y))
+					new_tile_map.create_cell_data(Vector2i(x,y), 1, 100)
 	
-	tile_map.set_cells_terrain_connect(space_tiles_array, 0, 0)
+	tile_map.set_cells_terrain_connect(new_tile_map.get_cells_array(), 0, 0)
 	#tile_map.set_cells_terrain_connect(empty_tiles_array, 0, 1, false)

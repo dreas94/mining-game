@@ -14,9 +14,10 @@ func _init() -> void:
 
 
 func _enabled() -> void:
+	cave_generator.generate(breakable_tile_map_layer)
 	player = player_scene.instantiate()
 	add_child(player)
-	player.global_position = Vector2(-20.8, 40.0)
+	player.global_position = Vector2(8.0, -8.0)
 	player.mine_attempt.connect(_attempt_to_clear_cell_from_position)
 	campfire.enabled = true
 	App.music.play(DefaultMusic.BEYOND)
