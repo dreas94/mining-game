@@ -34,15 +34,15 @@ func generate(new_tile_map: BreakableTileMapLayer):
 	for x in range(min_width, max_width):
 		for y in range(min_height, max_height):
 			if x in range(-2, 2) and y == 1:
-				new_tile_map.create_cell_data(Vector2i(x,y), 1, 100)
+				new_tile_map.create_cell_data(Vector2i(x,y), load("uid://dnloess7co135"))
 			elif x in range(min_width, min_width + 2) or x in range(max_width - 2, max_width):
-				new_tile_map.create_cell_data(Vector2i(x,y), 1, 100)
+				new_tile_map.create_cell_data(Vector2i(x,y), load("uid://dnloess7co135"))
 			elif y in range(min_height, min_height + 2) or y in range(max_height - 2, max_height):
-				new_tile_map.create_cell_data(Vector2i(x,y), 1, 100)
+				new_tile_map.create_cell_data(Vector2i(x,y), load("uid://dnloess7co135"))
 			elif (not x in range(-2, 2)) or (not y in range(-2, 0)):
 				var noise_val: float = simplex_noise.get_noise_2d(x, y)
 				if noise_val < self.noise_threshold:
-					new_tile_map.create_cell_data(Vector2i(x,y), 1, 100)
+					new_tile_map.create_cell_data(Vector2i(x,y), load("uid://dnloess7co135"))
 	
 	tile_map.set_cells_terrain_connect(new_tile_map.get_cells_array(), 0, 0)
 	#tile_map.set_cells_terrain_connect(empty_tiles_array, 0, 1, false)

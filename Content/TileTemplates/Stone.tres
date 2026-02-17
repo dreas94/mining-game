@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TileTemplate" load_steps=2 format=3 uid="uid://dnloess7co135"]
+
+[ext_resource type="Script" uid="uid://beghyqhtkssl1" path="res://Game/Tiles/TileTemplate.gd" id="1_0kw3r"]
+
+[resource]
+script = ExtResource("1_0kw3r")
+tile_name = "Stone"
+health = 100
+amount_range = Vector2i(0, 0)
+metadata/_custom_type_script = "uid://beghyqhtkssl1"

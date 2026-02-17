@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=4 uid="uid://c72f4ti8pjn7d"]
 
 [ext_resource type="Script" uid="uid://cp4q2b1cr83xn" path="res://Game/World/World.gd" id="1_lsgo1"]
-[ext_resource type="Script" uid="uid://dni3xc2w64gkx" path="res://Resources/BreakableTileLayer/BreakableTileLayer.gd" id="3_5xt6m"]
+[ext_resource type="Script" uid="uid://dni3xc2w64gkx" path="res://Game/Tiles/BreakableTileLayer.gd" id="3_5xt6m"]
 [ext_resource type="PackedScene" uid="uid://bmn6yod73w421" path="res://Interface/Fluff/Campfire/Campfire.tscn" id="3_16coc"]
 [ext_resource type="TileSet" uid="uid://cvmpxeksqaf2m" path="res://Resources/Newer.tres" id="3_ov2xx"]
 [ext_resource type="Script" uid="uid://btmipfumpmqtj" path="res://Resources/CaveGenerator.gd" id="4_5xt6m"]

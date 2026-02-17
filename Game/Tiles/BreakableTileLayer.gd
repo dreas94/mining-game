@@ -13,9 +13,9 @@ func get_cells_array() -> Array[Vector2i]:
 	return _cells_array.duplicate()
 
 
-func create_cell_data(cell: Vector2i, id: int, health: int) -> void:
+func create_cell_data(cell: Vector2i, template: TileTemplate) -> void:
 	_cells_array.append(cell)
-	_custom_cell_data[cell] = TileAttributes.new(id, health)
+	_custom_cell_data[cell] = TileAttributes.new(template)
 	_custom_cell_data[cell].health.changed.connect(_on_health_changed.bind(cell))
 
 
