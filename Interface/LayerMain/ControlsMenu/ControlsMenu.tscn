@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbo2cxkdnlax7"]
+
+[ext_resource type="Script" uid="uid://c41frpsgbpylv" path="res://Interface/LayerMain/ControlsMenu/ControlsMenu.gd" id="1_p8cwe"]
+
+[node name="ControlsMenu" type="PanelContainer" node_paths=PackedStringArray("return_button")]
+use_parent_material = true
+custom_minimum_size = Vector2(256, 0)
+theme_type_variation = &"TitlePanelContainer"
+script = ExtResource("1_p8cwe")
+return_button = NodePath("VBoxContainer/HBoxContainer/Return")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+use_parent_material = true
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+text = "W/Spacebar = Jump
+A = Left
+D = Right
+S = Crouch
+Hold left mouse button = Mining mode
+
+In Mining Mode either crouch or collide with a tile to begin mining it."
+fit_content = true
+autowrap_mode = 0
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+alignment = 2
+
+[node name="Return" type="Button" parent="VBoxContainer/HBoxContainer"]
+use_parent_material = true
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+text = "Return"

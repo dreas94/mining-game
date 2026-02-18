@@ -48,5 +48,7 @@ func _on_health_changed(value: int, _delta: int, cell: Vector2i) -> void:
 	if value > 0:
 		return
 	
+	if _custom_cell_data[cell].item_template != null:
+		pass
 	_custom_cell_data.erase(cell)
 	set_cells_terrain_connect([cell], 0, -1, true)

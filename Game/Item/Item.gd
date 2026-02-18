@@ -1,0 +1,21 @@
+class_name Item
+extends RefCounted
+
+
+var id: String = "none"
+var item_attributes: ItemAttributes
+var item_template: ItemTemplate
+var item_instance: ItemInstance
+var item_visuals: ItemVisuals
+
+
+func get_item_instance() -> ItemInstance:
+	if is_instance_valid(item_instance):
+		return item_instance
+	
+	# Intentionally not kept, and not preloaded
+	item_instance = ItemInstance.new(item_attributes, item_template)
+	item_instance.item_ref = weakref(self)
+	item_visuals = item_instance.item_visuals
+	
+	return item_instance

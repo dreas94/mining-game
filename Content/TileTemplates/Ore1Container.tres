@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="TileTemplate" load_steps=3 format=3 uid="uid://degpd00i4ni5c"]
+
+[ext_resource type="Resource" uid="uid://edgc1eayqcvw" path="res://Content/ItemTemplates/Ore1.tres" id="1_eg3ml"]
+[ext_resource type="Script" uid="uid://beghyqhtkssl1" path="res://Game/Tiles/TileTemplate.gd" id="2_56l3b"]
+
+[resource]
+script = ExtResource("2_56l3b")
+tile_name = "Ore1Container"
+health = 200
+item_dropped = ExtResource("1_eg3ml")
+amount_range = Vector2i(1, 3)
+metadata/_custom_type_script = "uid://beghyqhtkssl1"

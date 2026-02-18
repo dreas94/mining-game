@@ -387,6 +387,68 @@ tracks/6/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_fdftm"]
+resource_name = "Ready_Pickaxe_Left"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pickaxe:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(-2),
+"update": 0,
+"values": [0.436332]
+}
+
+[sub_resource type="Animation" id="Animation_nbrqn"]
+resource_name = "Ready_Pickaxe_Right"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pickaxe:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(-2),
+"update": 0,
+"values": [-0.436332]
+}
+
+[sub_resource type="Animation" id="Animation_px0gh"]
+resource_name = "Recover_Pickaxe"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pickaxe:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.635294, 0.160784, 0, 1), Color(0.415686, 0.415686, 0.415686, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_recover_pickaxe"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_65y41"]
 resource_name = "Run_Left"
 length = 0.3
@@ -787,68 +849,6 @@ tracks/5/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_px0gh"]
-resource_name = "Recover_Pickaxe"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Pickaxe:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0.635294, 0.160784, 0, 1), Color(0.415686, 0.415686, 0.415686, 1)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"_recover_pickaxe"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_fdftm"]
-resource_name = "Ready_Pickaxe_Left"
-length = 0.1
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Pickaxe:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(-2),
-"update": 0,
-"values": [0.436332]
-}
-
-[sub_resource type="Animation" id="Animation_nbrqn"]
-resource_name = "Ready_Pickaxe_Right"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Pickaxe:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(-2),
-"update": 0,
-"values": [-0.436332]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kt3un"]
 _data = {
 &"Crouch_Left": SubResource("Animation_kt3un"),
@@ -1019,4 +1019,4 @@ shape = SubResource("RectangleShape2D_4672b")
 
 [node name="PointLight2D" parent="." instance=ExtResource("5_kt3un")]
 energy = 0.907596
-texture_scale = 1.01229
+texture_scale = 1.0303

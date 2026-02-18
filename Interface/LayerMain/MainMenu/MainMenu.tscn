@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://cedfub537lkht"]
 
 [ext_resource type="Script" uid="uid://delmr7geb6gv4" path="res://Interface/LayerMain/MainMenu/MainMenu.gd" id="1_bfnjg"]
-[ext_resource type="PackedScene" uid="uid://is4n63fcx7n4" path="res://Interface/Components/Divider.tscn" id="1_vak0p"]
 [ext_resource type="PackedScene" uid="uid://jv4mdpuaynue" path="res://Interface/Fluff/Background/Background.tscn" id="2_gjf61"]
 [ext_resource type="Material" uid="uid://dvdnygwk8g12t" path="res://Shader/Unshaded/Unshaded.tres" id="3_bwcia"]
+[ext_resource type="PackedScene" uid="uid://dbo2cxkdnlax7" path="res://Interface/LayerMain/ControlsMenu/ControlsMenu.tscn" id="4_bwcia"]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("start_button", "quit_button", "tab_container", "background")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("start_button", "controls_button", "quit_button", "tab_container", "controls_menu", "background")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,8 +14,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bfnjg")
 start_button = NodePath("MarginContainer/TabContainer/MainMenu/VBoxContainer/Start")
+controls_button = NodePath("MarginContainer/TabContainer/MainMenu/VBoxContainer/Controls")
 quit_button = NodePath("MarginContainer/TabContainer/MainMenu/VBoxContainer/Exit")
 tab_container = NodePath("MarginContainer/TabContainer")
+controls_menu = NodePath("MarginContainer/TabContainer/ControlsMenu")
 background = NodePath("CenterContainer/Background/Background")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
@@ -32,6 +34,7 @@ layout_mode = 2
 [node name="Background" parent="CenterContainer/Background" instance=ExtResource("2_gjf61")]
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+material = ExtResource("3_bwcia")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -40,6 +43,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TabContainer" type="TabContainer" parent="MarginContainer"]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -47,44 +51,60 @@ current_tab = 0
 tabs_visible = false
 
 [node name="MainMenu" type="PanelContainer" parent="MarginContainer/TabContainer"]
+use_parent_material = true
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
 theme_type_variation = &"TitlePanelContainer"
 metadata/_tab_index = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/MainMenu"]
+use_parent_material = true
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer"]
+use_parent_material = true
 layout_mode = 2
 
 [node name="Title" type="Label" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer/MarginContainer"]
-material = ExtResource("3_bwcia")
+use_parent_material = true
 layout_mode = 2
 theme_type_variation = &"TitleLabel"
 text = "These Shadows Of Mine"
 
-[node name="Divider" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer" instance=ExtResource("1_vak0p")]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer"]
+use_parent_material = true
 layout_mode = 2
 
 [node name="Start" type="Button" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer"]
-material = ExtResource("3_bwcia")
+use_parent_material = true
 layout_mode = 2
 theme_type_variation = &"TitleButton"
 text = "Start"
 
+[node name="Controls" type="Button" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+theme_type_variation = &"TitleButton"
+text = "Controls"
+
 [node name="Exit" type="Button" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer"]
-material = ExtResource("3_bwcia")
+use_parent_material = true
 layout_mode = 2
 theme_type_variation = &"TitleButton"
 text = "Exit"
 
-[node name="Divider2" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer" instance=ExtResource("1_vak0p")]
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer"]
+use_parent_material = true
 layout_mode = 2
 
 [node name="Disclaimer" type="RichTextLabel" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer"]
-material = ExtResource("3_bwcia")
+use_parent_material = true
 layout_mode = 2
 theme_type_variation = &"Disclaimer"
 text = "The following game experience contains only movement options and destructive capabilities. We currently seek input on these things first, but feel free to give ideas."
 fit_content = true
+
+[node name="ControlsMenu" parent="MarginContainer/TabContainer" instance=ExtResource("4_bwcia")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
