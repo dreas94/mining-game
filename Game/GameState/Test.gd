@@ -4,6 +4,7 @@ extends GameState
 
 func enter(_previous_state: SimpleState) -> void:
 	World.active = true
+	Interface.item_window.visible = true
 	entered.emit()
 
 

@@ -71,14 +71,15 @@ func _attempt_to_mine(rid_to_mine: RID) -> void:
 
 
 func _handle_collision() -> void:
-	if get_slide_collision_count() == 0:
+	var collision_count: int = get_slide_collision_count()
+	if collision_count == 0:
 		return
 		
 	if _current_pickaxe_state != PickaxeState.READY:
 		return
 	
 	var already_triggered_rid: Array[RID]
-	for index: int in range(get_slide_collision_count()):
+	for index: int in range(collision_count):
 		var collision: KinematicCollision2D = get_slide_collision(index)
 		if already_triggered_rid.find(collision.get_collider_rid()) != -1:
 			continue 

@@ -18,9 +18,11 @@ config/icon="uid://bl512thg5rqir"
 [autoload]
 
 App="*res://App/App.gd"
+Content="*res://Content/Content.gd"
 Interface="*res://Interface/Interface.gd"
 Game="*res://Game/Game.gd"
 World="*res://Game/World/World.tscn"
+ItemCollection="*res://Game/Item/Collection/ItemCollection.gd"
 
 [display]
 

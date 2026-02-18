@@ -3,6 +3,7 @@ extends Node
 
 const UI_CANVAS_LAYER: int = 2
 const MAIN_MENU_SCENE: PackedScene = preload("uid://cedfub537lkht")
+const ITEM_WINDOW_SCENE: PackedScene = preload("uid://b71cvrfjvtuyg")
 
 var _root_canvas_layer: CanvasLayer
 
@@ -27,6 +28,11 @@ var main_menu: iMainMenu:
 	get: return _main_menu
 var _main_menu: iMainMenu
 
+# HUD
+var item_window: iItemWindow:
+	get: return _item_window
+var _item_window: iItemWindow
+
 
 @warning_ignore("untyped_declaration")
 func _set_readonly(_value) -> void:
@@ -45,6 +51,8 @@ func _init() -> void:
 	
 	#MAIN
 	_main_menu = _instance_to_layer(MAIN_MENU_SCENE, _layer_main)
+	#HUD
+	_item_window = _instance_to_layer(ITEM_WINDOW_SCENE, _layer_hud)
 
 
 func _new_to_layer(script: Script, layer: Layer) -> Object:

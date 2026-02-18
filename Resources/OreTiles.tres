@@ -1,0 +1,11 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dabjh64hdekfb"]
+
+[ext_resource type="Texture2D" uid="uid://bpnn57q4y537i" path="res://Textures/Ore_Vein.png" id="1_pqqm1"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_laucf"]
+texture = ExtResource("1_pqqm1")
+0:0/0 = 0
+0:0/0/modulate = Color(0.761719, 0.32135, 0, 1)
+
+[resource]
+sources/0 = SubResource("TileSetAtlasSource_laucf")

@@ -11,3 +11,6 @@ extends Resource
 @export_category("Drops")
 @export var item_dropped: ItemTemplate
 @export var amount_range: Vector2i = Vector2i.ZERO
+
+@export_category("Tiles")
+@export var atlas_coords: Vector2i = Vector2i.ZERO

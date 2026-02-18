@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=4 uid="uid://c72f4ti8pjn7d"]
+[gd_scene load_steps=9 format=4 uid="uid://c72f4ti8pjn7d"]
 
 [ext_resource type="Script" uid="uid://cp4q2b1cr83xn" path="res://Game/World/World.gd" id="1_lsgo1"]
 [ext_resource type="Script" uid="uid://dni3xc2w64gkx" path="res://Game/Tiles/BreakableTileLayer.gd" id="3_5xt6m"]
 [ext_resource type="PackedScene" uid="uid://bmn6yod73w421" path="res://Interface/Fluff/Campfire/Campfire.tscn" id="3_16coc"]
 [ext_resource type="TileSet" uid="uid://cvmpxeksqaf2m" path="res://Resources/Newer.tres" id="3_ov2xx"]
 [ext_resource type="Script" uid="uid://btmipfumpmqtj" path="res://Resources/CaveGenerator.gd" id="4_5xt6m"]
+[ext_resource type="TileSet" uid="uid://dabjh64hdekfb" path="res://Resources/OreTiles.tres" id="4_dtptj"]
 [ext_resource type="Texture2D" uid="uid://cq254veb6dqms" path="res://Textures/Pickaxe.png" id="4_ov2xx"]
 [ext_resource type="Texture2D" uid="uid://drjxkesrh35pn" path="res://Textures/Little Guy.png" id="5_5xt6m"]
 
@@ -17,12 +18,16 @@ cave_generator = NodePath("TileMapLayer/Node")
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0, 0, 0, 1)
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="TileMapLayer" type="TileMapLayer" parent="." node_paths=PackedStringArray("over_layer")]
 z_index = -1
 texture_filter = 1
 tile_map_data = PackedByteArray("AAD//wAAAAAAAAMAAAAAAAAAAAACAAMAAAA=")
 tile_set = ExtResource("3_ov2xx")
 script = ExtResource("3_5xt6m")
+over_layer = NodePath("TileMapLayer")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="TileMapLayer"]
+tile_set = ExtResource("4_dtptj")
 
 [node name="Node" type="Node" parent="TileMapLayer"]
 script = ExtResource("4_5xt6m")

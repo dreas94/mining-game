@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemTemplate" load_steps=3 format=3 uid="uid://edgc1eayqcvw"]
 
 [ext_resource type="Script" uid="uid://dau4r1i6a7pax" path="res://Game/Item/ItemTemplate.gd" id="1_aparh"]
-[ext_resource type="Texture2D" uid="uid://86nj8vqd82sj" path="res://Textures/Ore.png" id="1_fk0kn"]
+[ext_resource type="Texture2D" uid="uid://86nj8vqd82sj" path="res://Textures/Ore0.png" id="1_fk0kn"]
 
 [resource]
 script = ExtResource("1_aparh")

@@ -3,6 +3,7 @@
 [ext_resource type="Shader" uid="uid://dxlr4w6r6w7gr" path="res://Shader/Cracks/Cracks.gdshader" id="1_nk7sm"]
 
 [resource]
+resource_local_to_scene = true
 shader = ExtResource("1_nk7sm")
 shader_parameter/crack_depth = 1.0
 shader_parameter/crack_scale = 4.0

@@ -6,7 +6,6 @@ extends Node
 @export var fractal_octaves: int = 4
 @export var fractal_gain: float = 0.5
 @export var fractal_lacunarity: float = 1
-@export var noise_threshold: float = 0.1
 @export var fractal_weighted_strength: float = 0.1
 @export var frequency: float = 0.1
 
@@ -41,8 +40,7 @@ func generate(new_tile_map: BreakableTileMapLayer):
 				new_tile_map.create_cell_data(Vector2i(x,y), load("uid://dnloess7co135"))
 			elif (not x in range(-2, 2)) or (not y in range(-2, 0)):
 				var noise_val: float = simplex_noise.get_noise_2d(x, y)
-				if noise_val < self.noise_threshold:
+				if noise_val > 0.5:
+					new_tile_map.create_cell_data(Vector2i(x,y), load("uid://degpd00i4ni5c"))
+				elif noise_val > 0.1:
 					new_tile_map.create_cell_data(Vector2i(x,y), load("uid://dnloess7co135"))
-	
-	tile_map.set_cells_terrain_connect(new_tile_map.get_cells_array(), 0, 0)
-	#tile_map.set_cells_terrain_connect(empty_tiles_array, 0, 1, false)

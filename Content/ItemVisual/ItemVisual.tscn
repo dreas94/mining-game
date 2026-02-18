@@ -1,13 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://coj6a5b0wvrd8"]
+[gd_scene load_steps=2 format=3 uid="uid://coj6a5b0wvrd8"]
 
 [ext_resource type="Script" uid="uid://bv4cf38veip7t" path="res://Content/ItemVisual/ItemVisuals.gd" id="1_0hht3"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0hht3"]
-
-[node name="ItemVisual" type="Node2D"]
+[node name="ItemVisual" type="Node2D" node_paths=PackedStringArray("graphic_sprite")]
 script = ExtResource("1_0hht3")
+graphic_sprite = NodePath("Sprite2D")
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_0hht3")
+[node name="Sprite2D" type="Sprite2D" parent="."]

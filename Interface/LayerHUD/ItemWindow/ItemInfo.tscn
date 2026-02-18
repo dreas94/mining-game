@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnkynamme1287"]
+
+[ext_resource type="Script" uid="uid://dbqwgge7u51db" path="res://Interface/LayerHUD/ItemWindow/ItemInfo.gd" id="1_gggpl"]
+[ext_resource type="Texture2D" uid="uid://86nj8vqd82sj" path="res://Textures/Ore0.png" id="1_l4nar"]
+
+[node name="ItemInfo" type="HBoxContainer" node_paths=PackedStringArray("texture_rect", "label")]
+theme_override_constants/separation = 10
+script = ExtResource("1_gggpl")
+texture_rect = NodePath("TextureRect")
+label = NodePath("Label")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 2
+texture = ExtResource("1_l4nar")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "0"

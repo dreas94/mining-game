@@ -969,6 +969,7 @@ node_connections = [&"Combine", 0, &"Mining Speed", &"Combine", 1, &"TimeScale",
 size = Vector2(8, 9)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "camera")]
+collision_layer = 3
 script = ExtResource("1_4672b")
 animation_tree = NodePath("AnimationTree")
 camera = NodePath("Camera2D")
@@ -1019,4 +1020,4 @@ shape = SubResource("RectangleShape2D_4672b")
 
 [node name="PointLight2D" parent="." instance=ExtResource("5_kt3un")]
 energy = 0.907596
-texture_scale = 1.0303
+texture_scale = 1.02536

@@ -25,7 +25,7 @@ func _on_health_changed(value: int, _delta: int) -> void:
 	if value == 0:
 		queue_free()
 		return
-	var remapped_value: float = remap(float(value), 100.0, 0.0, 0.0, 0.1)
+	var remapped_value: float = remap(float(value), tile_attributes.health.maximum, 0.0, 0.0, 0.1)
 	_color_multiplier = lerpf(_color_multiplier, 2.0, 1.0)
 	var new_shader_param_color: Vector4 = Vector4(_color_multiplier, _color_multiplier, _color_multiplier, 1.0)
 	set_shader_param_color(new_shader_param_color)
