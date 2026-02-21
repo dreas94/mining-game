@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=3 format=3 uid="uid://cgfaluhif4g16"]
+
+[ext_resource type="Script" uid="uid://c7d3ccupogtwi" path="res://App/Sound/SoundEffect.gd" id="1_etw8u"]
+[ext_resource type="AudioStream" uid="uid://coluycrcl3pey" path="res://Content/RawSounds/Stockman/Trigger_Pickup.ogg" id="2_acb5e"]
+
+[resource]
+script = ExtResource("1_etw8u")
+stream = ExtResource("2_acb5e")
+bus = "Effects"
+volume_db = -10.0
+pitch_scale = 1.5
+fade_start = -1.0
+fade_time = -1.0
+metadata/_custom_type_script = "uid://c7d3ccupogtwi"

@@ -8,4 +8,5 @@ func _init(_size: Vector2) -> void:
 	collision_shape = CollisionShape2D.new()
 	collision_shape.shape = RectangleShape2D.new()
 	collision_shape.shape.size = _size
+	gravity
 	add_child(collision_shape)

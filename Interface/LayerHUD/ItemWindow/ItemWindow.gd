@@ -21,7 +21,12 @@ func _ready() -> void:
 func _on_item_added_to_collection(item_id: String, new_quantity: int) -> void:
 	if not shown_items.has(item_id):
 		var template: ItemTemplate = Content.get_item_template(item_id)
-		var item_info: iItemInfo = create_item_info(template.item_graphic, new_quantity)
+		var graphic: Texture2D = null
+		if template != null:
+			graphic = template.item_graphic
+		else:
+			graphic = load("uid://86nj8vqd82sj")
+		var item_info: iItemInfo = create_item_info(graphic, new_quantity)
 		v_box_container.add_child(item_info)
 		item_info.label.text = str(new_quantity)
 		shown_items[item_id] = item_info

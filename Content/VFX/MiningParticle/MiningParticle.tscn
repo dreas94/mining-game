@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://c73q2ndbadhko"]
+
+[ext_resource type="Script" uid="uid://dr0qirmgelq5w" path="res://Content/VFX/MiningParticle/MiningParticle.gd" id="1_d760p"]
+
+[sub_resource type="Curve" id="Curve_7h0vd"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_aoffo"]
+offsets = PackedFloat32Array(0.5, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="MiningParticles" type="Node2D" node_paths=PackedStringArray("particles")]
+script = ExtResource("1_d760p")
+particles = NodePath("Particles")
+
+[node name="Particles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 50
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.5
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 25.0
+initial_velocity_max = 50.0
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_7h0vd")
+color_ramp = SubResource("Gradient_aoffo")

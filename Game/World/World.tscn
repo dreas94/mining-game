@@ -43,7 +43,7 @@ tile_set = ExtResource("3_ov2xx")
 script = ExtResource("3_5xt6m")
 
 [node name="Campfire2" parent="." instance=ExtResource("3_16coc")]
-position = Vector2(0, -4)
+position = Vector2(8, -4)
 
 [node name="Pickaxe2" type="Sprite2D" parent="."]
 visible = false

@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1hoesfdl604e"]
+
+[ext_resource type="Texture2D" uid="uid://cickcm17b0wo4" path="res://Textures/Smoke/smoke_01.png" id="1_faxnf"]
+
+[sub_resource type="Curve" id="Curve_hew8q"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="SoulSmoke" type="Node2D"]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 50
+texture = ExtResource("1_faxnf")
+lifetime_randomness = 0.5
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_min = 0.02
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_hew8q")

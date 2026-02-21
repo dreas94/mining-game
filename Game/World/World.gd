@@ -18,7 +18,7 @@ func _enabled() -> void:
 	player = player_scene.instantiate()
 	add_child(player)
 	player.global_position = Vector2(8.0, -8.0)
-	player.mine_attempt.connect(_attempt_to_clear_cell_from_position)
+	player.mine_attempt_by_rid.connect(_attempt_to_clear_cell)
 	campfire.enabled = true
 	App.music.play(DefaultMusic.BEYOND)
 	visible = true
@@ -26,9 +26,9 @@ func _enabled() -> void:
 
 
 func _disabled() -> void:
-	player.mine_attempt.disconnect(_attempt_to_clear_cell_from_position)
+	player.mine_attempt.disconnect(_attempt_to_clear_cell)
 	player.queue_free()
 
 
-func _attempt_to_clear_cell_from_position(damage: int, rid: RID):
-	breakable_tile_map_layer.attempt_to_clear_cell_from_position(damage, rid, player.position)
+func _attempt_to_clear_cell(damage: int, rid: RID):
+	breakable_tile_map_layer.attempt_to_clear_cell(damage, rid, player.position)

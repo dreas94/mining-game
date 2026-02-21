@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_0kw3r")
 tile_name = "Stone"
-health = 25
+health = 100
 amount_range = Vector2i(0, 0)
 atlas_coords = Vector2i(0, 0)
 metadata/_custom_type_script = "uid://beghyqhtkssl1"

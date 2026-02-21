@@ -13,4 +13,4 @@ shader_parameter/crack_profile = 0.45
 shader_parameter/crack_slope = 11.0
 shader_parameter/crack_width = 0.1
 shader_parameter/crack_alpha = 0.75
-shader_parameter/custom_crack_color = Color(0, 0, 0, 1)
+shader_parameter/custom_crack_color = Color(0.2, 0.2, 0.2, 1)

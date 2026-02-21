@@ -1,4 +1,3 @@
-@tool
 class_name AnimatedPointLight2D
 extends PointLight2D
 
@@ -20,14 +19,14 @@ func _ready() -> void:
 	if flicker_enabled:
 		_flicker_tween = create_tween()
 		_flicker_tween.set_loops()
-		_flicker_tween.tween_interval(duration_per_flicker_update)
 		_flicker_tween.tween_callback(_flicker)
+		_flicker_tween.tween_interval(duration_per_flicker_update)
 	
 	if scaler_enabled:
 		_scale_tween = create_tween()
 		_scale_tween.set_loops()
-		_scale_tween.tween_interval(duration_per_scale_update)
 		_scale_tween.tween_callback(_scaler)
+		_scale_tween.tween_interval(duration_per_scale_update)
 
 
 func _flicker() -> void:

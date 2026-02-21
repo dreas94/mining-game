@@ -101,7 +101,7 @@ layout_mode = 2
 use_parent_material = true
 layout_mode = 2
 theme_type_variation = &"Disclaimer"
-text = "The following game experience contains only movement options and destructive capabilities. We currently seek input on these things first, but feel free to give ideas."
+text = "The following game experience contains only movement options, destructive capabilities and some light gathering elements. We currently seek input on these things first, but feel free to give ideas."
 fit_content = true
 
 [node name="ControlsMenu" parent="MarginContainer/TabContainer" instance=ExtResource("4_bwcia")]

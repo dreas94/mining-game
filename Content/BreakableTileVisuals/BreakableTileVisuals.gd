@@ -4,6 +4,7 @@ extends Node2D
 @export var _visual: ColorRect = ColorRect.new()
 var _color_multiplier: float
 var tile_attributes: TileAttributes
+var _mining_particles_scene: PackedScene = load("uid://c73q2ndbadhko")
 
 
 func _ready() -> void:
@@ -22,6 +23,9 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_health_changed(value: int, _delta: int) -> void:
+	var mining_particles: iMiningParticles = _mining_particles_scene.instantiate()
+	mining_particles.global_position = global_position
+	World.add_child(mining_particles)
 	if value == 0:
 		queue_free()
 		return
