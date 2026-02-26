@@ -1,17 +1,23 @@
 class_name TileHandler
 extends Node2D
 
-var _tiles: Array[Tile] = []
+var _grid_array: Array[Vector2i]
+var _tiles: Dictionary = {}
 
 
-func instance_tile_to_grid_position(tile: Tile, global_pos: Vector2 = Vector2.ZERO) -> void:
+func instance_tile_to_grid_position(tile: Tile, grid_position: Vector2i = Vector2i.ZERO, global_pos: Vector2 = Vector2.ZERO) -> void:
 	Logger.hint(self, instance_tile_to_grid_position)
 	
 	if tile.get_tile_instance().get_parent() != null:
 		Logger.error(self, instance_tile_to_grid_position, "tile instance already part of a tile handler" + (get_path() as String))
 		return
 	
-	_tiles.append(tile)
+	if _grid_array.has(grid_position):
+		Logger.error(self, instance_tile_to_grid_position, "grid position, already filled" + (get_path() as String))
+		return
+	
+	_grid_array.append(grid_position)
+	_tiles[grid_position] = tile
 	tile.set_tile_to_handler(self)
 	
 	var tile_instance: TileInstance = tile.get_tile_instance()
@@ -20,12 +26,16 @@ func instance_tile_to_grid_position(tile: Tile, global_pos: Vector2 = Vector2.ZE
 	tile_instance.global_position = global_pos
 
 
-func instance_template_to_grid_position(template: TileTemplate, global_pos: Vector2 = Vector2.ZERO) -> Tile:
+func instance_template_to_grid_position(template: TileTemplate, grid_position: Vector2i = Vector2i.ZERO, global_pos: Vector2 = Vector2.ZERO) -> Tile:
 	Logger.hint(self, instance_template_to_grid_position)
 	
-	var tile: Tile = Tile.new(template)
+	if _grid_array.has(grid_position):
+		Logger.error(self, instance_tile_to_grid_position, "grid position, already filled" + (get_path() as String))
+		return
 	
-	_tiles.append(tile)
+	var tile: Tile = Tile.new(template)
+	_grid_array.append(grid_position)
+	_tiles[grid_position] = tile
 	tile.set_tile_to_handler(self)
 	
 	var tile_instance: TileInstance = tile.get_tile_instance()
