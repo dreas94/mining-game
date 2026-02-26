@@ -23,7 +23,7 @@ enum PlayerState {IDLE, WALK, JUMP, DOWN, CROUCH}
 enum PickaxeState {IDLE, READY, SWING, RECOVER}
 var _current_state: PlayerState = PlayerState.IDLE
 var _current_pickaxe_state: PickaxeState = PickaxeState.IDLE
-
+var _grid_position: Vector2i
 var _move_direction: float = 1.0
 
 
@@ -42,8 +42,9 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	_grid_position = World.breakable_tile_map_layer.translate_to_grid_positon(global_position)
 	_move_direction = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
-	_handle_collision()
+	#_handle_collision()
 	_handle_input(delta)
 	_update_movement(delta)
 	
@@ -70,38 +71,40 @@ func _attempt_to_mine_by_rid(rid_to_mine: RID) -> void:
 	print("Pickaxe struck")
 
 
-func _handle_collision() -> void:
-	var collision_count: int = get_slide_collision_count()
-	if collision_count == 0:
-		return
-		
-	if _current_pickaxe_state != PickaxeState.READY:
-		return
-	
-	var picked_collision: KinematicCollision2D = null
-	var already_triggered_rid: Array[RID]
-	for index: int in range(collision_count):
-		var collision: KinematicCollision2D = get_slide_collision(index)
-		if already_triggered_rid.find(collision.get_collider_rid()) != -1:
-			continue
-		match _current_state:
-			PlayerState.CROUCH when is_on_floor() and collision.get_normal().y < 0.0:
-				if picked_collision == null:
-					picked_collision = collision
-				elif collision.get_normal().y > picked_collision.get_normal().y:
-					picked_collision = collision
-				elif collision.get_normal().x < picked_collision.get_normal().x:
-					picked_collision = collision
-			PlayerState.JUMP when not is_on_floor() and collision.get_normal().y > 0.0:
-				picked_collision = collision
-			PlayerState.DOWN when not is_on_floor() and collision.get_normal().y > 0.0:
-				picked_collision = collision
-			_ when collision.get_normal().x != 0 and collision.get_normal().x == -_move_direction:
-				picked_collision = collision
-	
-	if picked_collision == null:
-		return
-	_attempt_to_mine_by_rid(picked_collision.get_collider_rid())
+#func _handle_collision() -> void:
+	#var collision_count: int = get_slide_collision_count()
+	#if collision_count == 0:
+		#return
+	#if collision_count > 1:
+		#print(str(collision_count))
+		#
+	#if _current_pickaxe_state != PickaxeState.READY:
+		#return
+	#
+	#var picked_collision: KinematicCollision2D = null
+	#var already_triggered_rid: Array[RID]
+	#for index: int in range(collision_count):
+		#var collision: KinematicCollision2D = get_slide_collision(index)
+		#if already_triggered_rid.find(collision.get_collider_rid()) != -1:
+			#continue
+		#match _current_state:
+			#PlayerState.CROUCH when is_on_floor() and collision.get_normal().y < 0.0:
+				#if picked_collision == null:
+					#picked_collision = collision
+				#elif collision.get_normal().y > picked_collision.get_normal().y:
+					#picked_collision = collision
+				#elif collision.get_normal().x < picked_collision.get_normal().x:
+					#picked_collision = collision
+			#PlayerState.JUMP when not is_on_floor() and collision.get_normal().y > 0.0:
+				#picked_collision = collision
+			#PlayerState.DOWN when not is_on_floor() and collision.get_normal().y > 0.0:
+				#picked_collision = collision
+			#_ when collision.get_normal().x != 0 and collision.get_normal().x == -_move_direction:
+				#picked_collision = collision
+	#
+	#if picked_collision == null:
+		#return
+	#_attempt_to_mine_by_rid(picked_collision.get_collider_rid())
 
 
 func _handle_input(delta: float) -> void:
@@ -185,7 +188,7 @@ func _input(event: InputEvent) -> void:
 	if not event.is_pressed():
 		return
 	
-	if event is InputEventMouseButton:
+	if event is InputEventMouseMotion:
 		if not event.button_index == MouseButton.MOUSE_BUTTON_LEFT:
 			return
 

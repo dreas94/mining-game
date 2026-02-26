@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://2cdd1ob0n0k6"]
+
+[ext_resource type="Script" uid="uid://cvdfvno3kfdix" path="res://Content/TileVisuals/TileVisuals.gd" id="1_j8cpm"]
+[ext_resource type="Material" uid="uid://c1nkj436djpxy" path="res://Shader/Cracks/Cracks.tres" id="2_7ab37"]
+
+[node name="TileVisuals" type="Node2D" node_paths=PackedStringArray("_visual")]
+script = ExtResource("1_j8cpm")
+_visual = NodePath("ColorRect")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = ExtResource("2_7ab37")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)

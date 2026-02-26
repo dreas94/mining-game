@@ -86,7 +86,7 @@ vec4 generate_cracks(vec2 uv, vec4 color, vec4 crack_color) {
         U *= 1.5;
     }
     color *= crack_color;
-	
+
 	return color;
 }
 
@@ -95,17 +95,17 @@ void fragment()
 {
 	vec4 color = COLOR;
 	vec4 crack_color = color;
-	
+
 	if (abs(custom_crack_color.a) < 0.0001)
 	{
 		crack_color = vec4(1.0 - color.rgb, color.a);
 	}
 	else
 		crack_color = custom_crack_color;
-	
+
 	crack_color.a = crack_alpha;
 	vec4 crack = generate_cracks(UV, color, crack_color);
-	
+
 	if (color.a < crack.a * 0.75)
 		COLOR = crack;
 	else

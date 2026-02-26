@@ -1,4 +1,4 @@
-class_name BreakableTileVisuals
+class_name TileVisuals
 extends Node2D
 
 @export var _visual: ColorRect = ColorRect.new()

@@ -32,6 +32,21 @@ func create_cell_data(cell: Vector2i, template: TileTemplate) -> void:
 		#_active_lights[cell] = light_source
 
 
+func _physics_process(_delta: float) -> void:
+	var global_mouse_pos: Vector2  = get_global_mouse_position()
+	var local_mouse_pos: Vector2  = to_local(global_mouse_pos)
+	var tile_pos: Vector2i = local_to_map(local_mouse_pos)
+	
+	if _cells_array.find(tile_pos) != -1:
+		print(str(tile_pos))
+
+
+func translate_to_grid_positon(global_pos: Vector2) -> Vector2i:
+	var local_pos: Vector2 = to_local(global_pos)
+	var grid_position: Vector2i = local_to_map(local_pos)
+	return grid_position
+
+
 func is_target_position_close_enough_to_player(player_cell: Vector2i, target_cell: Vector2i) -> bool:
 	var distance: Vector2i = abs(player_cell - target_cell)
 	
@@ -49,8 +64,10 @@ func attempt_to_clear_cell(damage: int, rid: RID, player_position: Vector2):
 	var player_cell: Vector2i = local_to_map(player_position)
 	var cell: Vector2i
 	
-	if rid != null:
-		cell = get_coords_for_body_rid(rid)
+	if rid == null:
+		return
+	
+	cell = get_coords_for_body_rid(rid)
 	
 	if cell == null:
 		return
@@ -63,7 +80,7 @@ func attempt_to_clear_cell(damage: int, rid: RID, player_position: Vector2):
 	
 	if  _custom_cell_data.get(cell).health.value == _custom_cell_data.get(cell).health.maximum:
 		var global_position_of_tile = to_global(map_to_local(cell))
-		var breakable_tile_visual: BreakableTileVisuals = _breakable_tile_visual_scene.instantiate()
+		var breakable_tile_visual: TileVisuals = _breakable_tile_visual_scene.instantiate()
 		breakable_tile_visual.tile_attributes = _custom_cell_data.get(cell)
 		breakable_tile_visual.global_position = global_position_of_tile
 		World.add_child(breakable_tile_visual)
