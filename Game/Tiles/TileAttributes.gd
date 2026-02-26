@@ -10,6 +10,7 @@ var atlas_coords: Vector2i = Vector2i.ZERO
 
 # Values
 var health: IntAttribute = IntAttribute.new(0)
+var is_moused: BoolAttribute = BoolAttribute.new(false)
 
 
 func _init(_tile_template: TileTemplate) -> void:

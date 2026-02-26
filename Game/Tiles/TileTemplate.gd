@@ -14,3 +14,11 @@ extends Resource
 
 @export_category("Tiles")
 @export var atlas_coords: Vector2i = Vector2i.ZERO
+
+
+func get_file_name() -> String:
+	return resource_path.get_file().get_basename()
+
+
+func get_item_id() -> String:
+	return get_file_name()

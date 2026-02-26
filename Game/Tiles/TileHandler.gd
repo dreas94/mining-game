@@ -43,3 +43,40 @@ func instance_template_to_grid_position(template: TileTemplate, grid_position: V
 	
 	tile_instance.global_position = global_pos
 	return tile
+
+
+func remove_tile_from_handler(tile: Tile) -> void:
+	Logger.hint(self, remove_tile_from_handler)
+	
+	if not tile:
+		return
+	
+	if _tiles.has(tile):
+		_tiles.erase(tile)
+	
+	tile.set_tile_to_handler(null)
+	
+	var i: TileInstance = tile.get_tile_instance()
+	i.queue_free()
+
+
+func clear_handler() -> void:
+	Logger.hint(self, clear_handler)
+	_tiles.clear()
+	for c: Node in get_children():
+		if c is TileInstance:
+			c.queue_free()
+		else:
+			Logger.warn(self, clear_handler, "Not a TileInstance -> %s" % c.name)
+
+
+func get_tiles() -> Dictionary:
+	return _tiles.duplicate()
+
+
+func get_tile_in_grid_position(grid_position: Vector2i) -> Tile:
+	return _tiles.get(grid_position)
+
+
+func has_tile_at_grid_position(grid_position: Vector2i) -> bool:
+	return _tiles.has(grid_position)

@@ -1,7 +1,9 @@
 class_name TileVisuals
 extends Node2D
 
-@export var _visual: ColorRect = ColorRect.new()
+@export var _visual: ColorRect
+@export var _moused_visual: PanelContainer
+
 var _color_multiplier: float
 var tile_attributes: TileAttributes
 var _mining_particles_scene: PackedScene = load("uid://c73q2ndbadhko")
@@ -9,11 +11,13 @@ var _mining_particles_scene: PackedScene = load("uid://c73q2ndbadhko")
 
 func _ready() -> void:
 	tile_attributes.health.changed.connect(_on_health_changed)
+	tile_attributes.is_moused.changed.connect(_on_is_moused_changed)
 	_configure()
 
 
 func _configure() -> void:
 	_on_health_changed(tile_attributes.health.value, 0)
+	_on_is_moused_changed(tile_attributes.is_moused.value, false)
 
 
 func _physics_process(delta: float) -> void:
@@ -23,6 +27,8 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_health_changed(value: int, _delta: int) -> void:
+	if value == tile_attributes.health.maximum:
+		return
 	var mining_particles: iMiningParticles = _mining_particles_scene.instantiate()
 	mining_particles.global_position = global_position
 	World.add_child(mining_particles)
@@ -34,6 +40,11 @@ func _on_health_changed(value: int, _delta: int) -> void:
 	var new_shader_param_color: Vector4 = Vector4(_color_multiplier, _color_multiplier, _color_multiplier, 1.0)
 	set_shader_param_color(new_shader_param_color)
 	set_shader_param_crack_width(remapped_value)
+	_visual.visible = true
+
+
+func _on_is_moused_changed(bool_value: bool, previous_value: bool) -> void:
+	_moused_visual.visible = bool_value
 
 
 func get_shader_param_color() -> Vector4:

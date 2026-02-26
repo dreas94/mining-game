@@ -3,6 +3,7 @@ extends GameMode
 @export var breakable_tile_map_layer: BreakableTileMapLayer
 @export var campfire: CampFire
 @export var cave_generator: CaveGenerator
+@export var tile_handler: TileHandler
 
 var player: iPlayer
 
