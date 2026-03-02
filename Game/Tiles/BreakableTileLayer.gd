@@ -7,6 +7,7 @@ Vector2i(1, 1), Vector2i(-1, 1), Vector2i(1, -1), Vector2i(-1, -1)]
 @export var over_layer: TileMapLayer
 #var _active_lights: Dictionary = {}
 var active_items: Array[Item]
+var hovered
 
 
 func create_cell_data(cell: Vector2i, template: TileTemplate) -> void:
@@ -24,16 +25,6 @@ func create_cell_data(cell: Vector2i, template: TileTemplate) -> void:
 		#light_source.color = Color(0.762, 0.321, 0.0)
 		#World.add_child(light_source)
 		#_active_lights[cell] = light_source
-
-
-func _physics_process(_delta: float) -> void:
-	var global_mouse_pos: Vector2 = get_global_mouse_position()
-	var local_mouse_pos: Vector2 = to_local(global_mouse_pos)
-	var tile_pos: Vector2i = local_to_map(local_mouse_pos)
-	
-	#if World.tile_handler.has_tile_at_grid_position(tile_pos) != false:
-		#var tile: Tile = World.tile_handler.get_tile_in_grid_position(tile_pos)
-		#tile.tile_attributes.is_moused.value = true
 
 
 func translate_to_grid_positon(global_pos: Vector2) -> Vector2i:
@@ -81,3 +72,4 @@ func attempt_to_clear_cell(damage: int, rid: RID, player_position: Vector2):
 func clear_cell_at_global_position(global_pos: Vector2) -> void:
 	var cell: Vector2i = World.breakable_tile_map_layer.local_to_map(to_local(global_pos))
 	World.breakable_tile_map_layer.set_cells_terrain_connect([cell], 0, -1, true)
+	update_internals()

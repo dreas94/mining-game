@@ -952,6 +952,7 @@ graph_offset = Vector2(7, 12)
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_1khw3"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_1khw3"]
+graph_offset = Vector2(-289.364, -428.364)
 nodes/Combine/node = SubResource("AnimationNodeAdd2_kt3un")
 nodes/Combine/position = Vector2(440, -180)
 nodes/Mining/node = SubResource("AnimationNodeStateMachine_kt3un")
@@ -971,11 +972,13 @@ size = Vector2(8, 9)
 [sub_resource type="CircleShape2D" id="CircleShape2D_o2hno"]
 radius = 20.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "camera") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "camera", "ray_2d", "light") groups=["Player"]]
 collision_layer = 32
 script = ExtResource("1_4672b")
 animation_tree = NodePath("AnimationTree")
 camera = NodePath("Camera2D")
+ray_2d = NodePath("RayCast2D")
+light = NodePath("PointLight2D")
 mining_speed = 2.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -1031,8 +1034,8 @@ parameters/Mining/Ready/blend_position = 0
 "parameters/Mining Speed/scale" = 1.0
 parameters/PlayerStates/Crouch/blend_position = 0.0
 parameters/PlayerStates/Down/blend_position = 0
-parameters/PlayerStates/Idle/blend_position = 0.0
-parameters/PlayerStates/Up/blend_position = 0
+parameters/PlayerStates/Idle/blend_position = -0.000856876
+parameters/PlayerStates/Up/blend_position = 0.275064
 parameters/PlayerStates/Walk/blend_position = 0
 parameters/TimeScale/scale = 1.0
 
@@ -1056,3 +1059,6 @@ shape = SubResource("CircleShape2D_o2hno")
 [node name="PointLight2D" parent="." instance=ExtResource("5_kt3un")]
 energy = 0.907596
 texture_scale = 1.05928
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 16)

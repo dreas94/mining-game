@@ -74,9 +74,31 @@ func get_tiles() -> Dictionary:
 	return _tiles.duplicate()
 
 
+func get_tile_in_global_position(pos: Vector2) -> Tile:
+	var tile_map_local_position: Vector2 = World.breakable_tile_map_layer.to_local(pos)
+	var grid_position: Vector2i = World.breakable_tile_map_layer.local_to_map(tile_map_local_position)
+	return get_tile_in_grid_position(grid_position)
+
+
 func get_tile_in_grid_position(grid_position: Vector2i) -> Tile:
 	return _tiles.get(grid_position)
 
 
 func has_tile_at_grid_position(grid_position: Vector2i) -> bool:
 	return _tiles.has(grid_position)
+
+
+func get_tile_based_on_rid(rid: RID) -> Tile:
+	if not rid.is_valid():
+		return null
+	
+	var grid_position: Vector2i = World.breakable_tile_map_layer.get_coords_for_body_rid(rid)
+	
+	if not has_tile_at_grid_position(grid_position):
+		return null
+	
+	return get_tile_in_grid_position(grid_position)
+
+
+func get_grid_position_of_tile(tile: Tile) -> Vector2i:
+	return _tiles.find_key(tile)

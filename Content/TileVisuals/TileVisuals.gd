@@ -43,7 +43,7 @@ func _on_health_changed(value: int, _delta: int) -> void:
 	_visual.visible = true
 
 
-func _on_is_moused_changed(bool_value: bool, previous_value: bool) -> void:
+func _on_is_moused_changed(bool_value: bool, _previous_value: bool) -> void:
 	_moused_visual.visible = bool_value
 
 

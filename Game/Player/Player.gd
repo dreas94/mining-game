@@ -4,6 +4,8 @@ signal mine_attempt_by_rid(damage: int, rid: RID)
 
 @export var animation_tree: AnimationTree
 @export var camera: Camera2D
+@export var ray_2d: RayCast2D
+@export var light: AnimatedPointLight2D
 @export var speed: float = 100.0
 @export var acceleration: float = 100.0
 @export var deacceleration: float = acceleration * 4.0
@@ -25,6 +27,8 @@ var _current_state: PlayerState = PlayerState.IDLE
 var _current_pickaxe_state: PickaxeState = PickaxeState.IDLE
 var _grid_position: Vector2i
 var _move_direction: float = 1.0
+var _last_tile_grid_pos_ray_casted: Vector2i = Vector2i.MAX
+var _health: FloatAttribute = FloatAttribute.new(100.0, 100.0)
 
 
 func _ready() -> void:
@@ -39,11 +43,15 @@ func _ready() -> void:
 	animation_tree.set("parameters/PlayerStates/Idle/blend_position", 1.0)
 	animation_tree.set("parameters/PlayerStates/Run/blend_position", 1.0)
 	animation_tree.set("parameters/PlayerStates/Walk/blend_position", 1.0)
+	
+	_health.changed.connect(_on_health_changed)
 
 
 func _physics_process(delta: float) -> void:
 	_grid_position = World.breakable_tile_map_layer.translate_to_grid_positon(global_position)
 	_move_direction = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
+	
+	_handle_ray_cast()
 	_handle_collision()
 	_handle_input(delta)
 	_update_movement(delta)
@@ -66,45 +74,51 @@ func _enter_pickaxe_recovery() -> void:
 
 
 func _attempt_to_mine_by_rid(rid_to_mine: RID) -> void:
+	_health.value -= randf_range(1.0, 10.0)
 	_current_pickaxe_state = PickaxeState.SWING
 	mine_attempt_by_rid.emit(25, rid_to_mine)
 	print("Pickaxe struck")
 
 
-func _handle_collision() -> void:
-	var collision_count: int = get_slide_collision_count()
-	if collision_count == 0:
+func _handle_ray_cast() -> void:
+	var previous_tile: Tile = World.tile_handler.get_tile_in_grid_position(_last_tile_grid_pos_ray_casted)
+	if not ray_2d.is_colliding():
+		if previous_tile == null:
+			return
+		previous_tile.tile_attributes.is_moused.value = false
+		_last_tile_grid_pos_ray_casted =  Vector2i.MAX
 		return
-	if collision_count > 1:
-		print(str(collision_count))
+	
+	if _current_pickaxe_state in [PickaxeState.RECOVER, PickaxeState.SWING]:
+		return
+	
+	var tile: Tile = World.tile_handler.get_tile_based_on_rid(ray_2d.get_collider_rid())
+	
+	if tile == null:
+		return
+	
+	if previous_tile == tile:
+		return
+	
+	tile.tile_attributes.is_moused.value = true
+	_last_tile_grid_pos_ray_casted =  World.tile_handler.get_grid_position_of_tile(tile)
+	
+	if previous_tile == null:
+		return
 		
+	previous_tile.tile_attributes.is_moused.value = false
+	_last_tile_grid_pos_ray_casted = World.tile_handler.get_grid_position_of_tile(tile)
+	
+
+
+func _handle_collision() -> void:
+	if not ray_2d.is_colliding():
+		return
+	
 	if _current_pickaxe_state != PickaxeState.READY:
 		return
 	
-	var picked_collision: KinematicCollision2D = null
-	var already_triggered_rid: Array[RID]
-	for index: int in range(collision_count):
-		var collision: KinematicCollision2D = get_slide_collision(index)
-		if already_triggered_rid.find(collision.get_collider_rid()) != -1:
-			continue
-		match _current_state:
-			PlayerState.CROUCH when is_on_floor() and collision.get_normal().y < 0.0:
-				if picked_collision == null:
-					picked_collision = collision
-				elif collision.get_normal().y > picked_collision.get_normal().y:
-					picked_collision = collision
-				elif collision.get_normal().x < picked_collision.get_normal().x:
-					picked_collision = collision
-			PlayerState.JUMP when not is_on_floor() and collision.get_normal().y > 0.0:
-				picked_collision = collision
-			PlayerState.DOWN when not is_on_floor() and collision.get_normal().y > 0.0:
-				picked_collision = collision
-			_ when collision.get_normal().x != 0 and collision.get_normal().x == -_move_direction:
-				picked_collision = collision
-	
-	if picked_collision == null:
-		return
-	_attempt_to_mine_by_rid(picked_collision.get_collider_rid())
+	_attempt_to_mine_by_rid(ray_2d.get_collider_rid())
 
 
 func _handle_input(delta: float) -> void:
@@ -185,14 +199,27 @@ func _update_animation() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if not event.is_pressed():
-		return
-	
 	if event is InputEventMouseMotion:
-		if not event.button_index == MouseButton.MOUSE_BUTTON_LEFT:
-			return
+		var global_mouse_pos: Vector2 = get_global_mouse_position()
+		var local_mouse_pos: Vector2 = to_local(global_mouse_pos)
+		var normalized_local_mouse_pos: Vector2 = local_mouse_pos.normalized()
+		var direction: Vector2 = Vector2.ZERO
+		var shortest_distance: float = INF
+		for vec: Vector2 in [Vector2.UP, Vector2.DOWN, Vector2.RIGHT, Vector2.LEFT]:
+			var distance: float = vec.distance_to(normalized_local_mouse_pos)
+			if shortest_distance < distance:
+				continue
+			direction = vec
+			shortest_distance = distance
+		
+		ray_2d.target_position = direction * 16.0
 
 
 func _play_footstep() -> void:
 	if is_on_floor():
 		App.sfx.play(DefaultSoundEffects.GRAVEL)
+
+
+func _on_health_changed(value: int, _delta: int) -> void:
+	light.base_scale = remap(value, 0.0, _health.maximum, 0.0, 1.0)
+	
