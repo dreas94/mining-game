@@ -4,6 +4,7 @@ extends Node
 const UI_CANVAS_LAYER: int = 2
 const MAIN_MENU_SCENE: PackedScene = preload("uid://cedfub537lkht")
 const ITEM_WINDOW_SCENE: PackedScene = preload("uid://b71cvrfjvtuyg")
+const HEALTH_VISUALS_SCENE: PackedScene = preload("uid://ce5pt73vdvu5d")
 
 var _root_canvas_layer: CanvasLayer
 
@@ -32,6 +33,9 @@ var _main_menu: iMainMenu
 var item_window: iItemWindow:
 	get: return _item_window
 var _item_window: iItemWindow
+var health_visuals: iHealthVisuals:
+	get: return _health_visuals
+var _health_visuals: iHealthVisuals
 
 
 @warning_ignore("untyped_declaration")
@@ -53,6 +57,7 @@ func _init() -> void:
 	_main_menu = _instance_to_layer(MAIN_MENU_SCENE, _layer_main)
 	#HUD
 	_item_window = _instance_to_layer(ITEM_WINDOW_SCENE, _layer_hud)
+	_health_visuals = _instance_to_layer(HEALTH_VISUALS_SCENE, _layer_hud)
 
 
 func _new_to_layer(script: Script, layer: Layer) -> Object:

@@ -28,7 +28,6 @@ var _current_pickaxe_state: PickaxeState = PickaxeState.IDLE
 var _grid_position: Vector2i
 var _move_direction: float = 1.0
 var _last_tile_grid_pos_ray_casted: Vector2i = Vector2i.MAX
-var _health: FloatAttribute = FloatAttribute.new(100.0, 100.0)
 
 
 func _ready() -> void:
@@ -44,7 +43,7 @@ func _ready() -> void:
 	animation_tree.set("parameters/PlayerStates/Run/blend_position", 1.0)
 	animation_tree.set("parameters/PlayerStates/Walk/blend_position", 1.0)
 	
-	_health.changed.connect(_on_health_changed)
+	World.health.current_changed.connect(_on_current_health_changed)
 
 
 func _physics_process(delta: float) -> void:
@@ -74,7 +73,7 @@ func _enter_pickaxe_recovery() -> void:
 
 
 func _attempt_to_mine_by_rid(rid_to_mine: RID) -> void:
-	_health.value -= randf_range(1.0, 10.0)
+	World.health.sub_health(randf_range(1.0, 10.0))
 	_current_pickaxe_state = PickaxeState.SWING
 	mine_attempt_by_rid.emit(25, rid_to_mine)
 	print("Pickaxe struck")
@@ -220,6 +219,6 @@ func _play_footstep() -> void:
 		App.sfx.play(DefaultSoundEffects.GRAVEL)
 
 
-func _on_health_changed(value: int, _delta: int) -> void:
-	light.base_scale = remap(value, 0.0, _health.maximum, 0.0, 1.0)
+func _on_current_health_changed(previous: float, current: float) -> void:
+	light.base_scale = remap(current, 0.0, World.health.maximum, 0.0, 1.0)
 	

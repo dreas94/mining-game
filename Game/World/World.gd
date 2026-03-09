@@ -6,12 +6,13 @@ extends GameMode
 @export var tile_handler: TileHandler
 
 var player: iPlayer
-
+var health: Health
 var player_scene: PackedScene = preload("uid://cr7vr5ke2lgfn")
 
 
 func _init() -> void:
 	visible = false
+	health = Health.new()
 
 
 func _enabled() -> void:
