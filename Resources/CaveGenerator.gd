@@ -12,9 +12,6 @@ extends Node
 var tile_map : BreakableTileMapLayer
 var simplex_noise: FastNoiseLite = FastNoiseLite.new()
 
-var cells_array: Array[Vector2i]
-var world_ref: WeakRef
-
 
 func generate(new_tile_map: BreakableTileMapLayer):
 	self.tile_map = new_tile_map
@@ -32,13 +29,13 @@ func generate(new_tile_map: BreakableTileMapLayer):
 	var max_height: int = floor((self.map_width + 2) / 2.0)
 	for x in range(min_width, max_width):
 		for y in range(min_height, max_height):
-			if x in range(-2, 2) and y == 1:
+			if x == 0 and y == 0:
 				new_tile_map.create_cell_data(Vector2i(x,y), load("uid://dnloess7co135"))
 			elif x in range(min_width, min_width + 2) or x in range(max_width - 2, max_width):
 				new_tile_map.create_cell_data(Vector2i(x,y), load("uid://dnloess7co135"))
 			elif y in range(min_height, min_height + 2) or y in range(max_height - 2, max_height):
 				new_tile_map.create_cell_data(Vector2i(x,y), load("uid://dnloess7co135"))
-			elif (not x in range(-2, 2)) or (not y in range(-2, 0)):
+			elif not (x == 0 and y in range(-2, 0)):
 				var noise_val: float = simplex_noise.get_noise_2d(x, y)
 				if noise_val > 0.5:
 					new_tile_map.create_cell_data(Vector2i(x,y), load("uid://degpd00i4ni5c"))

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dqwikqse5jy46" path="res://Interface/LayerHUD/Health/HealthVisuals.gd" id="1_vpinq"]
 
-[node name="HealthVisuals" type="Control" node_paths=PackedStringArray("health_bar", "damage_bar", "timer")]
+[node name="HealthVisuals" type="Control" node_paths=PackedStringArray("health_bar", "damage_bar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,38 +11,34 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vpinq")
 health_bar = NodePath("HealthBar")
-damage_bar = NodePath("DamageBar")
-timer = NodePath("Timer")
-
-[node name="DamageBar" type="ProgressBar" parent="."]
-modulate = Color(0.617188, 0.617188, 0.617188, 1)
-custom_minimum_size = Vector2(500, 20)
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = -21.0
-offset_right = 501.0
-offset_bottom = -1.0
-grow_vertical = 0
-theme_type_variation = &"DamageBar"
-value = 60.0
-show_percentage = false
+damage_bar = NodePath("HealthBar/DamageBar")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
-modulate = Color(0.133333, 1, 0.262745, 1)
+self_modulate = Color(0.133333, 1, 0.262745, 1)
 custom_minimum_size = Vector2(240, 4)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = -21.0
-offset_right = 501.0
-offset_bottom = -1.0
+offset_left = 5.0
+offset_top = -25.0
+offset_right = 505.0
+offset_bottom = -5.0
 grow_vertical = 0
 theme_type_variation = &"HealthBar"
+value = 50.0
 show_percentage = false
 
-[node name="Timer" type="Timer" parent="."]
+[node name="DamageBar" type="ProgressBar" parent="HealthBar"]
+self_modulate = Color(0.615686, 0.615686, 0.615686, 1)
+z_index = -1
+custom_minimum_size = Vector2(500, 20)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"DamageBar"
+value = 60.0
+show_percentage = false

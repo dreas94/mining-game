@@ -25,5 +25,5 @@ func get_save_data() -> Dictionary:
 	return data
 
 
-func apply_save_data(data: Dictionary) -> void:
+func apply_save_data(_data: Dictionary) -> void:
 	return

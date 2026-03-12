@@ -8,7 +8,7 @@ var _open: bool = false:
 		_open = value
 
 
-var shown_items: Dictionary = {}
+var shown_items: Dictionary[String, iItemInfo] = {}
 
 
 func _ready() -> void:
@@ -38,11 +38,14 @@ func _on_item_removed_from_collection(item_id: String, new_quantity: int) -> voi
 	if new_quantity >= 0:
 		shown_items[item_id].queue_free()
 		shown_items.erase(item_id)
-	shown_items[item_id] = new_quantity
+	shown_items[item_id].label.text = str(new_quantity)
 
 
 func _on_game_state_changed(_old: SimpleState, new: SimpleState) -> void:
 	visible = false
+	for key: String in shown_items:
+		shown_items[key].queue_free()
+		shown_items.erase(key)
 	if new.get_script() in [GameStateTest]:
 		visible = true
 

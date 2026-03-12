@@ -73,3 +73,8 @@ func clear_cell_at_global_position(global_pos: Vector2) -> void:
 	var cell: Vector2i = World.breakable_tile_map_layer.local_to_map(to_local(global_pos))
 	World.breakable_tile_map_layer.set_cells_terrain_connect([cell], 0, -1, true)
 	update_internals()
+
+
+func clear_tilemaps() -> void:
+	clear()
+	over_layer.clear()

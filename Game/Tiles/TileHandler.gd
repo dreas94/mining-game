@@ -52,6 +52,7 @@ func remove_tile_from_handler(tile: Tile) -> void:
 		return
 	
 	if _tiles.has(tile):
+		_grid_array.erase(_tiles.find_key(tile))
 		_tiles.erase(tile)
 	
 	tile.set_tile_to_handler(null)
@@ -62,6 +63,7 @@ func remove_tile_from_handler(tile: Tile) -> void:
 
 func clear_handler() -> void:
 	Logger.hint(self, clear_handler)
+	_grid_array.clear()
 	_tiles.clear()
 	for c: Node in get_children():
 		if c is TileInstance:

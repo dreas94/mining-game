@@ -1,19 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://c72f4ti8pjn7d"]
+[gd_scene load_steps=7 format=3 uid="uid://c72f4ti8pjn7d"]
 
 [ext_resource type="Script" uid="uid://cp4q2b1cr83xn" path="res://Game/World/World.gd" id="1_lsgo1"]
 [ext_resource type="Script" uid="uid://67r0vk0mah3l" path="res://Game/Tiles/TileHandler.gd" id="2_bgsr8"]
 [ext_resource type="Script" uid="uid://dni3xc2w64gkx" path="res://Game/Tiles/BreakableTileLayer.gd" id="3_5xt6m"]
-[ext_resource type="PackedScene" uid="uid://bmn6yod73w421" path="res://Interface/Fluff/Campfire/Campfire.tscn" id="3_16coc"]
 [ext_resource type="TileSet" uid="uid://cvmpxeksqaf2m" path="res://Resources/Newer.tres" id="3_ov2xx"]
 [ext_resource type="Script" uid="uid://btmipfumpmqtj" path="res://Resources/CaveGenerator.gd" id="4_5xt6m"]
 [ext_resource type="TileSet" uid="uid://dabjh64hdekfb" path="res://Resources/OreTiles.tres" id="4_dtptj"]
-[ext_resource type="Texture2D" uid="uid://cq254veb6dqms" path="res://Textures/Pickaxe.png" id="4_ov2xx"]
-[ext_resource type="Texture2D" uid="uid://drjxkesrh35pn" path="res://Textures/Little Guy.png" id="5_5xt6m"]
 
-[node name="World" type="Node2D" node_paths=PackedStringArray("breakable_tile_map_layer", "campfire", "cave_generator", "tile_handler")]
+[node name="World" type="Node2D" node_paths=PackedStringArray("breakable_tile_map_layer", "cave_generator", "tile_handler")]
 script = ExtResource("1_lsgo1")
 breakable_tile_map_layer = NodePath("TileMapLayer")
-campfire = NodePath("Campfire2")
 cave_generator = NodePath("TileMapLayer/Node")
 tile_handler = NodePath("TileHandler")
 
@@ -23,7 +19,6 @@ color = Color(0, 0, 0, 1)
 [node name="TileMapLayer" type="TileMapLayer" parent="." node_paths=PackedStringArray("over_layer")]
 z_index = -1
 texture_filter = 1
-tile_map_data = PackedByteArray(0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 3, 0, 0, 0)
 tile_set = ExtResource("3_ov2xx")
 script = ExtResource("3_5xt6m")
 over_layer = NodePath("TileMapLayer")
@@ -37,23 +32,3 @@ world_seed = "ijdsnfguiohsduhbisdaf"
 
 [node name="TileHandler" type="Node2D" parent="."]
 script = ExtResource("2_bgsr8")
-
-[node name="Campfire2" parent="." instance=ExtResource("3_16coc")]
-position = Vector2(8, -4)
-
-[node name="Pickaxe2" type="Sprite2D" parent="."]
-visible = false
-self_modulate = Color(0.6, 0.6, 0.6, 1)
-texture_filter = 1
-position = Vector2(-41.8, 43.8)
-rotation = 1.29262
-texture = ExtResource("4_ov2xx")
-
-[node name="LittleGuy2" type="Sprite2D" parent="."]
-visible = false
-self_modulate = Color(0.0588235, 0.662745, 0.184314, 1)
-texture_filter = 1
-position = Vector2(-20.8, 40)
-texture = ExtResource("5_5xt6m")
-hframes = 6
-frame = 5

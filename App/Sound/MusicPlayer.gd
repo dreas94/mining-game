@@ -29,6 +29,15 @@ func play(track: MusicTrack, fade_time: float = 0.5) -> void:
 		_current = 0
 
 
+func stop(fade_time: float = 0.5) -> void:
+	if _current == 0:
+		_fade_to_stop(_player_one, fade_time)
+	else:
+		_fade_to_stop(_player_two, fade_time)
+	
+	_current == 0
+
+
 func _fade_to_stop(player: AudioStreamPlayer, fade_time: float) -> void:
 	var t: Tween = create_tween()
 	t.set_ease(Tween.EASE_OUT)

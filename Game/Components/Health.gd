@@ -38,7 +38,6 @@ func set_health(ammount: float) -> void:
 
 
 func set_maximum(ammount: float) -> void:
-	var previous: float = _maximum
 	_maximum = ammount
 
 

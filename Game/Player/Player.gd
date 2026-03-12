@@ -23,6 +23,7 @@ signal mine_attempt_by_rid(damage: int, rid: RID)
 
 enum PlayerState {IDLE, WALK, JUMP, DOWN, CROUCH}
 enum PickaxeState {IDLE, READY, SWING, RECOVER}
+var alive: bool = true
 var _current_state: PlayerState = PlayerState.IDLE
 var _current_pickaxe_state: PickaxeState = PickaxeState.IDLE
 var _grid_position: Vector2i
@@ -47,6 +48,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if alive == false:
+		return
 	_grid_position = World.breakable_tile_map_layer.translate_to_grid_positon(global_position)
 	_move_direction = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 	
@@ -219,6 +222,6 @@ func _play_footstep() -> void:
 		App.sfx.play(DefaultSoundEffects.GRAVEL)
 
 
-func _on_current_health_changed(previous: float, current: float) -> void:
+func _on_current_health_changed(_previous: float, current: float) -> void:
 	light.base_scale = remap(current, 0.0, World.health.maximum, 0.0, 1.0)
 	
