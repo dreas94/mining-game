@@ -6,3 +6,4 @@ extends GameState
 
 func enter(_previous_state: SimpleState) -> void:
 	ItemCollection.clear()
+	entered.emit()
