@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dsr0f5ealpe4e" path="res://Content/VFX/LightSource/LightSource.tscn" id="2_et48t"]
 
 [node name="Campfire" type="Node2D" node_paths=PackedStringArray("_light_source")]
+texture_filter = 2
 script = ExtResource("1_w5vc3")
 light_energy = 1.0
 light_scale = 1.0
