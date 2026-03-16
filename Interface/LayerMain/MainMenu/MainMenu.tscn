@@ -47,10 +47,11 @@ use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-current_tab = 0
+current_tab = 1
 tabs_visible = false
 
 [node name="MainMenu" type="PanelContainer" parent="MarginContainer/TabContainer"]
+visible = false
 use_parent_material = true
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
@@ -105,6 +106,5 @@ text = "The following game experience contains only movement options, destructiv
 fit_content = true
 
 [node name="ControlsMenu" parent="MarginContainer/TabContainer" instance=ExtResource("4_bwcia")]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 1

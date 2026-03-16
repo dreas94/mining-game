@@ -4,7 +4,12 @@
 
 [node name="ControlsMenu" type="PanelContainer" node_paths=PackedStringArray("return_button")]
 use_parent_material = true
-custom_minimum_size = Vector2(256, 0)
+custom_minimum_size = Vector2(800, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_type_variation = &"TitlePanelContainer"
 script = ExtResource("1_p8cwe")
 return_button = NodePath("VBoxContainer/HBoxContainer/Return")
@@ -13,18 +18,37 @@ return_button = NodePath("VBoxContainer/HBoxContainer/Return")
 use_parent_material = true
 layout_mode = 2
 
+[node name="Label" type="Label" parent="VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+text = "W/Spacebar = Jump"
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+text = "A = Left"
+
+[node name="Label3" type="Label" parent="VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+text = "D = Right"
+
+[node name="Label4" type="Label" parent="VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+text = "S = Crouch"
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
 use_parent_material = true
 layout_mode = 2
-text = "W/Spacebar = Jump
-A = Left
-D = Right
-S = Crouch
-Hold left mouse button = Mining mode
+text = "Hold left mouse button = Mining mode
 
-In Mining Mode either crouch or collide with a tile to begin mining it."
+In Mining Mode as long as a tile is highlighted, damage will be dealt to the tile in a interval depending on your mining speed."
 fit_content = true
-autowrap_mode = 0
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 use_parent_material = true
