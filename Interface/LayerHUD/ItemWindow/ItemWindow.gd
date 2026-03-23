@@ -38,6 +38,7 @@ func _on_item_removed_from_collection(item_id: String, new_quantity: int) -> voi
 	if new_quantity >= 0:
 		shown_items[item_id].queue_free()
 		shown_items.erase(item_id)
+		return
 	shown_items[item_id].label.text = str(new_quantity)
 
 

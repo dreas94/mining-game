@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="UpgradeTemplate" load_steps=2 format=3 uid="uid://d0kbxx3xorqsy"]
 
-[ext_resource type="Script" uid="uid://50pdk8k77qee" path="res://Game/Camp/UpgradeTemplate/UpgradeTemplate.gd" id="1_nwpgb"]
+[ext_resource type="Script" uid="uid://50pdk8k77qee" path="res://Game/Upgrades/UpgradeTemplate/UpgradeTemplate.gd" id="1_nwpgb"]
 
 [resource]
 script = ExtResource("1_nwpgb")

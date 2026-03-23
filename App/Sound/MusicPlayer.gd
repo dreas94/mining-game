@@ -35,7 +35,7 @@ func stop(fade_time: float = 0.5) -> void:
 	else:
 		_fade_to_stop(_player_two, fade_time)
 	
-	_current == 0
+	_current = 0
 
 
 func _fade_to_stop(player: AudioStreamPlayer, fade_time: float) -> void:

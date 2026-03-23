@@ -13,11 +13,8 @@ func _init() -> void:
 	visible = false 
 
 
-func _ready() -> void:
-	health.current_changed.connect(_on_current_health_changed)
-
-
 func _enabled() -> void:
+	health.current_changed.connect(_on_current_health_changed)
 	cave_generator.generate(breakable_tile_map_layer)
 	player = player_scene.instantiate()
 	add_child(player)
@@ -39,6 +36,7 @@ func lose() -> void:
 
 func _disabled() -> void:
 	visible = false
+	health.current_changed.disconnect(_on_current_health_changed)
 	tile_handler.clear_handler()
 	breakable_tile_map_layer.clear_tilemaps()
 	player.mine_attempt_by_rid.disconnect(_attempt_to_clear_cell)

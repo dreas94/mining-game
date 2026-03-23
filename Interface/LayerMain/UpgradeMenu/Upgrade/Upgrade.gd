@@ -1,3 +1,4 @@
+class_name iUpgrade
 extends PanelContainer
 
 @export var _cost_gauge: ProgressBar
@@ -7,25 +8,30 @@ extends PanelContainer
 @export var _cost_label: Label
 @export var _buy_button: Button
 
+var _id: String = ""
 var _upgrade_name: String = "Upgrade"
 var _information: String = "Information"
 var _stats: Array[Stats] = []
 var _cost: int = 20
 
 func _ready() -> void:
+	_buy_button.pressed.connect(_on_buy_button_pressed)
 	ItemCollection.item_added.connect(_on_item_added_to_item_collection)
 	ItemCollection.item_removed.connect(_on_item_added_to_item_collection)
 
 
-func fill_data(upgrade_name: String, information: String, stats: Array[Stats], cost: float) -> void:
-	_upgrade_name = upgrade_name
+func fill_data(template: UpgradeTemplate) -> void:
+	_id = template.get_upgrade_id()
+	_upgrade_name = template.upgrade_name
 	_header_label.text = _upgrade_name
-	_information = information
+	_information = template.information
 	_information_rich_text_label.text = _information
-	_stats = stats.duplicate()
+	for index: int in range(template.number_of_stats):
+		_stats.append(Stats.new(template.stats_type[index], template.stats_value_type[index], template.stats_value[index]))
+	_stats_rich_text_label.text = ""
 	for stat: Stats in _stats:
-		_stats_rich_text_label.text += stat.get_stat_increase() + "   "
-	_cost = cost
+		_stats_rich_text_label.text += stat.get_stats_as_string() + "   "
+	_cost = template.cost
 	_cost_gauge.max_value = _cost
 	
 	_cost_gauge.value = _cost_gauge.max_value
@@ -36,22 +42,33 @@ func fill_data(upgrade_name: String, information: String, stats: Array[Stats], c
 
 
 func _on_item_added_to_item_collection(item_id: String, new_quantity: int) -> void:
-	if item_id != "ore1":
+	if item_id != "Ore1":
 		return
 	
 	var new_value: float = _cost_gauge.max_value - new_quantity
 	_cost_gauge.value = clampf(new_value, 0.0, _cost_gauge.max_value)
 	
-	if new_value == _cost_gauge.max_value:
+	if new_quantity >= _cost_gauge.max_value:
 		_buy_button.disabled = false
 
 
 func _on_item_removed_from_item_collection(item_id: String, new_quantity: int) -> void:
-	if item_id != "ore1":
+	if item_id != "Ore1":
 		return
 	
 	var new_value: float = _cost_gauge.max_value - new_quantity
 	_cost_gauge.value = clampf(new_value, 0.0, _cost_gauge.max_value)
 	
-	if new_value != _cost_gauge.max_value:
+	if new_quantity <= _cost_gauge.max_value:
 		_buy_button.disabled = true
+
+
+func _on_buy_button_pressed() -> void:
+	if not ItemCollection.remove_exact_quantity("Ore1", _cost):
+		return
+	
+	var index: int = 0
+	for stat: Stats in _stats:
+		StatCollection.add_stat(_id + "_" + str(index), stat)
+	
+	visible = false

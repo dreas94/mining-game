@@ -1,12 +1,16 @@
-[gd_scene format=3 uid="uid://1lq35hbbiqdi"]
+[gd_scene load_steps=2 format=3 uid="uid://1lq35hbbiqdi"]
 
-[node name="UpgradeMenu" type="Control"]
+[ext_resource type="Script" uid="uid://c2tpd782t5d5k" path="res://Interface/LayerMain/UpgradeMenu/UpgradeMenu.gd" id="1_5x2t8"]
+
+[node name="UpgradeMenu" type="Control" node_paths=PackedStringArray("_vbox_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_5x2t8")
+_vbox_container = NodePath("MarginContainer/PanelContainer/ScrollContainer/VBoxContainer")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -20,6 +24,7 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_type_variation = &"UpgradeMenuPanelContainer"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/PanelContainer"]
 custom_minimum_size = Vector2(700, 350)
@@ -27,6 +32,7 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/ScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/PanelContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2

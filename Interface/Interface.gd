@@ -4,6 +4,7 @@ extends Node
 const UI_CANVAS_LAYER: int = 2
 const MAIN_MENU_SCENE: PackedScene = preload("uid://cedfub537lkht")
 const LOSE_MENU_SCENE: PackedScene = preload("uid://dsygiaxq1ul0u")
+const UPGRADE_MENU_SCENE: PackedScene = preload("uid://1lq35hbbiqdi")
 const ITEM_WINDOW_SCENE: PackedScene = preload("uid://b71cvrfjvtuyg")
 const HEALTH_VISUALS_SCENE: PackedScene = preload("uid://ce5pt73vdvu5d")
 
@@ -32,6 +33,9 @@ var _main_menu: iMainMenu
 var lose_menu: iLoseMenu:
 	get: return _lose_menu
 var _lose_menu: iLoseMenu
+var upgrade_menu: iUpgradeMenu:
+	get: return _upgrade_menu
+var _upgrade_menu: iUpgradeMenu
 
 # HUD
 var item_window: iItemWindow:
@@ -60,6 +64,7 @@ func _init() -> void:
 	#MAIN
 	_main_menu = _instance_to_layer(MAIN_MENU_SCENE, _layer_main)
 	_lose_menu = _instance_to_layer(LOSE_MENU_SCENE, _layer_main)
+	_upgrade_menu = _instance_to_layer(UPGRADE_MENU_SCENE, _layer_main)
 	#HUD
 	_item_window = _instance_to_layer(ITEM_WINDOW_SCENE, _layer_hud)
 	_health_visuals = _instance_to_layer(HEALTH_VISUALS_SCENE, _layer_hud)

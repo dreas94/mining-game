@@ -24,5 +24,5 @@ func get_item_template(file_name_without_extension: String) -> ItemTemplate:
 	return item_templates.get_resource(file_name_without_extension) as ItemTemplate
 
 
-func get_upgrade_config(file_name_without_extension: String) -> UpgradeTemplate:
+func get_upgrade_template(file_name_without_extension: String) -> UpgradeTemplate:
 	return upgrade_templates.get_resource(file_name_without_extension) as UpgradeTemplate

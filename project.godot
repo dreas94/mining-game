@@ -20,9 +20,10 @@ config/icon="uid://bl512thg5rqir"
 App="*res://App/App.gd"
 Content="*res://Content/Content.gd"
 Interface="*res://Interface/Interface.gd"
+StatCollection="*res://Game/Stats/Collection/StatCollection.gd"
+ItemCollection="*res://Game/Item/Collection/ItemCollection.gd"
 Game="*res://Game/Game.gd"
 Mines="*res://Game/Mines/Mines.tscn"
-ItemCollection="*res://Game/Item/Collection/ItemCollection.gd"
 Camp="*res://Game/Camp/Camp.tscn"
 
 [display]

@@ -17,3 +17,11 @@ extends Resource
 @export var stats_type: Array[StatsConstants.TYPE] = []
 @export var stats_value_type: Array[StatsConstants.VALUE_TYPE] = []
 @export var stats_value: Array[float] = []
+
+
+func get_file_name() -> String:
+	return resource_path.get_file().get_basename()
+
+
+func get_upgrade_id() -> String:
+	return get_file_name()
