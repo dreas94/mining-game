@@ -43,11 +43,12 @@ func _on_item_removed_from_collection(item_id: String, new_quantity: int) -> voi
 
 func _on_game_state_changed(_old: SimpleState, new: SimpleState) -> void:
 	visible = false
-	for key: String in shown_items:
-		shown_items[key].queue_free()
-		shown_items.erase(key)
-	if new.get_script() in [GameStateTest]:
+	if new.get_script() in [GameStateMines, GameStateCamp]:
 		visible = true
+	else:
+		for key: String in shown_items:
+			shown_items[key].queue_free()
+			shown_items.erase(key)
 
 
 func create_item_info(texture: Texture2D, value: int) -> iItemInfo:

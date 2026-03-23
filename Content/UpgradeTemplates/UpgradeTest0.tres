@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UpgradeTemplate" load_steps=2 format=3 uid="uid://d0kbxx3xorqsy"]
+
+[ext_resource type="Script" uid="uid://50pdk8k77qee" path="res://Game/Camp/UpgradeTemplate/UpgradeTemplate.gd" id="1_nwpgb"]
+
+[resource]
+script = ExtResource("1_nwpgb")
+upgrade_name = "Test 1"
+information = "This is a simple test to see if it works"
+cost = 5
+number_of_stats = 1
+stats_type = Array[int]([1])
+stats_value_type = Array[int]([0])
+stats_value = Array[float]([1.0])
+metadata/_custom_type_script = "uid://50pdk8k77qee"

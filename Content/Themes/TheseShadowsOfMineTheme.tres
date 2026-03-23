@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://bprg36i3mssg3"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://bprg36i3mssg3"]
 
 [ext_resource type="StyleBox" uid="uid://ljxllhg1r10i" path="res://Content/Themes/Styles/empty.tres" id="1_iox86"]
 [ext_resource type="FontFile" uid="uid://0v5lh5cpxe3j" path="res://Content/Themes/Roboto-VariableFont_wdth,wght.ttf" id="1_m2xdc"]
@@ -7,18 +7,17 @@
 [ext_resource type="FontFile" uid="uid://0ifxl5ugo7rv" path="res://Content/Themes/antiquity-print.ttf" id="2_m2xdc"]
 [ext_resource type="StyleBox" uid="uid://codwp8pgnoqy7" path="res://Content/Themes/ProgressBar/ProgressBarFront.tres" id="2_nok0g"]
 [ext_resource type="StyleBox" uid="uid://dfvdkcs2lr8cd" path="res://Content/Themes/PanelContainer/Panel.tres" id="3_vbih5"]
+[ext_resource type="StyleBox" uid="uid://b4eej7gjgvyjy" path="res://Content/Themes/ProgressBar/UpgradeProgressBar/UpgradeProgressBar.tres" id="7_nok0g"]
 
 [resource]
 default_font = ExtResource("2_m2xdc")
 default_font_size = 26
-DamageBar/base_type = &"ProgressBar"
 DamageBar/styles/background = ExtResource("1_nml2g")
 DamageBar/styles/fill = ExtResource("2_nok0g")
 Disclaimer/base_type = &"RichTextLabel"
 Disclaimer/fonts/normal_font = ExtResource("1_m2xdc")
 HSeparator/constants/separation = 4
 HSeparator/styles/separator = ExtResource("2_ga3f0")
-HealthBar/base_type = &"ProgressBar"
 HealthBar/styles/background = ExtResource("1_iox86")
 HealthBar/styles/fill = ExtResource("2_nok0g")
 Label/colors/font_color = Color(1, 1, 1, 1)
@@ -53,3 +52,14 @@ TitleLabel/base_type = &"Label"
 TitleLabel/font_sizes/font_size = 59
 TitlePanelContainer/base_type = &"PanelContainer"
 TitlePanelContainer/styles/panel = ExtResource("1_iox86")
+UpgradeHeader/base_type = &"Label"
+UpgradeHeader/font_sizes/font_size = 26
+UpgradeProgressBar/base_type = &"ProgressBar"
+UpgradeProgressBar/styles/background = ExtResource("1_iox86")
+UpgradeProgressBar/styles/fill = ExtResource("7_nok0g")
+UpgradeTooltip/base_type = &"RichTextLabel"
+UpgradeTooltip/font_sizes/bold_font_size = 13
+UpgradeTooltip/font_sizes/bold_italics_font_size = 13
+UpgradeTooltip/font_sizes/italics_font_size = 13
+UpgradeTooltip/font_sizes/mono_font_size = 13
+UpgradeTooltip/font_sizes/normal_font_size = 13

@@ -12,7 +12,7 @@ func _init(_size: Vector2) -> void:
 	max_contacts_reported = 1
 	can_sleep = false
 	collision_layer = 32
-	collision_mask = 33
+	collision_mask = 3
 	add_child(collision_shape)
 	
 	body_entered.connect(_on_body_entered)

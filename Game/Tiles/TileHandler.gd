@@ -77,8 +77,8 @@ func get_tiles() -> Dictionary:
 
 
 func get_tile_in_global_position(pos: Vector2) -> Tile:
-	var tile_map_local_position: Vector2 = World.breakable_tile_map_layer.to_local(pos)
-	var grid_position: Vector2i = World.breakable_tile_map_layer.local_to_map(tile_map_local_position)
+	var tile_map_local_position: Vector2 = Mines.breakable_tile_map_layer.to_local(pos)
+	var grid_position: Vector2i = Mines.breakable_tile_map_layer.local_to_map(tile_map_local_position)
 	return get_tile_in_grid_position(grid_position)
 
 
@@ -94,7 +94,8 @@ func get_tile_based_on_rid(rid: RID) -> Tile:
 	if not rid.is_valid():
 		return null
 	
-	var grid_position: Vector2i = World.breakable_tile_map_layer.get_coords_for_body_rid(rid)
+	var grid_position: Vector2i = Mines.breakable_tile_map_layer.get_coords_for_body_rid(rid)
+		
 	
 	if not has_tile_at_grid_position(grid_position):
 		return null

@@ -11,7 +11,7 @@ var hovered
 
 
 func create_cell_data(cell: Vector2i, template: TileTemplate) -> void:
-	var tile: Tile = World.tile_handler.instance_template_to_grid_position(template, cell, to_global(map_to_local(cell)))
+	var tile: Tile = Mines.tile_handler.instance_template_to_grid_position(template, cell, to_global(map_to_local(cell)))
 	if tile.tile_attributes.item_template == null:
 		set_cells_terrain_connect([cell], 0, 0)
 	else:
@@ -23,7 +23,7 @@ func create_cell_data(cell: Vector2i, template: TileTemplate) -> void:
 		#light_source.base_scale = 0.25
 		#light_source.duration_per_scale_update = 1.0
 		#light_source.color = Color(0.762, 0.321, 0.0)
-		#World.add_child(light_source)
+		#Mines.add_child(light_source)
 		#_active_lights[cell] = light_source
 
 
@@ -61,17 +61,17 @@ func attempt_to_clear_cell(damage: int, rid: RID, player_position: Vector2):
 	if not is_target_position_close_enough_to_player(player_cell, cell):
 		return
 	
-	if World.tile_handler.has_tile_at_grid_position(cell) == false:
+	if Mines.tile_handler.has_tile_at_grid_position(cell) == false:
 		return
 	
-	var tile: Tile = World.tile_handler.get_tile_in_grid_position(cell)
+	var tile: Tile = Mines.tile_handler.get_tile_in_grid_position(cell)
 	
 	tile.tile_attributes.health.value -= damage
 
 
 func clear_cell_at_global_position(global_pos: Vector2) -> void:
-	var cell: Vector2i = World.breakable_tile_map_layer.local_to_map(to_local(global_pos))
-	World.breakable_tile_map_layer.set_cells_terrain_connect([cell], 0, -1, true)
+	var cell: Vector2i = Mines.breakable_tile_map_layer.local_to_map(to_local(global_pos))
+	Mines.breakable_tile_map_layer.set_cells_terrain_connect([cell], 0, -1, true)
 	update_internals()
 
 

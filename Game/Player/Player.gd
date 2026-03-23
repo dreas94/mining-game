@@ -44,13 +44,13 @@ func _ready() -> void:
 	animation_tree.set("parameters/PlayerStates/Run/blend_position", 1.0)
 	animation_tree.set("parameters/PlayerStates/Walk/blend_position", 1.0)
 	
-	World.health.current_changed.connect(_on_current_health_changed)
+	Mines.health.current_changed.connect(_on_current_health_changed)
 
 
 func _physics_process(delta: float) -> void:
 	if alive == false:
 		return
-	_grid_position = World.breakable_tile_map_layer.translate_to_grid_positon(global_position)
+	_grid_position = Mines.breakable_tile_map_layer.translate_to_grid_positon(global_position)
 	_move_direction = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 	
 	_handle_ray_cast()
@@ -76,14 +76,16 @@ func _enter_pickaxe_recovery() -> void:
 
 
 func _attempt_to_mine_by_rid(rid_to_mine: RID) -> void:
-	World.health.sub_health(randf_range(1.0, 10.0))
+	Mines.health.sub_health(randf_range(1.0, 10.0))
 	_current_pickaxe_state = PickaxeState.SWING
 	mine_attempt_by_rid.emit(25, rid_to_mine)
 	print("Pickaxe struck")
 
 
 func _handle_ray_cast() -> void:
-	var previous_tile: Tile = World.tile_handler.get_tile_in_grid_position(_last_tile_grid_pos_ray_casted)
+	if Game.state.active_state is GameStateCamp:
+		return
+	var previous_tile: Tile = Mines.tile_handler.get_tile_in_grid_position(_last_tile_grid_pos_ray_casted)
 	if not ray_2d.is_colliding():
 		if previous_tile == null:
 			return
@@ -94,7 +96,7 @@ func _handle_ray_cast() -> void:
 	if _current_pickaxe_state in [PickaxeState.RECOVER, PickaxeState.SWING]:
 		return
 	
-	var tile: Tile = World.tile_handler.get_tile_based_on_rid(ray_2d.get_collider_rid())
+	var tile: Tile = Mines.tile_handler.get_tile_based_on_rid(ray_2d.get_collider_rid())
 	
 	if tile == null:
 		return
@@ -103,13 +105,13 @@ func _handle_ray_cast() -> void:
 		return
 	
 	tile.tile_attributes.is_moused.value = true
-	_last_tile_grid_pos_ray_casted =  World.tile_handler.get_grid_position_of_tile(tile)
+	_last_tile_grid_pos_ray_casted =  Mines.tile_handler.get_grid_position_of_tile(tile)
 	
 	if previous_tile == null:
 		return
 		
 	previous_tile.tile_attributes.is_moused.value = false
-	_last_tile_grid_pos_ray_casted = World.tile_handler.get_grid_position_of_tile(tile)
+	_last_tile_grid_pos_ray_casted = Mines.tile_handler.get_grid_position_of_tile(tile)
 	
 
 
@@ -124,11 +126,12 @@ func _handle_collision() -> void:
 
 
 func _handle_input(delta: float) -> void:
-	match _current_pickaxe_state:
-		PickaxeState.IDLE when Input.is_action_pressed("mouse_left"):
-			_current_pickaxe_state = PickaxeState.READY
-		PickaxeState.READY when not Input.is_action_pressed("mouse_left"):
-			_current_pickaxe_state = PickaxeState.IDLE
+	if Game.state.active_state is GameStateMines:
+		match _current_pickaxe_state:
+			PickaxeState.IDLE when Input.is_action_pressed("mouse_left"):
+				_current_pickaxe_state = PickaxeState.READY
+			PickaxeState.READY when not Input.is_action_pressed("mouse_left"):
+				_current_pickaxe_state = PickaxeState.IDLE
 	
 	if _current_state != PlayerState.CROUCH and Input.is_action_pressed("jump") and is_on_floor():
 		velocity.y = jump_speed
@@ -223,5 +226,5 @@ func _play_footstep() -> void:
 
 
 func _on_current_health_changed(_previous: float, current: float) -> void:
-	light.base_scale = remap(current, 0.0, World.health.maximum, 0.0, 1.0)
+	light.base_scale = remap(current, 0.0, Mines.health.maximum, 0.0, 1.0)
 	

@@ -1,0 +1,57 @@
+extends PanelContainer
+
+@export var _cost_gauge: ProgressBar
+@export var _header_label: Label
+@export var _information_rich_text_label: RichTextLabel
+@export var _stats_rich_text_label: RichTextLabel
+@export var _cost_label: Label
+@export var _buy_button: Button
+
+var _upgrade_name: String = "Upgrade"
+var _information: String = "Information"
+var _stats: Array[Stats] = []
+var _cost: int = 20
+
+func _ready() -> void:
+	ItemCollection.item_added.connect(_on_item_added_to_item_collection)
+	ItemCollection.item_removed.connect(_on_item_added_to_item_collection)
+
+
+func fill_data(upgrade_name: String, information: String, stats: Array[Stats], cost: float) -> void:
+	_upgrade_name = upgrade_name
+	_header_label.text = _upgrade_name
+	_information = information
+	_information_rich_text_label.text = _information
+	_stats = stats.duplicate()
+	for stat: Stats in _stats:
+		_stats_rich_text_label.text += stat.get_stat_increase() + "   "
+	_cost = cost
+	_cost_gauge.max_value = _cost
+	
+	_cost_gauge.value = _cost_gauge.max_value
+	var new_value: float = _cost_gauge.max_value - ItemCollection.get_number_of_items_by_id("ore1")
+	_cost_gauge.value = clampf(new_value, 0.0, _cost_gauge.max_value)
+	
+	_cost_label.text = "Cost: " + str(_cost)
+
+
+func _on_item_added_to_item_collection(item_id: String, new_quantity: int) -> void:
+	if item_id != "ore1":
+		return
+	
+	var new_value: float = _cost_gauge.max_value - new_quantity
+	_cost_gauge.value = clampf(new_value, 0.0, _cost_gauge.max_value)
+	
+	if new_value == _cost_gauge.max_value:
+		_buy_button.disabled = false
+
+
+func _on_item_removed_from_item_collection(item_id: String, new_quantity: int) -> void:
+	if item_id != "ore1":
+		return
+	
+	var new_value: float = _cost_gauge.max_value - new_quantity
+	_cost_gauge.value = clampf(new_value, 0.0, _cost_gauge.max_value)
+	
+	if new_value != _cost_gauge.max_value:
+		_buy_button.disabled = true

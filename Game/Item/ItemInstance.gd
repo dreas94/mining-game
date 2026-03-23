@@ -30,6 +30,6 @@ func _on_body_entered(body: Node2D) -> void:
 	
 	App.sfx.play(DefaultSoundEffects.PICKUP)
 	ItemCollection.add_item(item_attributes.template.get_item_id())
-	if World.breakable_tile_map_layer.active_items.has(item_ref.get_ref()):
-		World.breakable_tile_map_layer.active_items.erase(item_ref.get_ref())
+	if Mines.breakable_tile_map_layer.active_items.has(item_ref.get_ref()):
+		Mines.breakable_tile_map_layer.active_items.erase(item_ref.get_ref())
 	queue_free()

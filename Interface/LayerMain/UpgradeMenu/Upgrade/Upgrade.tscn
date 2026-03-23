@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=3 uid="uid://btwucrs8x1cep"]
+
+[ext_resource type="Texture2D" uid="uid://kdl1xte7s72u" path="res://Textures/Ore2.png" id="1_bmebw"]
+[ext_resource type="Script" uid="uid://bqp6rmwcfhu3u" path="res://Interface/LayerMain/UpgradeMenu/Upgrade/Upgrade.gd" id="1_sxniy"]
+
+[node name="Upgrade" type="PanelContainer"]
+custom_minimum_size = Vector2(700, 96)
+offset_right = 16.0
+offset_bottom = 16.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_sxniy")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_bmebw")
+expand_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Header" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"UpgradeHeader"
+text = "Upgrade Header"
+
+[node name="Information" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"UpgradeTooltip"
+text = "Upgrade Tooltip"
+fit_content = true
+
+[node name="Stats" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"UpgradeTooltip"
+text = "Upgrade stats"
+fit_content = true
+
+[node name="Cost" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Cost"
+
+[node name="Buy" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+disabled = true
+text = "Buy"
+
+[node name="CostGauge" type="ProgressBar" parent="."]
+layout_mode = 2
+size_flags_vertical = 1
+theme_type_variation = &"UpgradeProgressBar"
+value = 100.0
+show_percentage = false

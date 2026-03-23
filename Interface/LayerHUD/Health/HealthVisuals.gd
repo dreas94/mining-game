@@ -8,11 +8,11 @@ extends Control
 func _ready() -> void:
 	visible = false
 	Game.state.changed.connect(_on_game_state_changed)
-	World.health.current_changed.connect(_on_current_health_changed)
-	health_bar.max_value = World.health.maximum
-	health_bar.value = World.health.current
-	damage_bar.max_value = World.health.maximum
-	damage_bar.value = World.health.current
+	Mines.health.current_changed.connect(_on_current_health_changed)
+	health_bar.max_value = Mines.health.maximum
+	health_bar.value = Mines.health.current
+	damage_bar.max_value = Mines.health.maximum
+	damage_bar.value = Mines.health.current
 
 
 func _physics_process(delta: float) -> void:
@@ -26,12 +26,12 @@ func _physics_process(delta: float) -> void:
 
 func _on_game_state_changed(_old: SimpleState, new: SimpleState) -> void:
 	visible = false
-	if new.get_script() in [GameStateTest]:
+	if new.get_script() in [GameStateMines, GameStateCamp]:
 		visible = true
-		health_bar.max_value = World.health.maximum
-		health_bar.value = World.health.current
-		damage_bar.max_value = World.health.maximum
-		damage_bar.value = World.health.current
+		health_bar.max_value = Mines.health.maximum
+		health_bar.value = Mines.health.current
+		damage_bar.max_value = Mines.health.maximum
+		damage_bar.value = Mines.health.current
 
 
 func _on_current_health_changed(_previous: float, current: float) -> void:

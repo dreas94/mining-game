@@ -31,7 +31,7 @@ func _on_health_changed(value: int, _delta: int) -> void:
 		return
 	var mining_particles: iMiningParticles = _mining_particles_scene.instantiate()
 	mining_particles.global_position = global_position
-	World.add_child(mining_particles)
+	Mines.add_child(mining_particles)
 	if value == 0:
 		queue_free()
 		return

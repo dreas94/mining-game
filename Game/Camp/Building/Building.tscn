@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1n3mkr81avxf"]
+
+[ext_resource type="Script" uid="uid://syk1f7cds278" path="res://Game/Camp/Building/Building.gd" id="1_4qudq"]
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("area_2d", "_collision_polygon", "_sprite")]
+script = ExtResource("1_4qudq")
+polygon = PackedVector2Array()
+area_2d = NodePath("Area2D")
+_collision_polygon = NodePath("Area2D/CollisionPolygon2D")
+_sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(0, -0.5)

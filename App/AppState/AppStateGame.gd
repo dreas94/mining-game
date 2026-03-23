@@ -18,7 +18,7 @@ func _enter_normal() -> void:
 	# Init save game if new game/loading.
 	
 	# This is a new game.
-	Game.state.enter_state(GameStateTest.new())
+	Game.state.enter_state(GameStateCamp.new())
 	
 	# We're just resuming. Do nothing.
 	entered.emit()
