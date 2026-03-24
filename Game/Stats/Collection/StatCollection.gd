@@ -5,7 +5,7 @@ signal stat_added(stat_id: String, stat: Stats)
 signal stat_removed(stat_id: String, stat: Stats)
 
 #Key = statId, data = quantity
-var _stats: Dictionary = {} 
+var _stats: Dictionary[String, Stats] = {} 
 
 
 func clear() -> void:
@@ -25,3 +25,7 @@ func remove_stat(stat_id: String) -> void:
 	var stat: Stats = _stats[stat_id]
 	_stats.erase(stat_id)
 	stat_removed.emit(stat_id, stat)
+
+
+func get_stats() -> Dictionary[String, Stats]:
+	return _stats.duplicate()

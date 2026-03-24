@@ -24,6 +24,11 @@ signal mine_attempt_by_rid(damage: int, rid: RID)
 enum PlayerState {IDLE, WALK, JUMP, DOWN, CROUCH}
 enum PickaxeState {IDLE, READY, SWING, RECOVER}
 var alive: bool = true
+var _damage_base: float = 25
+var _damage_additive_upgrades: float = 0
+var _damage_multiplicative_upgrades: float = 1.0
+var _health_additive_upgrades: float = 0
+var _health_multiplicative_upgrades: float = 1.0
 var _current_state: PlayerState = PlayerState.IDLE
 var _current_pickaxe_state: PickaxeState = PickaxeState.IDLE
 var _grid_position: Vector2i
@@ -45,6 +50,9 @@ func _ready() -> void:
 	animation_tree.set("parameters/PlayerStates/Walk/blend_position", 1.0)
 	
 	Mines.health.current_changed.connect(_on_current_health_changed)
+	StatCollection.stat_added.connect(_on_stat_added_to_collection)
+	apply_upgrades()
+	#StatCollection.stat_removed.connect(_on_stat_added_to_collection)
 
 
 func _physics_process(delta: float) -> void:
@@ -60,6 +68,7 @@ func _physics_process(delta: float) -> void:
 	
 	_update_states()
 	_update_animation()
+	_update_health(delta)
 	
 	move_and_slide()
 
@@ -76,9 +85,10 @@ func _enter_pickaxe_recovery() -> void:
 
 
 func _attempt_to_mine_by_rid(rid_to_mine: RID) -> void:
-	Mines.health.sub_health(randf_range(1.0, 10.0))
+	Mines.health.sub_health(randf_range(1.0, 5.0))
 	_current_pickaxe_state = PickaxeState.SWING
-	mine_attempt_by_rid.emit(25, rid_to_mine)
+	var damage: float = (_damage_base + _damage_additive_upgrades) * _damage_multiplicative_upgrades
+	mine_attempt_by_rid.emit(damage, rid_to_mine)
 	print("Pickaxe struck")
 
 
@@ -203,6 +213,14 @@ func _update_animation() -> void:
 		animation_tree.set("parameters/TimeScale/scale", time_scale)
 
 
+func _update_health(delta: float) -> void:
+	if not Game.state.active_state is GameStateMines:
+		return
+	if _current_state == PlayerState.IDLE:
+		return
+	Mines.health.sub_health(1.0 * delta)
+
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		var global_mouse_pos: Vector2 = get_global_mouse_position()
@@ -227,4 +245,23 @@ func _play_footstep() -> void:
 
 func _on_current_health_changed(_previous: float, current: float) -> void:
 	light.base_scale = remap(current, 0.0, Mines.health.maximum, 0.0, 1.0)
-	
+
+
+func _on_stat_added_to_collection(_stat_id: String, stat: Stats) -> void:
+	match stat.stats_type:
+		StatsConstants.TYPE.DAMAGE when stat.stats_value_type == StatsConstants.VALUE_TYPE.GENERIC:
+			_damage_additive_upgrades += stat.value
+		StatsConstants.TYPE.DAMAGE when stat.stats_value_type == StatsConstants.VALUE_TYPE.PERCENTAGE:
+			_damage_multiplicative_upgrades += stat.value
+		StatsConstants.TYPE.HEALTH when stat.stats_value_type == StatsConstants.VALUE_TYPE.GENERIC:
+			_health_additive_upgrades += stat.value
+			Mines.health.set_maximum((Mines.health.INITIAL + _health_additive_upgrades) * _health_multiplicative_upgrades)
+		StatsConstants.TYPE.HEALTH when stat.stats_value_type == StatsConstants.VALUE_TYPE.PERCENTAGE:
+			_health_multiplicative_upgrades += stat.value
+			
+
+func apply_upgrades() -> void:
+	var duplicate_stats: Dictionary[String, Stats] = StatCollection.get_stats()
+	for key: String in duplicate_stats:
+		var stat: Stats = duplicate_stats[key]
+		_on_stat_added_to_collection(key, stat)

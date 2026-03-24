@@ -9,12 +9,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 script = ExtResource("1_vpinq")
 health_bar = NodePath("HealthBar")
 damage_bar = NodePath("HealthBar/DamageBar")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
-self_modulate = Color(0.133333, 1, 0.262745, 1)
 custom_minimum_size = Vector2(240, 4)
 layout_mode = 1
 anchors_preset = 2
@@ -30,7 +31,6 @@ value = 50.0
 show_percentage = false
 
 [node name="DamageBar" type="ProgressBar" parent="HealthBar"]
-self_modulate = Color(0.615686, 0.615686, 0.615686, 1)
 z_index = -1
 custom_minimum_size = Vector2(500, 20)
 layout_mode = 1

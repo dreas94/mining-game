@@ -14,13 +14,14 @@ func _init() -> void:
 
 
 func _enabled() -> void:
-	health.current_changed.connect(_on_current_health_changed)
 	cave_generator.generate(breakable_tile_map_layer)
 	player = player_scene.instantiate()
 	add_child(player)
 	player.light.enabled = true
 	player.global_position = Vector2(8.0, -8.0)
 	player.mine_attempt_by_rid.connect(_attempt_to_clear_cell)
+	health.reset_health(health.maximum)
+	health.current_changed.connect(_on_current_health_changed)
 	App.music.play(DefaultMusic.BEYOND)
 	visible = true
 	enabled.emit()

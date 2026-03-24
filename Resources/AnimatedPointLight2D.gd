@@ -1,3 +1,4 @@
+@tool
 class_name AnimatedPointLight2D
 extends PointLight2D
 

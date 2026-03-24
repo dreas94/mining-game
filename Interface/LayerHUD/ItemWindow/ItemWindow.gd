@@ -35,7 +35,7 @@ func _on_item_added_to_collection(item_id: String, new_quantity: int) -> void:
 
 
 func _on_item_removed_from_collection(item_id: String, new_quantity: int) -> void:
-	if new_quantity >= 0:
+	if new_quantity <= 0:
 		shown_items[item_id].queue_free()
 		shown_items.erase(item_id)
 		return

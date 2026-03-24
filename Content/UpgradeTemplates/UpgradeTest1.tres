@@ -10,5 +10,5 @@ cost = 10
 number_of_stats = 1
 stats_type = Array[int]([2])
 stats_value_type = Array[int]([0])
-stats_value = Array[float]([10.0])
+stats_value = Array[float]([25.0])
 metadata/_custom_type_script = "uid://50pdk8k77qee"

@@ -1060,7 +1060,7 @@ shape = SubResource("CircleShape2D_o2hno")
 
 [node name="PointLight2D" parent="." instance=ExtResource("5_kt3un")]
 energy = 0.907596
-texture_scale = 1.05928
+texture_scale = 0.981896
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, 16)
