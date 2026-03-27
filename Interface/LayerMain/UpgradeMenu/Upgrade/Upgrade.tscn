@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://kdl1xte7s72u" path="res://Textures/Ore2.png" id="1_bmebw"]
 [ext_resource type="Script" uid="uid://bqp6rmwcfhu3u" path="res://Interface/LayerMain/UpgradeMenu/Upgrade/Upgrade.gd" id="1_sxniy"]
 
-[node name="Upgrade" type="PanelContainer" node_paths=PackedStringArray("_cost_gauge", "_header_label", "_information_rich_text_label", "_stats_rich_text_label", "_cost_label", "_buy_button")]
+[node name="Upgrade" type="PanelContainer" node_paths=PackedStringArray("_cost_gauge", "_header_label", "_information_rich_text_label", "_upgrade_rich_text_label", "_cost_label", "_buy_button")]
 custom_minimum_size = Vector2(700, 100)
 offset_right = 700.0
 offset_bottom = 100.0
@@ -14,7 +14,7 @@ script = ExtResource("1_sxniy")
 _cost_gauge = NodePath("CostGauge")
 _header_label = NodePath("HBoxContainer/VBoxContainer/Header")
 _information_rich_text_label = NodePath("HBoxContainer/VBoxContainer/Information")
-_stats_rich_text_label = NodePath("HBoxContainer/VBoxContainer/Stats")
+_upgrade_rich_text_label = NodePath("HBoxContainer/VBoxContainer/Upgrade")
 _cost_label = NodePath("HBoxContainer/Cost")
 _buy_button = NodePath("HBoxContainer/Buy")
 
@@ -53,7 +53,7 @@ theme_type_variation = &"UpgradeTooltip"
 text = "Upgrade Tooltip"
 fit_content = true
 
-[node name="Stats" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
+[node name="Upgrade" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"UpgradeTooltip"
 text = "Upgrade stats"

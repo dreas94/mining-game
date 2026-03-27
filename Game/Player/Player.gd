@@ -50,9 +50,8 @@ func _ready() -> void:
 	animation_tree.set("parameters/PlayerStates/Walk/blend_position", 1.0)
 	
 	Mines.health.current_changed.connect(_on_current_health_changed)
-	StatCollection.stat_added.connect(_on_stat_added_to_collection)
+	UpgradeCollection.upgrade_added.connect(_on_upgrade_added_to_collection)
 	apply_upgrades()
-	#StatCollection.stat_removed.connect(_on_stat_added_to_collection)
 
 
 func _physics_process(delta: float) -> void:
@@ -247,21 +246,21 @@ func _on_current_health_changed(_previous: float, current: float) -> void:
 	light.base_scale = remap(current, 0.0, Mines.health.maximum, 0.0, 1.0)
 
 
-func _on_stat_added_to_collection(_stat_id: String, stat: Stats) -> void:
-	match stat.stats_type:
-		StatsConstants.TYPE.DAMAGE when stat.stats_value_type == StatsConstants.VALUE_TYPE.GENERIC:
-			_damage_additive_upgrades += stat.value
-		StatsConstants.TYPE.DAMAGE when stat.stats_value_type == StatsConstants.VALUE_TYPE.PERCENTAGE:
-			_damage_multiplicative_upgrades += stat.value
-		StatsConstants.TYPE.HEALTH when stat.stats_value_type == StatsConstants.VALUE_TYPE.GENERIC:
-			_health_additive_upgrades += stat.value
+func _on_upgrade_added_to_collection(_stat_id: String, upgrade: Upgrade) -> void:
+	match upgrade.upgrade_type:
+		UpgradeConstants.TYPE.DAMAGE when upgrade.upgrade_value_type == UpgradeConstants.VALUE_TYPE.GENERIC:
+			_damage_additive_upgrades += upgrade.value
+		UpgradeConstants.TYPE.DAMAGE when upgrade.upgrade_value_type == UpgradeConstants.VALUE_TYPE.PERCENTAGE:
+			_damage_multiplicative_upgrades += upgrade.value
+		UpgradeConstants.TYPE.HEALTH when upgrade.upgrade_value_type == UpgradeConstants.VALUE_TYPE.GENERIC:
+			_health_additive_upgrades += upgrade.value
 			Mines.health.set_maximum((Mines.health.INITIAL + _health_additive_upgrades) * _health_multiplicative_upgrades)
-		StatsConstants.TYPE.HEALTH when stat.stats_value_type == StatsConstants.VALUE_TYPE.PERCENTAGE:
-			_health_multiplicative_upgrades += stat.value
+		UpgradeConstants.TYPE.HEALTH when upgrade.upgrade_value_type == UpgradeConstants.VALUE_TYPE.PERCENTAGE:
+			_health_multiplicative_upgrades += upgrade.value
 			
 
 func apply_upgrades() -> void:
-	var duplicate_stats: Dictionary[String, Stats] = StatCollection.get_stats()
-	for key: String in duplicate_stats:
-		var stat: Stats = duplicate_stats[key]
-		_on_stat_added_to_collection(key, stat)
+	var duplicate_upgrade: Dictionary[String, Upgrade] = UpgradeCollection.get_upgrade()
+	for key: String in duplicate_upgrade:
+		var upgrade: Upgrade = duplicate_upgrade[key]
+		_on_upgrade_added_to_collection(key, upgrade)

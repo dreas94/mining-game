@@ -1,4 +1,4 @@
-class_name StatsConstants
+class_name UpgradeConstants
 extends RefCounted
 
 enum TYPE {
