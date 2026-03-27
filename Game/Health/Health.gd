@@ -1,5 +1,4 @@
-class_name Health
-extends RefCounted
+extends Node
 
 signal current_changed(previous: float, current: float)
 signal reset(amount: float)
@@ -14,6 +13,11 @@ var maximum: float:
 # recovered when one lose maximum health
 var _current: float = INITIAL
 var _maximum: float = INITIAL
+
+
+func _ready() -> void:
+	UpgradeCollection.upgrade_added.connect(_update_health_maximum)
+	UpgradeCollection.upgrade_removed.connect(_update_health_maximum)
 
 
 func add_health(ammount: float) -> void:
@@ -49,3 +53,7 @@ func reset_health(ammount: float = INITIAL) -> void:
 	_maximum = ammount
 	_current = clamp_health(ammount)
 	reset.emit(ammount)
+
+
+func _update_health_maximum(_upgrade_id: String, _upgrade: Upgrade) -> void:
+	set_maximum(UpgradeCollection.calculate_upgrades(UpgradeConstants.TYPE.HEALTH))

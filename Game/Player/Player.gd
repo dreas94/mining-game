@@ -20,15 +20,10 @@ signal mine_attempt_by_rid(damage: int, rid: RID)
 			return 1
 		return animation_tree.get("parameters/Mining Speed/scale")
 
-
+const DAMAGE_BASE = 25.0
 enum PlayerState {IDLE, WALK, JUMP, DOWN, CROUCH}
 enum PickaxeState {IDLE, READY, SWING, RECOVER}
 var alive: bool = true
-var _damage_base: float = 25
-var _damage_additive_upgrades: float = 0
-var _damage_multiplicative_upgrades: float = 1.0
-var _health_additive_upgrades: float = 0
-var _health_multiplicative_upgrades: float = 1.0
 var _current_state: PlayerState = PlayerState.IDLE
 var _current_pickaxe_state: PickaxeState = PickaxeState.IDLE
 var _grid_position: Vector2i
@@ -49,9 +44,7 @@ func _ready() -> void:
 	animation_tree.set("parameters/PlayerStates/Run/blend_position", 1.0)
 	animation_tree.set("parameters/PlayerStates/Walk/blend_position", 1.0)
 	
-	Mines.health.current_changed.connect(_on_current_health_changed)
-	UpgradeCollection.upgrade_added.connect(_on_upgrade_added_to_collection)
-	apply_upgrades()
+	Health.current_changed.connect(_on_current_health_changed)
 
 
 func _physics_process(delta: float) -> void:
@@ -84,9 +77,9 @@ func _enter_pickaxe_recovery() -> void:
 
 
 func _attempt_to_mine_by_rid(rid_to_mine: RID) -> void:
-	Mines.health.sub_health(randf_range(1.0, 5.0))
+	Health.sub_health(randf_range(1.0, 5.0))
 	_current_pickaxe_state = PickaxeState.SWING
-	var damage: float = (_damage_base + _damage_additive_upgrades) * _damage_multiplicative_upgrades
+	var damage: float = UpgradeCollection.calculate_upgrades(UpgradeConstants.TYPE.DAMAGE)
 	mine_attempt_by_rid.emit(damage, rid_to_mine)
 	print("Pickaxe struck")
 
@@ -217,7 +210,7 @@ func _update_health(delta: float) -> void:
 		return
 	if _current_state == PlayerState.IDLE:
 		return
-	Mines.health.sub_health(1.0 * delta)
+	Health.sub_health(1.0 * delta)
 
 
 func _input(event: InputEvent) -> void:
@@ -243,24 +236,4 @@ func _play_footstep() -> void:
 
 
 func _on_current_health_changed(_previous: float, current: float) -> void:
-	light.base_scale = remap(current, 0.0, Mines.health.maximum, 0.0, 1.0)
-
-
-func _on_upgrade_added_to_collection(_stat_id: String, upgrade: Upgrade) -> void:
-	match upgrade.upgrade_type:
-		UpgradeConstants.TYPE.DAMAGE when upgrade.upgrade_value_type == UpgradeConstants.VALUE_TYPE.GENERIC:
-			_damage_additive_upgrades += upgrade.value
-		UpgradeConstants.TYPE.DAMAGE when upgrade.upgrade_value_type == UpgradeConstants.VALUE_TYPE.PERCENTAGE:
-			_damage_multiplicative_upgrades += upgrade.value
-		UpgradeConstants.TYPE.HEALTH when upgrade.upgrade_value_type == UpgradeConstants.VALUE_TYPE.GENERIC:
-			_health_additive_upgrades += upgrade.value
-			Mines.health.set_maximum((Mines.health.INITIAL + _health_additive_upgrades) * _health_multiplicative_upgrades)
-		UpgradeConstants.TYPE.HEALTH when upgrade.upgrade_value_type == UpgradeConstants.VALUE_TYPE.PERCENTAGE:
-			_health_multiplicative_upgrades += upgrade.value
-			
-
-func apply_upgrades() -> void:
-	var duplicate_upgrade: Dictionary[String, Upgrade] = UpgradeCollection.get_upgrade()
-	for key: String in duplicate_upgrade:
-		var upgrade: Upgrade = duplicate_upgrade[key]
-		_on_upgrade_added_to_collection(key, upgrade)
+	light.base_scale = remap(current, 0.0, Health.maximum, 0.0, 1.0)

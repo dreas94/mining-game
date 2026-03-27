@@ -29,3 +29,44 @@ func remove_upgrade(upgrade_id: String) -> void:
 
 func get_upgrades() -> Dictionary[String, Upgrade]:
 	return _upgrades.duplicate()
+
+
+func get_upgrades_of_type(type: UpgradeConstants.TYPE) -> Array[Upgrade]:
+	var _typed_upgrades: Array[Upgrade]
+	for key: String in _upgrades:
+		if _upgrades[key].upgrade_type != type:
+			continue
+		_typed_upgrades.append(_upgrades[key])
+	return _typed_upgrades
+
+
+func calculate_upgrades(type: UpgradeConstants.TYPE) -> float:
+	var all_upgrades_of_type: Array[Upgrade] = UpgradeCollection.get_upgrades_of_type(type)
+	var all_generic_upgrades_of_type: Array[Upgrade] = all_upgrades_of_type.filter(_is_generic_upgrade)
+	var all_percentage_upgrades_of_type: Array[Upgrade] = all_upgrades_of_type.filter(_is_percentage_upgrade)
+	
+	var generic_upgrade_total: float = 0.0
+	for upgrade: Upgrade in all_generic_upgrades_of_type:
+		generic_upgrade_total += upgrade.value
+	
+	var percentage_upgrade_total: float = 1.0
+	for upgrade: Upgrade in all_percentage_upgrades_of_type:
+		percentage_upgrade_total += upgrade.value
+	
+	match type:
+		UpgradeConstants.TYPE.DAMAGE:
+			if Mines.player == null:
+				return 0.0
+			return (Mines.player.DAMAGE_BASE + generic_upgrade_total) * percentage_upgrade_total
+		UpgradeConstants.TYPE.HEALTH:
+			return (Health.INITIAL + generic_upgrade_total) * percentage_upgrade_total
+	
+	return 0.0
+
+
+func _is_generic_upgrade(upgrade: Upgrade) -> bool:
+	return upgrade.upgrade_value_type == UpgradeConstants.VALUE_TYPE.GENERIC
+
+
+func _is_percentage_upgrade(upgrade: Upgrade) -> bool:
+	return upgrade.upgrade_value_type == UpgradeConstants.VALUE_TYPE.PERCENTAGE

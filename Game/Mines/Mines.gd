@@ -5,7 +5,6 @@ extends GameMode
 @export var tile_handler: TileHandler
 
 var player: iPlayer
-var health: Health = Health.new()
 var player_scene: PackedScene = preload("uid://cr7vr5ke2lgfn")
 
 
@@ -20,11 +19,22 @@ func _enabled() -> void:
 	player.light.enabled = true
 	player.global_position = Vector2(8.0, -8.0)
 	player.mine_attempt_by_rid.connect(_attempt_to_clear_cell)
-	health.reset_health(health.maximum)
-	health.current_changed.connect(_on_current_health_changed)
+	Health.reset_health(Health.maximum)
+	Health.current_changed.connect(_on_current_health_changed)
 	App.music.play(DefaultMusic.BEYOND)
 	visible = true
 	enabled.emit()
+
+
+func _physics_process(_delta: float) -> void:
+	if breakable_tile_map_layer == null:
+		return
+	if player == null:
+		return
+	var player_cell: Vector2i = breakable_tile_map_layer.local_to_map(breakable_tile_map_layer.to_local(player.global_position))
+	if player_cell.x >= cave_generator.min_width and player_cell.x <= cave_generator.max_width and player_cell.y >= cave_generator.min_height and player_cell.y <= cave_generator.max_height:
+		return
+	Health.set_health(0)
 
 
 func lose() -> void:
@@ -37,12 +47,12 @@ func lose() -> void:
 
 func _disabled() -> void:
 	visible = false
-	health.current_changed.disconnect(_on_current_health_changed)
+	Health.current_changed.disconnect(_on_current_health_changed)
 	tile_handler.clear_handler()
 	breakable_tile_map_layer.clear_tilemaps()
 	player.mine_attempt_by_rid.disconnect(_attempt_to_clear_cell)
 	player.queue_free()
-	health.reset_health()
+	Health.reset_health()
 
 
 func _attempt_to_clear_cell(damage: int, rid: RID):

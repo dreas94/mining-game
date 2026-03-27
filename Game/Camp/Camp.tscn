@@ -30,7 +30,7 @@ flip_h = true
 
 [node name="PointLight2D" parent="ArrowSignHole" instance=ExtResource("3_j8n86")]
 position = Vector2(0, -1)
-texture_scale = 0.244894
+texture_scale = 0.272721
 scale_range = 0.025
 base_scale = 0.25
 
@@ -43,7 +43,7 @@ texture = ExtResource("2_rghun")
 
 [node name="PointLight2D2" parent="ArrowSignHouse" instance=ExtResource("3_j8n86")]
 position = Vector2(0, -1)
-texture_scale = 0.251737
+texture_scale = 0.267821
 scale_range = 0.025
 base_scale = 0.25
 

@@ -1040,11 +1040,9 @@ parameters/PlayerStates/Walk/blend_position = 0
 parameters/TimeScale/scale = 1.0
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("RectangleShape2D_4672b")
 
 [node name="PickupArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 32
 input_pickable = false
@@ -1060,7 +1058,7 @@ shape = SubResource("CircleShape2D_o2hno")
 
 [node name="PointLight2D" parent="." instance=ExtResource("5_kt3un")]
 energy = 0.907596
-texture_scale = 0.949525
+texture_scale = 0.981088
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, 16)

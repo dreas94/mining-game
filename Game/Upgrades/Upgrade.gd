@@ -5,6 +5,7 @@ var upgrade_type: UpgradeConstants.TYPE
 var upgrade_value_type: UpgradeConstants.VALUE_TYPE
 var value: float
 
+
 func _init(new_upgrade_type: UpgradeConstants.TYPE, new_upgrade_value_type: UpgradeConstants.VALUE_TYPE, new_value: float) -> void:
 	upgrade_type = new_upgrade_type
 	upgrade_value_type = new_upgrade_value_type

@@ -11,6 +11,18 @@ extends Node
 
 var tile_map : BreakableTileMapLayer
 var simplex_noise: FastNoiseLite = FastNoiseLite.new()
+var min_width: int:
+	get:
+		return floor(-(map_width) / 2.0)
+var max_width: int:
+	get:
+		return floor((map_width) / 2.0)
+var min_height: int:
+	get:
+		return floor(-(map_width) / 2.0)
+var max_height: int:
+	get:
+		return floor((map_width) / 2.0)
 
 
 func generate(new_tile_map: BreakableTileMapLayer):
@@ -23,10 +35,6 @@ func generate(new_tile_map: BreakableTileMapLayer):
 	self.simplex_noise.fractal_weighted_strength = self.fractal_weighted_strength
 	self.simplex_noise.frequency = self.frequency
 	
-	var min_width: int = floor(-(self.map_width + 2) / 2.0)
-	var max_width: int = floor((self.map_width + 2) / 2.0)
-	var min_height: int = floor(-(self.map_width + 2) / 2.0)
-	var max_height: int = floor((self.map_width + 2) / 2.0)
 	for x in range(min_width, max_width):
 		for y in range(min_height, max_height):
 			if x == 0 and y == 0:
