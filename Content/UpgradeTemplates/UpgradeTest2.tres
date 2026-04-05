@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="UpgradeTemplate" load_steps=2 format=3 uid="uid://bsck1oqpy71gy"]
+
+[ext_resource type="Script" uid="uid://50pdk8k77qee" path="res://Game/Upgrades/UpgradeTemplate.gd" id="1_bxnpe"]
+
+[resource]
+script = ExtResource("1_bxnpe")
+upgrade_name = "Light of the Soul I"
+information = "You remember having a soul far stronger then this. Able to fight and work longer."
+number_of_costs = 1
+cost_id = Array[String](["Ore1"])
+cost_value = Array[int]([10])
+number_of_upgrade = 1
+upgrade_type = Array[int]([2])
+upgrade_value_type = Array[int]([1])
+upgrade_value = Array[float]([0.5])
+metadata/_custom_type_script = "uid://50pdk8k77qee"

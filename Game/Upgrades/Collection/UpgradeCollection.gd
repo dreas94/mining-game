@@ -41,7 +41,7 @@ func get_upgrades_of_type(type: UpgradeConstants.TYPE) -> Array[Upgrade]:
 
 
 func calculate_upgrades(type: UpgradeConstants.TYPE) -> float:
-	var all_upgrades_of_type: Array[Upgrade] = UpgradeCollection.get_upgrades_of_type(type)
+	var all_upgrades_of_type: Array[Upgrade] = get_upgrades_of_type(type)
 	var all_generic_upgrades_of_type: Array[Upgrade] = all_upgrades_of_type.filter(_is_generic_upgrade)
 	var all_percentage_upgrades_of_type: Array[Upgrade] = all_upgrades_of_type.filter(_is_percentage_upgrade)
 	
@@ -57,9 +57,11 @@ func calculate_upgrades(type: UpgradeConstants.TYPE) -> float:
 		UpgradeConstants.TYPE.DAMAGE:
 			if Mines.player == null:
 				return 0.0
-			return (Mines.player.DAMAGE_BASE + generic_upgrade_total) * percentage_upgrade_total
+			return (UpgradeConstants.DAMAGE_BASE + generic_upgrade_total) * percentage_upgrade_total
 		UpgradeConstants.TYPE.HEALTH:
-			return (Health.INITIAL + generic_upgrade_total) * percentage_upgrade_total
+			return (UpgradeConstants.HEALTH_BASE + generic_upgrade_total) * percentage_upgrade_total
+		UpgradeConstants.TYPE.MINING_SPEED:
+			return (UpgradeConstants.MINING_SPEED_SCALE_BASE + generic_upgrade_total) * (percentage_upgrade_total)
 	
 	return 0.0
 

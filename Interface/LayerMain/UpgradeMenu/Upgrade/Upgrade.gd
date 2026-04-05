@@ -12,7 +12,7 @@ var _id: String = ""
 var _upgrade_name: String = "Upgrade"
 var _information: String = "Information"
 var _upgrades: Array[Upgrade] = []
-var _cost: int = 20
+var _costs: Dictionary[String, int] = {}
 
 func _ready() -> void:
 	_buy_button.pressed.connect(_on_buy_button_pressed)
@@ -31,41 +31,70 @@ func fill_data(template: UpgradeTemplate) -> void:
 	_upgrade_rich_text_label.text = ""
 	for upgrade: Upgrade in _upgrades:
 		_upgrade_rich_text_label.text += upgrade.get_upgrade_as_string() + "   "
-	_cost = template.cost
-	_cost_gauge.max_value = _cost
 	
-	_cost_gauge.value = _cost_gauge.max_value
-	var new_value: float = _cost_gauge.max_value - ItemCollection.get_number_of_items_by_id("ore1")
-	_cost_gauge.value = clampf(new_value, 0.0, _cost_gauge.max_value)
-	
-	_cost_label.text = "Cost: " + str(_cost)
+	_cost_label.text = ""
+	for index: int in range(template.number_of_costs):
+		var id: String = template.cost_id[index]
+		var cost: int = template.cost_value[index]
+		_costs[template.cost_id[index]] = cost
+		_cost_gauge.max_value += cost
+		_cost_gauge.value = _cost_gauge.max_value
+		var quantity: int = ItemCollection.get_number_of_items_by_id(id)
+		var new_value: float = _cost_gauge.max_value - quantity
+		_cost_gauge.value = clampf(new_value, 0.0, _cost_gauge.max_value)
+		_cost_label.text = Content.get_item_template(id).item_name + ": " + str(quantity) + " / " + str(cost)
 
 
-func _on_item_added_to_item_collection(item_id: String, new_quantity: int) -> void:
-	if item_id != "Ore1":
+func _on_item_added_to_item_collection(item_id: String, _new_quantity: int) -> void:
+	if not item_id in _costs:
 		return
 	
-	var new_value: float = _cost_gauge.max_value - new_quantity
-	_cost_gauge.value = clampf(new_value, 0.0, _cost_gauge.max_value)
+	var new_total_value: int = 0
+	var first: bool = true
+	for key: String in _costs:
+		if not first:
+			_cost_label.text += "\n"
+		var id: String = key
+		var cost: int = _costs[key]
+		var quantity: int = ItemCollection.get_number_of_items_by_id(id)
+		var new_value: float = _cost_gauge.max_value - quantity
+		new_total_value = clampf(new_value, 0.0, float(cost))
+		_cost_label.text = Content.get_item_template(id).item_name + ": " + str(quantity) + " / " + str(cost)
 	
-	if new_quantity >= _cost_gauge.max_value:
+	_cost_gauge.value = new_total_value
+	
+	if _cost_gauge.value >= _cost_gauge.max_value:
 		_buy_button.disabled = false
 
 
-func _on_item_removed_from_item_collection(item_id: String, new_quantity: int) -> void:
-	if item_id != "Ore1":
+func _on_item_removed_from_item_collection(item_id: String, _new_quantity: int) -> void:
+	if not item_id in _costs:
 		return
 	
-	var new_value: float = _cost_gauge.max_value - new_quantity
-	_cost_gauge.value = clampf(new_value, 0.0, _cost_gauge.max_value)
+	var new_total_value: int = 0
+	var first: bool = true
+	for key: String in _costs:
+		if not first:
+			_cost_label.text += "\n"
+		var id: String = key
+		var cost: int = _costs[key]
+		var quantity: int = ItemCollection.get_number_of_items_by_id(id)
+		var new_value: float = _cost_gauge.max_value - quantity
+		new_total_value = clampf(new_value, 0.0, float(cost))
+		_cost_label.text = Content.get_item_template(id).item_name + ": " + str(quantity) + " / " + str(cost)
 	
-	if new_quantity <= _cost_gauge.max_value:
+	_cost_gauge.value = new_total_value
+	
+	if _cost_gauge.value < _cost_gauge.max_value:
 		_buy_button.disabled = true
 
 
 func _on_buy_button_pressed() -> void:
-	if not ItemCollection.remove_exact_quantity("Ore1", _cost):
-		return
+	for key: String in _costs:
+		if not ItemCollection.check_has_equal_or_more_quantity(key, _costs[key]):
+			return
+	for key: String in _costs:
+		ItemCollection.remove_exact_quantity(key, _costs[key])
 	
 	var index: int = 0
 	for upgrade: Upgrade in _upgrades:

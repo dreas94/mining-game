@@ -20,7 +20,6 @@ signal mine_attempt_by_rid(damage: int, rid: RID)
 			return 1
 		return animation_tree.get("parameters/Mining Speed/scale")
 
-const DAMAGE_BASE = 25.0
 enum PlayerState {IDLE, WALK, JUMP, DOWN, CROUCH}
 enum PickaxeState {IDLE, READY, SWING, RECOVER}
 var alive: bool = true
@@ -77,7 +76,7 @@ func _enter_pickaxe_recovery() -> void:
 
 
 func _attempt_to_mine_by_rid(rid_to_mine: RID) -> void:
-	Health.sub_health(randf_range(1.0, 5.0))
+	Health.sub_health(randf_range(1.0, 5.0) / mining_speed)
 	_current_pickaxe_state = PickaxeState.SWING
 	var damage: float = UpgradeCollection.calculate_upgrades(UpgradeConstants.TYPE.DAMAGE)
 	mine_attempt_by_rid.emit(damage, rid_to_mine)
@@ -201,6 +200,8 @@ func _update_animation() -> void:
 		if Input.is_action_pressed("run"):
 			time_scale = 2.0
 	
+	mining_speed = UpgradeCollection.calculate_upgrades(UpgradeConstants.TYPE.MINING_SPEED)
+	
 	if animation_tree.get("parameters/TimeScale/scale") != time_scale:
 		animation_tree.set("parameters/TimeScale/scale", time_scale)
 
@@ -208,9 +209,9 @@ func _update_animation() -> void:
 func _update_health(delta: float) -> void:
 	if not Game.state.active_state is GameStateMines:
 		return
-	if _current_state == PlayerState.IDLE:
-		return
-	Health.sub_health(1.0 * delta)
+	if _current_state != PlayerState.IDLE:
+		Health.sub_health(1.0 * delta)
+
 
 
 func _input(event: InputEvent) -> void:
