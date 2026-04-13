@@ -16,8 +16,8 @@ var _costs: Dictionary[String, int] = {}
 
 func _ready() -> void:
 	_buy_button.pressed.connect(_on_buy_button_pressed)
-	ItemCollection.item_added.connect(_on_item_added_to_item_collection)
-	ItemCollection.item_removed.connect(_on_item_added_to_item_collection)
+	ItemCollection.item_added.connect(_on_item_count_altered_in_item_collection)
+	ItemCollection.item_removed.connect(_on_item_count_altered_in_item_collection)
 
 
 func fill_data(template: UpgradeTemplate) -> void:
@@ -32,6 +32,7 @@ func fill_data(template: UpgradeTemplate) -> void:
 	for upgrade: Upgrade in _upgrades:
 		_upgrade_rich_text_label.text += upgrade.get_upgrade_as_string() + "   "
 	
+	_cost_gauge.max_value = 0.0
 	_cost_label.text = ""
 	for index: int in range(template.number_of_costs):
 		var id: String = template.cost_id[index]
@@ -45,12 +46,13 @@ func fill_data(template: UpgradeTemplate) -> void:
 		_cost_label.text = Content.get_item_template(id).item_name + ": " + str(quantity) + " / " + str(cost)
 
 
-func _on_item_added_to_item_collection(item_id: String, _new_quantity: int) -> void:
+func _on_item_count_altered_in_item_collection(item_id: String, _new_quantity: int) -> void:
 	if not item_id in _costs:
 		return
 	
 	var new_total_value: int = 0
 	var first: bool = true
+	
 	for key: String in _costs:
 		if not first:
 			_cost_label.text += "\n"
@@ -63,30 +65,12 @@ func _on_item_added_to_item_collection(item_id: String, _new_quantity: int) -> v
 	
 	_cost_gauge.value = new_total_value
 	
-	if _cost_gauge.value >= _cost_gauge.max_value:
-		_buy_button.disabled = false
-
-
-func _on_item_removed_from_item_collection(item_id: String, _new_quantity: int) -> void:
-	if not item_id in _costs:
-		return
-	
-	var new_total_value: int = 0
-	var first: bool = true
-	for key: String in _costs:
-		if not first:
-			_cost_label.text += "\n"
-		var id: String = key
-		var cost: int = _costs[key]
-		var quantity: int = ItemCollection.get_number_of_items_by_id(id)
-		var new_value: float = _cost_gauge.max_value - quantity
-		new_total_value = clampf(new_value, 0.0, float(cost))
-		_cost_label.text = Content.get_item_template(id).item_name + ": " + str(quantity) + " / " + str(cost)
-	
-	_cost_gauge.value = new_total_value
-	
-	if _cost_gauge.value < _cost_gauge.max_value:
+	if _cost_gauge.value > 0.0:
 		_buy_button.disabled = true
+		_cost_gauge.get_parent().visible = true
+	else:
+		_buy_button.disabled = false
+		_cost_gauge.get_parent().visible = false
 
 
 func _on_buy_button_pressed() -> void:

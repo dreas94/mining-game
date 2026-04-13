@@ -40,7 +40,7 @@ func get_upgrades_of_type(type: UpgradeConstants.TYPE) -> Array[Upgrade]:
 	return _typed_upgrades
 
 
-func calculate_upgrades(type: UpgradeConstants.TYPE) -> float:
+func calculate_upgrades(type: UpgradeConstants.TYPE) -> Variant:
 	var all_upgrades_of_type: Array[Upgrade] = get_upgrades_of_type(type)
 	var all_generic_upgrades_of_type: Array[Upgrade] = all_upgrades_of_type.filter(_is_generic_upgrade)
 	var all_percentage_upgrades_of_type: Array[Upgrade] = all_upgrades_of_type.filter(_is_percentage_upgrade)
@@ -62,6 +62,12 @@ func calculate_upgrades(type: UpgradeConstants.TYPE) -> float:
 			return (UpgradeConstants.HEALTH_BASE + generic_upgrade_total) * percentage_upgrade_total
 		UpgradeConstants.TYPE.MINING_SPEED:
 			return (UpgradeConstants.MINING_SPEED_SCALE_BASE + generic_upgrade_total) * (percentage_upgrade_total)
+		UpgradeConstants.TYPE.JUMP_HEIGHT:
+			return -(UpgradeConstants.JUMP_HEIGHT_BASE + generic_upgrade_total) * percentage_upgrade_total
+		UpgradeConstants.TYPE.WORLD_SIZE_WIDTH:
+			return (UpgradeConstants.WORLD_SIZE_WIDTH_HEIGHT_BASE + generic_upgrade_total) * percentage_upgrade_total
+		UpgradeConstants.TYPE.WORLD_SIZE_HEIGHT:
+			return (UpgradeConstants.WORLD_SIZE_WIDTH_HEIGHT_BASE + generic_upgrade_total) * percentage_upgrade_total
 	
 	return 0.0
 

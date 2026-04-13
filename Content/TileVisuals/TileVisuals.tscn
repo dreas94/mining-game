@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://2cdd1ob0n0k6"]
+[gd_scene load_steps=4 format=3 uid="uid://2cdd1ob0n0k6"]
 
 [ext_resource type="Script" uid="uid://cvdfvno3kfdix" path="res://Content/TileVisuals/TileVisuals.gd" id="1_j8cpm"]
 [ext_resource type="Material" uid="uid://c1nkj436djpxy" path="res://Shader/Cracks/Cracks.tres" id="2_7ab37"]
+[ext_resource type="Material" uid="uid://dvdnygwk8g12t" path="res://Shader/Unshaded/Unshaded.tres" id="3_7ab37"]
 
 [node name="TileVisuals" type="Node2D" node_paths=PackedStringArray("_visual", "_moused_visual")]
 script = ExtResource("1_j8cpm")
@@ -26,6 +27,8 @@ color = Color(0, 0, 0, 0)
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 visible = false
+self_modulate = Color(1, 1, 1, 0.75)
+material = ExtResource("3_7ab37")
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

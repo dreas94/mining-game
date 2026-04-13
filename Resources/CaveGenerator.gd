@@ -1,7 +1,5 @@
 class_name CaveGenerator
 extends Node
-@export var map_width: int = 80
-@export var map_height: int = 80
 @export var world_seed: String = "4_20_69"
 @export var fractal_octaves: int = 4
 @export var fractal_gain: float = 0.5
@@ -13,16 +11,16 @@ var tile_map : BreakableTileMapLayer
 var simplex_noise: FastNoiseLite = FastNoiseLite.new()
 var min_width: int:
 	get:
-		return floor(-(map_width) / 2.0)
+		return floor(-(UpgradeCollection.calculate_upgrades(UpgradeConstants.TYPE.WORLD_SIZE_WIDTH)) / 2.0)
 var max_width: int:
 	get:
-		return floor((map_width) / 2.0)
+		return floor(UpgradeCollection.calculate_upgrades(UpgradeConstants.TYPE.WORLD_SIZE_WIDTH) / 2.0)
 var min_height: int:
 	get:
-		return floor(-(map_width) / 2.0)
+		return floor(-(UpgradeCollection.calculate_upgrades(UpgradeConstants.TYPE.WORLD_SIZE_HEIGHT)) / 2.0)
 var max_height: int:
 	get:
-		return floor((map_width) / 2.0)
+		return floor((UpgradeCollection.calculate_upgrades(UpgradeConstants.TYPE.WORLD_SIZE_HEIGHT)) / 2.0)
 
 
 func generate(new_tile_map: BreakableTileMapLayer):

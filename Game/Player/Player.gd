@@ -9,7 +9,6 @@ signal mine_attempt_by_rid(damage: int, rid: RID)
 @export var speed: float = 100.0
 @export var acceleration: float = 100.0
 @export var deacceleration: float = acceleration * 4.0
-@export var jump_speed: float = -200.0
 @export var gravity: float = 400.0
 @export var mining_speed: float = 1.0:
 	set(value):
@@ -22,7 +21,7 @@ signal mine_attempt_by_rid(damage: int, rid: RID)
 
 enum PlayerState {IDLE, WALK, JUMP, DOWN, CROUCH}
 enum PickaxeState {IDLE, READY, SWING, RECOVER}
-var alive: bool = true
+var alive: BoolAttribute = BoolAttribute.new(true)
 var _current_state: PlayerState = PlayerState.IDLE
 var _current_pickaxe_state: PickaxeState = PickaxeState.IDLE
 var _grid_position: Vector2i
@@ -43,11 +42,14 @@ func _ready() -> void:
 	animation_tree.set("parameters/PlayerStates/Run/blend_position", 1.0)
 	animation_tree.set("parameters/PlayerStates/Walk/blend_position", 1.0)
 	
+	light.base_scale = remap(Health.current, 0.0, UpgradeConstants.HEALTH_BASE, 0.0, 0.5)
+	
 	Health.current_changed.connect(_on_current_health_changed)
+	alive.changed.connect(_on_alive_changed)
 
 
 func _physics_process(delta: float) -> void:
-	if alive == false:
+	if alive.value == false:
 		return
 	_grid_position = Mines.breakable_tile_map_layer.translate_to_grid_positon(global_position)
 	_move_direction = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
@@ -76,7 +78,7 @@ func _enter_pickaxe_recovery() -> void:
 
 
 func _attempt_to_mine_by_rid(rid_to_mine: RID) -> void:
-	Health.sub_health(randf_range(1.0, 5.0) / mining_speed)
+	Health.sub_health(randf_range(1.0, 5.0))
 	_current_pickaxe_state = PickaxeState.SWING
 	var damage: float = UpgradeCollection.calculate_upgrades(UpgradeConstants.TYPE.DAMAGE)
 	mine_attempt_by_rid.emit(damage, rid_to_mine)
@@ -94,7 +96,7 @@ func _handle_ray_cast() -> void:
 		_last_tile_grid_pos_ray_casted =  Vector2i.MAX
 		return
 	
-	if _current_pickaxe_state in [PickaxeState.RECOVER, PickaxeState.SWING]:
+	if _current_pickaxe_state == PickaxeState.SWING:
 		return
 	
 	var tile: Tile = Mines.tile_handler.get_tile_based_on_rid(ray_2d.get_collider_rid())
@@ -135,7 +137,7 @@ func _handle_input(delta: float) -> void:
 				_current_pickaxe_state = PickaxeState.IDLE
 	
 	if _current_state != PlayerState.CROUCH and Input.is_action_pressed("jump") and is_on_floor():
-		velocity.y = jump_speed
+		velocity.y = UpgradeCollection.calculate_upgrades(UpgradeConstants.TYPE.JUMP_HEIGHT)
 		App.sfx.play(DefaultSoundEffects.JUMP)
 		_current_state = PlayerState.JUMP
 	if _current_state != PlayerState.JUMP and Input.is_action_pressed("move_down") and is_on_floor():
@@ -209,8 +211,11 @@ func _update_animation() -> void:
 func _update_health(delta: float) -> void:
 	if not Game.state.active_state is GameStateMines:
 		return
-	if _current_state != PlayerState.IDLE:
-		Health.sub_health(1.0 * delta)
+	match _current_state:
+		PlayerState.IDLE:
+			pass
+		_:
+			Health.sub_health(1.0 * delta)
 
 
 
@@ -237,4 +242,15 @@ func _play_footstep() -> void:
 
 
 func _on_current_health_changed(_previous: float, current: float) -> void:
-	light.base_scale = remap(current, 0.0, Health.maximum, 0.0, 1.0)
+	light.base_scale = remap(current, 0.0, UpgradeConstants.HEALTH_BASE, 0.0, 0.5)
+
+
+func _on_alive_changed(current: bool, _previous: bool) -> void:
+	if current == true:
+		return
+	var tile: Tile = Mines.tile_handler.get_tile_in_grid_position(_last_tile_grid_pos_ray_casted)
+	if tile == null:
+		return
+	
+	_current_state = PlayerState.IDLE
+	tile.tile_attributes.is_moused.value = false

@@ -41,7 +41,7 @@ func lose() -> void:
 	player.light.enabled = false
 	App.sfx.play(DefaultSoundEffects.DEATH)
 	App.music.stop()
-	player.alive = false
+	player.alive.value = false
 	App.state.enter_state(AppStateLose.new())
 
 

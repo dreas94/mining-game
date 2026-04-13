@@ -19,15 +19,19 @@ func get_upgrade_as_string() -> String:
 			string_name = "Damage"
 		UpgradeConstants.TYPE.HEALTH:
 			string_name = "Health"
+		UpgradeConstants.TYPE.MINING_SPEED:
+			string_name = "Mining Speed"
 	
 	var post_value_string: String = ""
+	var formated_value: float = value
 	
 	match upgrade_value_type:
 		UpgradeConstants.VALUE_TYPE.PERCENTAGE:
 			post_value_string = "%"
+			formated_value *= 100.0
 		_:
 			post_value_string = ""
 	if value > 0:
-		return string_name + " +" + str(value) + post_value_string
+		return string_name + " +" + str(formated_value) + post_value_string
 	else:
-		return string_name + " -" + str(value) + post_value_string
+		return string_name + " -" + str(formated_value) + post_value_string

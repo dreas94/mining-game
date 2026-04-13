@@ -95,7 +95,6 @@ func get_tile_based_on_rid(rid: RID) -> Tile:
 		return null
 	
 	var grid_position: Vector2i = Mines.breakable_tile_map_layer.get_coords_for_body_rid(rid)
-		
 	
 	if not has_tile_at_grid_position(grid_position):
 		return null
