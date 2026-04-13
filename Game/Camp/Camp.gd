@@ -3,6 +3,7 @@ extends GameMode
 @export var tile_map: TileMapLayer
 @export var mining_area: Area2D
 @export var abandoned_house: iBuilding
+@export var identity_house: iBuilding
 
 var player: iPlayer
 var player_scene: PackedScene = preload("uid://cr7vr5ke2lgfn")
@@ -25,6 +26,8 @@ func _enabled() -> void:
 	mining_area.body_entered.connect(_on_body_entered_mining_area)
 	abandoned_house.player_entered.connect(_on_player_entered_abandoned_house)
 	abandoned_house.player_exited.connect(_on_player_exited_abandoned_house)
+	identity_house.player_entered.connect(_on_player_entered_identity_house)
+	identity_house.player_exited.connect(_on_player_exited_identity_house)
 
 
 func _disabled() -> void:
@@ -32,6 +35,8 @@ func _disabled() -> void:
 	mining_area.body_entered.disconnect(_on_body_entered_mining_area)
 	abandoned_house.player_entered.disconnect(_on_player_entered_abandoned_house)
 	abandoned_house.player_exited.disconnect(_on_player_exited_abandoned_house)
+	identity_house.player_entered.disconnect(_on_player_entered_identity_house)
+	identity_house.player_exited.disconnect(_on_player_exited_identity_house)
 	player.queue_free()
 	tile_map.enabled = false
 
@@ -55,3 +60,15 @@ func _on_player_exited_abandoned_house() -> void:
 	if not visible:
 		return
 	Interface.upgrade_menu.disable()
+
+
+func _on_player_entered_identity_house() -> void:
+	if not visible:
+		return
+	Interface.identity_menu.enable()
+
+
+func _on_player_exited_identity_house() -> void:
+	if not visible:
+		return
+	Interface.identity_menu.disable()

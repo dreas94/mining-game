@@ -56,4 +56,4 @@ func reset_health(ammount: float = INITIAL) -> void:
 
 
 func _update_health_maximum(_upgrade_id: String, _upgrade: Upgrade) -> void:
-	set_maximum(UpgradeCollection.calculate_upgrades(UpgradeConstants.TYPE.HEALTH))
+	reset_health(UpgradeCollection.calculate_upgrades(UpgradeConstants.TYPE.HEALTH))

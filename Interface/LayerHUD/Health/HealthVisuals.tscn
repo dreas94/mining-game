@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dqwikqse5jy46" path="res://Interface/LayerHUD/Health/HealthVisuals.gd" id="1_vpinq"]
 
-[node name="HealthVisuals" type="Control" node_paths=PackedStringArray("health_bar", "damage_bar")]
+[node name="HealthVisuals" type="Control" node_paths=PackedStringArray("health_bar", "damage_bar", "label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,6 +14,7 @@ size_flags_vertical = 0
 script = ExtResource("1_vpinq")
 health_bar = NodePath("HealthBar")
 damage_bar = NodePath("HealthBar/DamageBar")
+label = NodePath("Label")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 custom_minimum_size = Vector2(240, 4)
@@ -42,3 +43,16 @@ grow_vertical = 2
 theme_type_variation = &"DamageBar"
 value = 60.0
 show_percentage = false
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 513.0
+offset_top = -36.0
+offset_right = 615.0
+offset_bottom = 2.0
+grow_vertical = 0
+text = "100"
+horizontal_alignment = 3
