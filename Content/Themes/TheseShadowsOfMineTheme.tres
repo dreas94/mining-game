@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=12 format=3 uid="uid://bprg36i3mssg3"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://bprg36i3mssg3"]
 
 [ext_resource type="StyleBox" uid="uid://ljxllhg1r10i" path="res://Content/Themes/Styles/empty.tres" id="1_iox86"]
 [ext_resource type="FontFile" uid="uid://0v5lh5cpxe3j" path="res://Content/Themes/Roboto-VariableFont_wdth,wght.ttf" id="1_m2xdc"]
@@ -10,6 +10,7 @@
 [ext_resource type="StyleBox" uid="uid://codwp8pgnoqy7" path="res://Content/Themes/ProgressBar/HealthBarFront.tres" id="6_1wbsb"]
 [ext_resource type="StyleBox" uid="uid://b4eej7gjgvyjy" path="res://Content/Themes/ProgressBar/UpgradeProgressBar/UpgradeProgressBar.tres" id="7_nok0g"]
 [ext_resource type="StyleBox" uid="uid://dd778ixyifngr" path="res://Content/Themes/PanelContainer/UpgradeMenuPanel.tres" id="7_uxlet"]
+[ext_resource type="StyleBox" uid="uid://by5w3hcbkrisy" path="res://Content/Themes/ProgressBar/TransitionBarFront.tres" id="8_1wbsb"]
 [ext_resource type="StyleBox" uid="uid://c84gb6ue037v7" path="res://Content/Themes/PanelContainer/UpgradePanel.tres" id="8_k1gep"]
 
 [resource]
@@ -61,6 +62,9 @@ TitleLabel/base_type = &"Label"
 TitleLabel/font_sizes/font_size = 59
 TitlePanelContainer/base_type = &"PanelContainer"
 TitlePanelContainer/styles/panel = ExtResource("1_iox86")
+TransitionBar/base_type = &"ProgressBar"
+TransitionBar/styles/background = ExtResource("1_iox86")
+TransitionBar/styles/fill = ExtResource("8_1wbsb")
 UpgradeHeader/base_type = &"Label"
 UpgradeHeader/font_sizes/font_size = 26
 UpgradeMenuPanelContainer/base_type = &"PanelContainer"

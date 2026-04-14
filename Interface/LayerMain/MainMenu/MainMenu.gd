@@ -40,6 +40,7 @@ func toggle_stuff(toggle: bool) -> void:
 
 func _on_start_button_pressed() -> void:
 	var s: AppStateNewGame = AppStateNewGame.new() 
+	await Interface.transitions.to_black(Transitions.STYLE.FADE)
 	App.state.enter_state(s)
 
 

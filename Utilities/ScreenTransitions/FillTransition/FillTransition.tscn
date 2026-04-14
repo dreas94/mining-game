@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmf1sc4d0ro6q"]
+
+[ext_resource type="Script" uid="uid://df1o2etpftif6" path="res://Utilities/ScreenTransitions/FillTransition/FillTransition.gd" id="1_ip1rn"]
+
+[node name="FillTransition" type="Control" node_paths=PackedStringArray("progress_bar")]
+top_level = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1280.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ip1rn")
+progress_bar = NodePath("ProgressBar")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(1280, 920)
+layout_mode = 1
+offset_top = -100.0
+offset_right = 1280.0
+offset_bottom = 820.0
+theme_type_variation = &"TransitionBar"
+fill_mode = 3
+show_percentage = false

@@ -18,7 +18,7 @@ abandoned_house = NodePath("AbandonedHouse")
 identity_house = NodePath("IdentityHouse")
 
 [node name="CanvasModulate2" type="CanvasModulate" parent="."]
-color = Color(0, 0, 0, 1)
+color = Color(0.04, 0.04, 0.04, 1)
 
 [node name="ArrowSignHole" type="Sprite2D" parent="."]
 self_modulate = Color(0.550781, 0.394529, 0.309814, 1)
@@ -31,7 +31,7 @@ flip_h = true
 
 [node name="PointLight2D" parent="ArrowSignHole" instance=ExtResource("3_j8n86")]
 position = Vector2(0, -1)
-texture_scale = 0.256652
+texture_scale = 0.24227
 scale_range = 0.025
 base_scale = 0.25
 
@@ -44,7 +44,7 @@ texture = ExtResource("2_rghun")
 
 [node name="PointLight2D2" parent="ArrowSignHouse" instance=ExtResource("3_j8n86")]
 position = Vector2(0, -1)
-texture_scale = 0.252502
+texture_scale = 0.238751
 scale_range = 0.025
 base_scale = 0.25
 
@@ -74,6 +74,6 @@ polygon = PackedVector2Array(-21, -8, -21, 15, 21, 15, 21, -8, 9, -14, -9, -14)
 
 [node name="PointLight2D" parent="IdentityHouse" instance=ExtResource("3_j8n86")]
 position = Vector2(0, 9.5)
-texture_scale = 0.164039
+texture_scale = 0.156471
 scale_range = 0.015
 base_scale = 0.15

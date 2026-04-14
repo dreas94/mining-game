@@ -6,4 +6,5 @@ extends GameState
 
 func enter(_previous_state: SimpleState) -> void:
 	ItemCollection.clear()
+	await Interface.transitions.to_clear(Transitions.STYLE.FADE)
 	entered.emit()

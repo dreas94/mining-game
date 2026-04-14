@@ -64,10 +64,6 @@ func calculate_upgrades(type: UpgradeConstants.TYPE) -> Variant:
 			return (UpgradeConstants.MINING_SPEED_SCALE_BASE + generic_upgrade_total) * (percentage_upgrade_total)
 		UpgradeConstants.TYPE.JUMP_HEIGHT:
 			return -(UpgradeConstants.JUMP_HEIGHT_BASE + generic_upgrade_total) * percentage_upgrade_total
-		UpgradeConstants.TYPE.WORLD_SIZE_WIDTH:
-			return (UpgradeConstants.WORLD_SIZE_WIDTH_HEIGHT_BASE + generic_upgrade_total) * percentage_upgrade_total
-		UpgradeConstants.TYPE.WORLD_SIZE_HEIGHT:
-			return (UpgradeConstants.WORLD_SIZE_WIDTH_HEIGHT_BASE + generic_upgrade_total) * percentage_upgrade_total
 	
 	return 0.0
 

@@ -12,6 +12,7 @@ var _mining_particles_scene: PackedScene = load("uid://c73q2ndbadhko")
 func _ready() -> void:
 	tile_attributes.health.changed.connect(_on_health_changed)
 	tile_attributes.is_moused.changed.connect(_on_is_moused_changed)
+		
 	_configure()
 
 

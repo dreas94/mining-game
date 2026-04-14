@@ -49,6 +49,11 @@ var health_visuals: iHealthVisuals:
 	get: return _health_visuals
 var _health_visuals: iHealthVisuals
 
+# POPUP
+var transitions: Transitions:
+	get: return _transitions
+var _transitions: Transitions
+
 
 @warning_ignore("untyped_declaration")
 func _set_readonly(_value) -> void:
@@ -73,6 +78,8 @@ func _init() -> void:
 	#HUD
 	_item_window = _instance_to_layer(ITEM_WINDOW_SCENE, _layer_hud)
 	_health_visuals = _instance_to_layer(HEALTH_VISUALS_SCENE, _layer_hud)
+	#POPUP
+	_transitions = _new_to_layer(Transitions, _layer_popup)
 
 
 func _new_to_layer(script: Script, layer: Layer) -> Object:

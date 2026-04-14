@@ -14,7 +14,7 @@ cave_generator = NodePath("TileMapLayer/Node")
 tile_handler = NodePath("TileHandler")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0, 0, 0, 1)
+color = Color(0.04, 0.04, 0.04, 1)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." node_paths=PackedStringArray("over_layer")]
 z_index = -1
