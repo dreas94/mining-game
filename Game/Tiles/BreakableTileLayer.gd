@@ -4,7 +4,6 @@ extends TileMapLayer
 const ADJ_VECS: Array[Vector2i] = [Vector2i(0, -1), Vector2i(0, 1), Vector2i(1, 0), Vector2i(-1, 0),
 Vector2i(1, 1), Vector2i(-1, 1), Vector2i(1, -1), Vector2i(-1, -1)]
 
-@export var over_layer: TileMapLayer
 #var _active_lights: Dictionary = {}
 var active_items: Array[Item]
 var hovered
@@ -16,15 +15,6 @@ func create_cell_data(cell: Vector2i, template: TileTemplate) -> void:
 		set_cells_terrain_connect([cell], 0, 0)
 	else:
 		set_cells_terrain_connect([cell], 0, 0)
-		over_layer.set_cell(cell, 0, tile.tile_attributes.atlas_coords)
-		#var light_source: AnimatedPointLight2D = load("uid://dsr0f5ealpe4e").instantiate()
-		#light_source.global_position = to_global(map_to_local(cell))
-		#light_source.base_energy = 0.25
-		#light_source.base_scale = 0.25
-		#light_source.duration_per_scale_update = 1.0
-		#light_source.color = Color(0.762, 0.321, 0.0)
-		#Mines.add_child(light_source)
-		#_active_lights[cell] = light_source
 
 
 func translate_to_grid_positon(global_pos: Vector2) -> Vector2i:
@@ -77,4 +67,3 @@ func clear_cell_at_global_position(global_pos: Vector2) -> void:
 
 func clear_tilemaps() -> void:
 	clear()
-	over_layer.clear()

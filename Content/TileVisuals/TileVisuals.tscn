@@ -4,10 +4,13 @@
 [ext_resource type="Material" uid="uid://c1nkj436djpxy" path="res://Shader/Cracks/Cracks.tres" id="2_7ab37"]
 [ext_resource type="Material" uid="uid://dvdnygwk8g12t" path="res://Shader/Unshaded/Unshaded.tres" id="3_7ab37"]
 
-[node name="TileVisuals" type="Node2D" node_paths=PackedStringArray("_visual", "_moused_visual")]
+[node name="TileVisuals" type="Node2D" node_paths=PackedStringArray("_visual", "_moused_visual", "_graphic_sprite")]
 script = ExtResource("1_j8cpm")
 _visual = NodePath("ColorRect")
 _moused_visual = NodePath("PanelContainer")
+_graphic_sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false

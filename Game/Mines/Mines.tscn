@@ -14,14 +14,13 @@ cave_generator = NodePath("TileMapLayer/Node")
 tile_handler = NodePath("TileHandler")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.04, 0.04, 0.04, 1)
+color = Color(0.06, 0.06, 0.06, 1)
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." node_paths=PackedStringArray("over_layer")]
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -1
 texture_filter = 1
 tile_set = ExtResource("3_ov2xx")
 script = ExtResource("3_5xt6m")
-over_layer = NodePath("TileMapLayer")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="TileMapLayer"]
 tile_set = ExtResource("4_dtptj")

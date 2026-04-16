@@ -3,6 +3,7 @@ extends Node2D
 
 @export var _visual: ColorRect
 @export var _moused_visual: PanelContainer
+@export var _graphic_sprite: Sprite2D
 
 var _color_multiplier: float
 var tile_attributes: TileAttributes
@@ -10,15 +11,17 @@ var _mining_particles_scene: PackedScene = load("uid://c73q2ndbadhko")
 
 
 func _ready() -> void:
-	tile_attributes.health.changed.connect(_on_health_changed)
-	tile_attributes.is_moused.changed.connect(_on_is_moused_changed)
+	tile_attributes.graphic.changed.connect(_set_graphic)
+	tile_attributes.health.changed.connect(_set_health)
+	tile_attributes.is_moused.changed.connect(_set_is_moused)
 		
 	_configure()
 
 
 func _configure() -> void:
-	_on_health_changed(tile_attributes.health.value, 0)
-	_on_is_moused_changed(tile_attributes.is_moused.value, false)
+	_set_graphic(tile_attributes.graphic.value)
+	_set_health(tile_attributes.health.value, 0)
+	_set_is_moused(tile_attributes.is_moused.value, false)
 
 
 func _physics_process(delta: float) -> void:
@@ -27,7 +30,11 @@ func _physics_process(delta: float) -> void:
 	set_shader_param_color(new_shader_param_color)
 
 
-func _on_health_changed(value: int, _delta: int) -> void:
+func _set_graphic(graphic: Texture2D) -> void:
+	_graphic_sprite.texture = graphic
+
+
+func _set_health(value: int, _delta: int) -> void:
 	if value == tile_attributes.health.maximum:
 		return
 	var mining_particles: iMiningParticles = _mining_particles_scene.instantiate()
@@ -44,7 +51,7 @@ func _on_health_changed(value: int, _delta: int) -> void:
 	_visual.visible = true
 
 
-func _on_is_moused_changed(bool_value: bool, _previous_value: bool) -> void:
+func _set_is_moused(bool_value: bool, _previous_value: bool) -> void:
 	_moused_visual.visible = bool_value
 
 

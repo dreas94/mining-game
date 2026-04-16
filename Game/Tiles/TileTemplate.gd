@@ -12,8 +12,8 @@ extends Resource
 @export var item_dropped: ItemTemplate
 @export var amount_range: Vector2i = Vector2i.ZERO
 
-@export_category("Tiles")
-@export var atlas_coords: Vector2i = Vector2i.ZERO
+@export_category("Visuals")
+@export var graphic: Texture2D
 
 
 func get_file_name() -> String:
