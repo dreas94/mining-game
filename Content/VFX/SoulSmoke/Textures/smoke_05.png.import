@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://mfl1o2jyw7yq"
-path="res://.godot/imported/Abandoned House.png-62b73aa788b56aa17b2d6a97342234ae.ctex"
+uid="uid://cejp3yptd40cl"
+path="res://.godot/imported/smoke_05.png-9cbc57ff2b4a23857b91ad7e2dea8369.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Abandoned House.png"
-dest_files=["res://.godot/imported/Abandoned House.png-62b73aa788b56aa17b2d6a97342234ae.ctex"]
+source_file="res://Content/VFX/SoulSmoke/Textures/smoke_05.png"
+dest_files=["res://.godot/imported/smoke_05.png-9cbc57ff2b4a23857b91ad7e2dea8369.ctex"]
 
 [params]
 

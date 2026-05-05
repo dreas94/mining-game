@@ -1,9 +1,9 @@
 [gd_scene load_steps=47 format=3 uid="uid://cr7vr5ke2lgfn"]
 
 [ext_resource type="Script" uid="uid://bwd7weq3u2ywv" path="res://Game/Player/Player.gd" id="1_4672b"]
-[ext_resource type="Texture2D" uid="uid://drjxkesrh35pn" path="res://Textures/Little Guy.png" id="2_65y41"]
+[ext_resource type="Texture2D" uid="uid://drjxkesrh35pn" path="res://Game/Player/Textures/Little Guy.png" id="2_65y41"]
 [ext_resource type="PackedScene" uid="uid://d1hoesfdl604e" path="res://Content/VFX/SoulSmoke/SoulSmoke.tscn" id="3_o2hno"]
-[ext_resource type="Texture2D" uid="uid://cq254veb6dqms" path="res://Textures/Pickaxe.png" id="3_sfkwu"]
+[ext_resource type="Texture2D" uid="uid://cq254veb6dqms" path="res://Game/Player/Textures/Pickaxe.png" id="3_sfkwu"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://jt22eswvd8ck" path="res://Game/Player/PlayerStates.tres" id="4_1khw3"]
 [ext_resource type="PackedScene" uid="uid://dsr0f5ealpe4e" path="res://Content/VFX/LightSource/LightSource.tscn" id="5_kt3un"]
 

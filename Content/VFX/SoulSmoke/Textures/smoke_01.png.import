@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsvxvh0gbwp13"
-path="res://.godot/imported/Arrow_Sign.png-1af02b20364709393abb1ee5d301c89d.ctex"
+uid="uid://cickcm17b0wo4"
+path="res://.godot/imported/smoke_01.png-6fc58c2d611a2ff3bfa1f90017f87983.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Arrow_Sign.png"
-dest_files=["res://.godot/imported/Arrow_Sign.png-1af02b20364709393abb1ee5d301c89d.ctex"]
+source_file="res://Content/VFX/SoulSmoke/Textures/smoke_01.png"
+dest_files=["res://.godot/imported/smoke_01.png-6fc58c2d611a2ff3bfa1f90017f87983.ctex"]
 
 [params]
 

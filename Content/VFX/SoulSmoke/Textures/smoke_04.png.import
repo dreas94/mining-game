@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://78x6csrcb46r"
-path="res://.godot/imported/smoke_06.png-d989d6a0bce7dce126e3bbc3471b9e0f.ctex"
+uid="uid://elmtohac028v"
+path="res://.godot/imported/smoke_04.png-7e98b9f6f1c7106c45b83878cebf49b5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Smoke/smoke_06.png"
-dest_files=["res://.godot/imported/smoke_06.png-d989d6a0bce7dce126e3bbc3471b9e0f.ctex"]
+source_file="res://Content/VFX/SoulSmoke/Textures/smoke_04.png"
+dest_files=["res://.godot/imported/smoke_04.png-7e98b9f6f1c7106c45b83878cebf49b5.ctex"]
 
 [params]
 

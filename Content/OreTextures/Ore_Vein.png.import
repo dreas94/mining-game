@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drut4tscdaw57"
-path="res://.godot/imported/Ore1.png-c3f91a49a3c6638350a2c0a927fb71f7.ctex"
+uid="uid://bpnn57q4y537i"
+path="res://.godot/imported/Ore_Vein.png-26aa9de855049c04ea9b2e98488f2fff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Ore1.png"
-dest_files=["res://.godot/imported/Ore1.png-c3f91a49a3c6638350a2c0a927fb71f7.ctex"]
+source_file="res://Content/OreTextures/Ore_Vein.png"
+dest_files=["res://.godot/imported/Ore_Vein.png-26aa9de855049c04ea9b2e98488f2fff.ctex"]
 
 [params]
 

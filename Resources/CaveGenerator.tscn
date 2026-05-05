@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b4ihfksrbyg57"]
-
-[ext_resource type="Script" uid="uid://btmipfumpmqtj" path="res://Resources/CaveGenerator.gd" id="1_ams8q"]
-
-[node name="CaveGenerator" type="Node"]
-script = ExtResource("1_ams8q")
-world_seed = "ijdsnfguiohsduhbisdaf"

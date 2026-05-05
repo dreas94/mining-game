@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=4 uid="uid://jv4mdpuaynue"]
 
 [ext_resource type="Script" uid="uid://bwtgcepmcstem" path="res://Interface/Fluff/Background/Background.gd" id="1_a8bid"]
-[ext_resource type="TileSet" uid="uid://cvmpxeksqaf2m" path="res://Resources/Newer.tres" id="1_yu7m8"]
+[ext_resource type="TileSet" uid="uid://cvmpxeksqaf2m" path="res://Game/Mines/Tilemap.tres" id="1_yu7m8"]
 [ext_resource type="PackedScene" uid="uid://bmn6yod73w421" path="res://Interface/Fluff/Campfire/Campfire.tscn" id="2_a8bid"]
-[ext_resource type="Texture2D" uid="uid://cq254veb6dqms" path="res://Textures/Pickaxe.png" id="3_vedwu"]
-[ext_resource type="Texture2D" uid="uid://drjxkesrh35pn" path="res://Textures/Little Guy.png" id="4_bpf4x"]
+[ext_resource type="Texture2D" uid="uid://cq254veb6dqms" path="res://Game/Player/Textures/Pickaxe.png" id="3_vedwu"]
+[ext_resource type="Texture2D" uid="uid://drjxkesrh35pn" path="res://Game/Player/Textures/Little Guy.png" id="4_bpf4x"]
 
 [node name="Background" type="Node2D" node_paths=PackedStringArray("tile_map", "camp_fire", "canvas_modulate")]
 script = ExtResource("1_a8bid")

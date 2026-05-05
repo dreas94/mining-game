@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=4 uid="uid://ds6vr34b7lg2h"]
 
-[ext_resource type="TileSet" uid="uid://cvmpxeksqaf2m" path="res://Resources/Newer.tres" id="1_iiie7"]
+[ext_resource type="TileSet" uid="uid://cvmpxeksqaf2m" path="res://Game/Mines/Tilemap.tres" id="1_iiie7"]
 [ext_resource type="Script" uid="uid://ck8j0bjfd82s1" path="res://Game/Camp/Camp.gd" id="1_rghun"]
-[ext_resource type="Texture2D" uid="uid://bsvxvh0gbwp13" path="res://Textures/Arrow_Sign.png" id="2_rghun"]
+[ext_resource type="Texture2D" uid="uid://bsvxvh0gbwp13" path="res://Content/PropTextures/Arrow_Sign.png" id="2_rghun"]
 [ext_resource type="PackedScene" uid="uid://dsr0f5ealpe4e" path="res://Content/VFX/LightSource/LightSource.tscn" id="3_j8n86"]
 [ext_resource type="PackedScene" uid="uid://d1n3mkr81avxf" path="res://Game/Camp/Building/Building.tscn" id="4_q7mhv"]
-[ext_resource type="Texture2D" uid="uid://mfl1o2jyw7yq" path="res://Textures/Abandoned House.png" id="5_rghun"]
+[ext_resource type="Texture2D" uid="uid://mfl1o2jyw7yq" path="res://Content/PropTextures/Abandoned House.png" id="5_rghun"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iiie7"]
 size = Vector2(32, 32)
@@ -31,7 +31,7 @@ flip_h = true
 
 [node name="PointLight2D" parent="ArrowSignHole" instance=ExtResource("3_j8n86")]
 position = Vector2(0, -1)
-texture_scale = 0.269775
+texture_scale = 0.274209
 scale_range = 0.025
 base_scale = 0.25
 
@@ -44,7 +44,7 @@ texture = ExtResource("2_rghun")
 
 [node name="PointLight2D2" parent="ArrowSignHouse" instance=ExtResource("3_j8n86")]
 position = Vector2(0, -1)
-texture_scale = 0.258436
+texture_scale = 0.269201
 scale_range = 0.025
 base_scale = 0.25
 
@@ -66,6 +66,12 @@ position = Vector2(-107, -14.5)
 sprite_texture = ExtResource("5_rghun")
 polygon = PackedVector2Array(-21, -8, -21, 15, 21, 15, 21, -8, 9, -14, -9, -14)
 
+[node name="PointLight2D2" parent="AbandonedHouse" instance=ExtResource("3_j8n86")]
+position = Vector2(0, 9.5)
+texture_scale = 0.14757
+scale_range = 0.015
+base_scale = 0.15
+
 [node name="IdentityHouse" parent="." instance=ExtResource("4_q7mhv")]
 modulate = Color(0.324219, 0.324219, 0.324219, 1)
 position = Vector2(-299, -14.5)
@@ -74,6 +80,6 @@ polygon = PackedVector2Array(-21, -8, -21, 15, 21, 15, 21, -8, 9, -14, -9, -14)
 
 [node name="PointLight2D" parent="IdentityHouse" instance=ExtResource("3_j8n86")]
 position = Vector2(0, 9.5)
-texture_scale = 0.1628
+texture_scale = 0.145913
 scale_range = 0.015
 base_scale = 0.15

@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://dsr0f5ealpe4e"]
 
 [ext_resource type="Texture2D" uid="uid://cmbxsp1n0mov6" path="res://Content/VFX/Light/Light.tres" id="1_2b6k1"]
-[ext_resource type="Script" uid="uid://df23wi1not8cn" path="res://Resources/AnimatedPointLight2D.gd" id="1_bajuk"]
+[ext_resource type="Script" uid="uid://df23wi1not8cn" path="res://Content/VFX/AnimatedPointLight2D/AnimatedPointLight2D.gd" id="1_bajuk"]
 
 [node name="PointLight2D" type="PointLight2D"]
 shadow_filter = 2
 texture = ExtResource("1_2b6k1")
-texture_scale = 0.989257
+texture_scale = 1.08032
 script = ExtResource("1_bajuk")
 scale_range = 0.1

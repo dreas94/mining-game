@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://k021rad6hqqm"
-path="res://.godot/imported/smoke_03.png-150c8ac117f8668ca69e2eedc44ecfcd.ctex"
+uid="uid://coj62cas0dspx"
+path="res://.godot/imported/AutoTileV1.png-86833112e104aa362a7f08e328d6d7e4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Smoke/smoke_03.png"
-dest_files=["res://.godot/imported/smoke_03.png-150c8ac117f8668ca69e2eedc44ecfcd.ctex"]
+source_file="res://Game/Mines/Textures/AutoTileV1.png"
+dest_files=["res://.godot/imported/AutoTileV1.png-86833112e104aa362a7f08e328d6d7e4.ctex"]
 
 [params]
 

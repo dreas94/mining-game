@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://coj62cas0dspx"
-path="res://.godot/imported/AutoTileV1.png-b7beeb9fc84ac712b12d6ae42b2608ea.ctex"
+uid="uid://bsvxvh0gbwp13"
+path="res://.godot/imported/Arrow_Sign.png-b3e182adca7dcd41f86fc82e1f1c13ed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/AutoTileV1.png"
-dest_files=["res://.godot/imported/AutoTileV1.png-b7beeb9fc84ac712b12d6ae42b2608ea.ctex"]
+source_file="res://Content/PropTextures/Arrow_Sign.png"
+dest_files=["res://.godot/imported/Arrow_Sign.png-b3e182adca7dcd41f86fc82e1f1c13ed.ctex"]
 
 [params]
 

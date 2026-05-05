@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="TileTemplate" load_steps=4 format=3 uid="uid://degpd00i4ni5c"]
 
-[ext_resource type="Texture2D" uid="uid://bpnn57q4y537i" path="res://Textures/Ore_Vein.png" id="1_56l3b"]
+[ext_resource type="Texture2D" uid="uid://bpnn57q4y537i" path="res://Content/OreTextures/Ore_Vein.png" id="1_56l3b"]
 [ext_resource type="Resource" uid="uid://edgc1eayqcvw" path="res://Content/ItemTemplates/Ore1.tres" id="1_eg3ml"]
 [ext_resource type="Script" uid="uid://beghyqhtkssl1" path="res://Game/Tiles/TileTemplate.gd" id="2_56l3b"]
 

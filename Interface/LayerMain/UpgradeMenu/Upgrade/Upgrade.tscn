@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://btwucrs8x1cep"]
 
-[ext_resource type="Texture2D" uid="uid://kdl1xte7s72u" path="res://Textures/Ore2.png" id="1_bmebw"]
+[ext_resource type="Texture2D" uid="uid://kdl1xte7s72u" path="res://Content/ItemTextures/Ore2.png" id="1_bmebw"]
 [ext_resource type="Script" uid="uid://bqp6rmwcfhu3u" path="res://Interface/LayerMain/UpgradeMenu/Upgrade/Upgrade.gd" id="1_sxniy"]
 
 [node name="Upgrade" type="PanelContainer" node_paths=PackedStringArray("_cost_gauge", "_header_label", "_information_rich_text_label", "_upgrade_rich_text_label", "_cost_label", "_buy_button")]

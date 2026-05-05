@@ -1,11 +1,12 @@
 class_name TileInstance
-extends Node2D
+extends StaticBody2D
 
 var tile_visuals_scene: PackedScene = load("uid://2cdd1ob0n0k6")
 
 var tile_ref: WeakRef
 var tile_attributes: TileAttributes
 var tile_visuals: TileVisuals
+var collision_shape: CollisionShape2D
 
 
 func _init(_tile_attributes: TileAttributes) -> void:

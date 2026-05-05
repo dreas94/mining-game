@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cq254veb6dqms"
-path="res://.godot/imported/Pickaxe.png-00d26aaae309eabde7b089b4fd173a1c.ctex"
+uid="uid://drjxkesrh35pn"
+path="res://.godot/imported/Little Guy.png-2a824b6e9538baa5ba2ea0a54b0eb047.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Pickaxe.png"
-dest_files=["res://.godot/imported/Pickaxe.png-00d26aaae309eabde7b089b4fd173a1c.ctex"]
+source_file="res://Game/Player/Textures/Little Guy.png"
+dest_files=["res://.godot/imported/Little Guy.png-2a824b6e9538baa5ba2ea0a54b0eb047.ctex"]
 
 [params]
 

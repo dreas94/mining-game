@@ -6,7 +6,7 @@ var template: ItemTemplate
 var name: String = "unnamed card"
 
 # Values
-var graphic: Texture2DAttribute = Texture2DAttribute.new(preload("res://Textures/2.png"))
+var graphic: Texture2DAttribute = Texture2DAttribute.new(preload("res://2.png"))
 
 
 func _init(_item_template: ItemTemplate) -> void:
