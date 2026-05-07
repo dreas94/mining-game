@@ -17,5 +17,3 @@ texture = ExtResource("1_r4j1w")
 
 [node name="PointLight2D" parent="." instance=ExtResource("2_et48t")]
 enabled = false
-energy = 0.8937
-texture_scale = 0.925426

@@ -1,7 +1,20 @@
 @tool
 class_name AnimatedPointLight2D
-extends PointLight2D
+extends Node2D
 
+@export var _normal_light: PointLight2D
+@export var _shadow_light: PointLight2D
+
+@export var enabled: bool:
+	set(value):
+		if _normal_light == null:
+			return
+		if _shadow_light == null:
+			return
+		_normal_light.enabled = value
+		_shadow_light.enabled = value
+	get:
+		return _normal_light.enabled
 @export_category("Animation")
 @export var flicker_enabled: bool = false:
 	set(value):
@@ -17,9 +30,11 @@ extends PointLight2D
 		var delta: float = base_energy - value
 		base_energy = value
 		if flicker_enabled:
-			energy = energy - delta
+			_normal_light.energy = _normal_light.energy - delta
+			_shadow_light.energy = _normal_light.energy
 		else:
-			energy = base_energy
+			_normal_light.energy = base_energy
+			_shadow_light.energy = _normal_light.energy
 @export var scaler_enabled: bool = true:
 	set(value):
 		scaler_enabled = value
@@ -35,17 +50,33 @@ extends PointLight2D
 		var delta: float = base_scale - value
 		base_scale = value
 		if scaler_enabled:
-			texture_scale = texture_scale - delta
+			_normal_light.texture_scale = _normal_light.texture_scale - delta
+			_shadow_light.texture_scale = _shadow_light.texture_scale - delta
 		else:
-			texture_scale = base_scale
+			_normal_light.texture_scale = base_scale
+			_shadow_light.texture_scale = base_scale
+@export var range_layer_min: int:
+	set(value):
+		_normal_light.range_layer_min = range_layer_min
+		_shadow_light.range_layer_min = range_layer_min
+	get:
+		return _normal_light.range_layer_min
+@export var range_layer_max: int:
+	set(value):
+		_normal_light.range_layer_max = value
+		_shadow_light.range_layer_max = value
+	get:
+		return _normal_light.range_layer_max
 
 var _flicker_tween: Tween
 var _scale_tween: Tween
 
 
 func _ready() -> void:
-	energy = base_energy
-	texture_scale = base_scale
+	_normal_light.energy = base_energy
+	_normal_light.texture_scale = base_scale
+	_shadow_light.energy = _normal_light.energy
+	_shadow_light.texture_scale = base_scale
 	if flicker_enabled:
 		_start_flicker_tween()
 	
@@ -95,12 +126,14 @@ func _stop_flicker_tween() -> void:
 
 func _flicker() -> void:
 	var random_energy: float = randf_range(-flicker_range, flicker_range)
-	energy = base_energy + random_energy
+	_normal_light.energy = base_energy + random_energy
+	_shadow_light.energy = base_energy + random_energy
 
 
 func _scaler() -> void:
 	var random_scale: float = randf_range(-scale_range, scale_range)
-	texture_scale = base_scale + random_scale
+	_normal_light.texture_scale = base_scale + random_scale
+	_shadow_light.texture_scale = base_scale + random_scale
 
 
 func _exit_tree() -> void:

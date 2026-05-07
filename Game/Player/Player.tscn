@@ -973,6 +973,7 @@ size = Vector2(8, 9)
 radius = 20.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "camera", "ray_2d", "light") groups=["Player"]]
+light_mask = 3
 collision_layer = 2
 script = ExtResource("1_4672b")
 animation_tree = NodePath("AnimationTree")
@@ -1039,11 +1040,9 @@ parameters/PlayerStates/Walk/blend_position = 0
 parameters/TimeScale/scale = 1.0
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("RectangleShape2D_4672b")
 
 [node name="PickupArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 32
 input_pickable = false
@@ -1058,9 +1057,6 @@ gravity = 300.0
 shape = SubResource("CircleShape2D_o2hno")
 
 [node name="PointLight2D" parent="." instance=ExtResource("5_kt3un")]
-shadow_item_cull_mask = 0
-texture_scale = 1.00249
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-visible = false
 target_position = Vector2(0, 16)

@@ -3,9 +3,23 @@
 [ext_resource type="Texture2D" uid="uid://cmbxsp1n0mov6" path="res://Content/VFX/Light/Light.tres" id="1_2b6k1"]
 [ext_resource type="Script" uid="uid://df23wi1not8cn" path="res://Content/VFX/AnimatedPointLight2D/AnimatedPointLight2D.gd" id="1_bajuk"]
 
-[node name="PointLight2D" type="PointLight2D"]
-shadow_filter = 2
-texture = ExtResource("1_2b6k1")
-texture_scale = 1.08032
+[node name="LightSource" type="Node2D" node_paths=PackedStringArray("_normal_light", "_shadow_light")]
 script = ExtResource("1_bajuk")
+_normal_light = NodePath("NormalLight")
+_shadow_light = NodePath("ShadowLight")
+enabled = true
 scale_range = 0.1
+
+[node name="NormalLight" type="PointLight2D" parent="."]
+shadow_enabled = true
+shadow_filter_smooth = 1.0
+texture = ExtResource("1_2b6k1")
+texture_scale = 1.00294
+
+[node name="ShadowLight" type="PointLight2D" parent="."]
+light_mask = 2
+color = Color(1, 1, 1, 0.5)
+range_item_cull_mask = 2
+shadow_item_cull_mask = 2
+texture = ExtResource("1_2b6k1")
+texture_scale = 1.00294

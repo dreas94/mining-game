@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=4 uid="uid://jv4mdpuaynue"]
+[gd_scene load_steps=7 format=4 uid="uid://jv4mdpuaynue"]
 
 [ext_resource type="Script" uid="uid://bwtgcepmcstem" path="res://Interface/Fluff/Background/Background.gd" id="1_a8bid"]
 [ext_resource type="TileSet" uid="uid://cvmpxeksqaf2m" path="res://Game/Mines/Tilemap.tres" id="1_yu7m8"]
 [ext_resource type="PackedScene" uid="uid://bmn6yod73w421" path="res://Interface/Fluff/Campfire/Campfire.tscn" id="2_a8bid"]
 [ext_resource type="Texture2D" uid="uid://cq254veb6dqms" path="res://Game/Player/Textures/Pickaxe.png" id="3_vedwu"]
 [ext_resource type="Texture2D" uid="uid://drjxkesrh35pn" path="res://Game/Player/Textures/Little Guy.png" id="4_bpf4x"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_a8bid"]
+polygon = PackedVector2Array(-1, 0, 76, 34, 76, 1)
 
 [node name="Background" type="Node2D" node_paths=PackedStringArray("tile_map", "camp_fire", "canvas_modulate")]
 script = ExtResource("1_a8bid")
@@ -13,6 +16,7 @@ camp_fire = NodePath("Campfire")
 canvas_modulate = NodePath("CanvasModulate")
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="."]
+light_mask = 3
 z_index = -1
 texture_filter = 1
 scale = Vector2(5, 5)
@@ -44,3 +48,7 @@ frame = 5
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 light_mask = 2
 color = Color(0, 0, 0, 1)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(-39, 125)
+occluder = SubResource("OccluderPolygon2D_a8bid")
