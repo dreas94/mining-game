@@ -5,7 +5,7 @@ var owner: Node2D
 var state_stack: Array[PushDownAutomataState] = []
 
 
-func _push_state_to_stack(new_state: PushDownAutomataState) -> void:
+func push_state_to_stack(new_state: PushDownAutomataState) -> void:
 	new_state.pda = self
 	
 	state_stack.append(new_state)
@@ -13,7 +13,7 @@ func _push_state_to_stack(new_state: PushDownAutomataState) -> void:
 	new_state.on_state_pushed()
 
 
-func _pop_state_from_stack() -> void:
+func pop_state_from_stack() -> void:
 	if state_stack.is_empty():
 		return
 	var popped_state: PushDownAutomataState = state_stack.pop_back()
@@ -24,7 +24,7 @@ func _pop_state_from_stack() -> void:
 
 func clear_stack() -> void:
 	while not state_stack.is_empty():
-		_pop_state_from_stack()
+		pop_state_from_stack()
 
 
 func _physics_update(delta):

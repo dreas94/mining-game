@@ -1,7 +1,7 @@
 class_name PushDownAutomataState
 extends RefCounted
 
-var pda: RefCounted = null
+var pda: PushDownAutomataStateMachine = null
 
 
 # This is called when the stack has been initialized and added
@@ -29,8 +29,7 @@ func physics_process(_delta) -> void:
 
 # The following are convinience methods so that it is easier to 
 # push and pop the states within the stackable states.
-
-func push_state_to_stack( new_state:Node ) -> void:
+func push_state_to_stack(new_state: PushDownAutomataState) -> void:
 	pda.push_state_to_stack(new_state)
 
 
