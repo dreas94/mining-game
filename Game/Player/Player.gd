@@ -237,13 +237,6 @@ func _play_footstep() -> void:
 		App.sfx.play(DefaultSoundEffects.GRAVEL)
 
 
-func set_direction() -> void:
-	if move_direction > 0.0:
-		character_sprite.scale = Vector2(1.0, 1.0)
-	elif move_direction < 0.0:
-		character_sprite.scale = Vector2(-1.0, 1.0)
-
-
 func _on_current_health_changed(_previous: float, current: float) -> void:
 	light.base_scale = remap(current, 0.0, UpgradeConstants.HEALTH_BASE, 0.0, 0.5)
 
