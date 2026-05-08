@@ -1,10 +1,9 @@
-[gd_scene load_steps=47 format=3 uid="uid://cr7vr5ke2lgfn"]
+[gd_scene load_steps=25 format=3 uid="uid://cr7vr5ke2lgfn"]
 
 [ext_resource type="Script" uid="uid://bwd7weq3u2ywv" path="res://Game/Player/Player.gd" id="1_4672b"]
 [ext_resource type="Texture2D" uid="uid://drjxkesrh35pn" path="res://Game/Player/Textures/Little Guy.png" id="2_65y41"]
 [ext_resource type="PackedScene" uid="uid://d1hoesfdl604e" path="res://Content/VFX/SoulSmoke/SoulSmoke.tscn" id="3_o2hno"]
 [ext_resource type="Texture2D" uid="uid://cq254veb6dqms" path="res://Game/Player/Textures/Pickaxe.png" id="3_sfkwu"]
-[ext_resource type="AnimationNodeStateMachine" uid="uid://jt22eswvd8ck" path="res://Game/Player/PlayerStates.tres" id="4_1khw3"]
 [ext_resource type="PackedScene" uid="uid://dsr0f5ealpe4e" path="res://Content/VFX/LightSource/LightSource.tscn" id="5_kt3un"]
 
 [sub_resource type="Animation" id="Animation_kt3un"]
@@ -135,71 +134,6 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(4.5, 7)]
-}
-
-[sub_resource type="Animation" id="Animation_4672b"]
-resource_name = "Idle"
-length = 0.05
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Goblin:flip_h")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Goblin:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Goblin/Pickaxe:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-5.5, 5)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Goblin/Pickaxe:flip_h")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Goblin/Pickaxe:offset")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-2, -2)]
 }
 
 [sub_resource type="Animation" id="Animation_ee8ni"]
@@ -850,6 +784,71 @@ tracks/5/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_4672b"]
+resource_name = "Idle_Left"
+length = 0.05
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Goblin:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Goblin:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Goblin/Pickaxe:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-5.5, 5)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Goblin/Pickaxe:flip_h")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Goblin/Pickaxe:offset")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-2, -2)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kt3un"]
 _data = {
 &"Crouch_Left": SubResource("Animation_kt3un"),
@@ -870,113 +869,21 @@ _data = {
 &"Walk_Right": SubResource("Animation_1khw3")
 }
 
-[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_kt3un"]
-
-[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_kt3un"]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kt3un"]
-animation = &"Idle_Pickaxe_Left"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o2hno"]
-animation = &"Idle_Pickaxe_Right"
-
-[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_kt3un"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_kt3un")
-blend_point_0/pos = -1.0
-blend_point_1/node = SubResource("AnimationNodeAnimation_o2hno")
-blend_point_1/pos = 1.0
-blend_mode = 1
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_65y41"]
-animation = &"Swing_Pickaxe_Left"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sfkwu"]
-animation = &"Swing_Pickaxe_Right"
-
-[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_o2hno"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_65y41")
-blend_point_0/pos = -1.0
-blend_point_1/node = SubResource("AnimationNodeAnimation_sfkwu")
-blend_point_1/pos = 1.0
-blend_mode = 1
-
-[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_65y41"]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1khw3"]
-animation = &"Recover_Pickaxe"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_65y41"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1khw3"]
-advance_mode = 2
-advance_expression = "_current_pickaxe_state == PickaxeState.READY"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hf5e6"]
-advance_mode = 2
-advance_expression = "_current_pickaxe_state == PickaxeState.IDLE"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_e0asf"]
-advance_mode = 2
-advance_expression = "_current_pickaxe_state == PickaxeState.SWING"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q7ak8"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ee8ni"]
-advance_mode = 2
-advance_expression = "_current_pickaxe_state == PickaxeState.READY"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6upfr"]
-advance_mode = 2
-advance_expression = "_current_pickaxe_state == PickaxeState.IDLE"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kt3un"]
-advance_mode = 2
-advance_expression = "_current_pickaxe_state == PickaxeState.SWING"
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_kt3un"]
-states/Idle/node = SubResource("AnimationNodeBlendSpace1D_kt3un")
-states/Idle/position = Vector2(403, 100)
-states/Mining/node = SubResource("AnimationNodeBlendSpace1D_o2hno")
-states/Mining/position = Vector2(708, 100)
-states/Ready/node = SubResource("AnimationNodeBlendSpace1D_65y41")
-states/Ready/position = Vector2(550, -1)
-states/Recover_Pickaxe/node = SubResource("AnimationNodeAnimation_1khw3")
-states/Recover_Pickaxe/position = Vector2(555, 167)
-states/Start/position = Vector2(199, 100)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_65y41"), "Idle", "Ready", SubResource("AnimationNodeStateMachineTransition_1khw3"), "Ready", "Idle", SubResource("AnimationNodeStateMachineTransition_hf5e6"), "Ready", "Mining", SubResource("AnimationNodeStateMachineTransition_e0asf"), "Mining", "Recover_Pickaxe", SubResource("AnimationNodeStateMachineTransition_q7ak8"), "Recover_Pickaxe", "Ready", SubResource("AnimationNodeStateMachineTransition_ee8ni"), "Recover_Pickaxe", "Idle", SubResource("AnimationNodeStateMachineTransition_6upfr"), "Recover_Pickaxe", "Mining", SubResource("AnimationNodeStateMachineTransition_kt3un")]
-graph_offset = Vector2(7, 12)
-
-[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_1khw3"]
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_1khw3"]
-graph_offset = Vector2(-318.9, -478)
-nodes/Combine/node = SubResource("AnimationNodeAdd2_kt3un")
-nodes/Combine/position = Vector2(440, -180)
-nodes/Mining/node = SubResource("AnimationNodeStateMachine_kt3un")
-nodes/Mining/position = Vector2(-100, -260)
-"nodes/Mining Speed/node" = SubResource("AnimationNodeTimeScale_kt3un")
-"nodes/Mining Speed/position" = Vector2(200, -240)
-nodes/PlayerStates/node = ExtResource("4_1khw3")
-nodes/PlayerStates/position = Vector2(-160, 0)
-nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_1khw3")
-nodes/TimeScale/position = Vector2(180, 0)
-nodes/output/position = Vector2(640, -120)
-node_connections = [&"Combine", 0, &"Mining Speed", &"Combine", 1, &"TimeScale", &"Mining Speed", 0, &"Mining", &"TimeScale", 0, &"PlayerStates", &"output", 0, &"Combine"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4672b"]
 size = Vector2(8, 9)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o2hno"]
 radius = 20.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "camera", "ray_2d", "light") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "camera", "ray_2d", "light") groups=["Player"]]
 light_mask = 3
 collision_layer = 2
 script = ExtResource("1_4672b")
-animation_tree = NodePath("AnimationTree")
+speed = null
+acceleration = null
+gravity = null
+mining_speed = null
+animation_player = NodePath("AnimationPlayer")
 camera = NodePath("Camera2D")
 ray_2d = NodePath("RayCast2D")
 light = NodePath("PointLight2D")
@@ -1001,6 +908,7 @@ zoom = Vector2(5, 5)
 
 [node name="Goblin" type="Sprite2D" parent="."]
 self_modulate = Color(0.0588235, 0.662745, 0.184314, 1)
+light_mask = 2
 texture_filter = 1
 position = Vector2(0, -3.5)
 texture = ExtResource("2_65y41")
@@ -1008,6 +916,7 @@ hframes = 6
 
 [node name="Pickaxe" type="Sprite2D" parent="Goblin"]
 modulate = Color(0.415686, 0.415686, 0.415686, 1)
+light_mask = 2
 texture_filter = 1
 position = Vector2(5.5, 5)
 scale = Vector2(0.75, 0.75)
@@ -1021,23 +930,6 @@ visible = false
 libraries = {
 &"": SubResource("AnimationLibrary_kt3un")
 }
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-active = false
-tree_root = SubResource("AnimationNodeBlendTree_1khw3")
-advance_expression_base_node = NodePath("..")
-anim_player = NodePath("../AnimationPlayer")
-parameters/Combine/add_amount = 1.0
-parameters/Mining/Idle/blend_position = 0
-parameters/Mining/Mining/blend_position = 0.232558
-parameters/Mining/Ready/blend_position = 0
-"parameters/Mining Speed/scale" = 1.0
-parameters/PlayerStates/Crouch/blend_position = 0.0
-parameters/PlayerStates/Down/blend_position = 0
-parameters/PlayerStates/Idle/blend_position = -0.000856876
-parameters/PlayerStates/Up/blend_position = 0.275064
-parameters/PlayerStates/Walk/blend_position = 0
-parameters/TimeScale/scale = 1.0
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_4672b")
