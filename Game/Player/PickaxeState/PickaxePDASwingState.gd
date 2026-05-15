@@ -11,7 +11,7 @@ func _init(rid: RID) -> void:
 
 
 func on_state_pushed() -> void:
-	_tween_time /= UpgradeCollection.calculate_upgrades(UpgradeConstants.TYPE.MINING_SPEED)
+	_tween_time /= pda.owner.mining_speed
 	_start_tween()
 
 
@@ -55,6 +55,6 @@ func _start_tween() -> void:
 
 func _attempt_to_mine_by_rid(rid_to_mine: RID) -> void:
 	Health.sub_health(randf_range(1.0, 5.0))
-	var damage: float = UpgradeCollection.calculate_upgrades(UpgradeConstants.TYPE.DAMAGE)
+	var damage: float = pda.owner.mining_power
 	pda.owner.mine_attempt_by_rid.emit(damage, rid_to_mine)
 	

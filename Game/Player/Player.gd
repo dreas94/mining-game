@@ -21,11 +21,57 @@ var last_tile_grid_pos_ray_casted: Vector2i = Vector2i.MAX
 var previous_move_direction: float = 0.0
 var move_direction: float = 1.0
 
+## Stats
+var mining_power: float:
+	get():
+		var mining_power_addition: float = 0.0
+		var mining_power_mult: float = 0.0
+		for upgrade_id: String in UpgradeCollection.get_upgrades():
+			var template: UpgradeTemplate = Content.get_upgrade_template(upgrade_id)
+			mining_power_addition += template.mining_power
+		for upgrade_id: String in UpgradeCollection.get_upgrades():
+			var template: UpgradeTemplate = Content.get_upgrade_template(upgrade_id)
+			mining_power_mult += template.mining_power_mult
+		return (25.0 + mining_power_addition) * (1.0 + mining_power_mult)
+var mining_speed: float:
+	get():
+		var mining_speed_addition: float = 0.0
+		var mining_speed_mult: float = 0.0
+		for upgrade_id: String in UpgradeCollection.get_upgrades():
+			var template: UpgradeTemplate = Content.get_upgrade_template(upgrade_id)
+			mining_speed_addition += template.mining_speed
+		for upgrade_id: String in UpgradeCollection.get_upgrades():
+			var template: UpgradeTemplate = Content.get_upgrade_template(upgrade_id)
+			mining_speed_mult += template.mining_speed_mult
+		return (1.0 + mining_speed_addition) * (1.0 + mining_speed_mult)
+var durability: float:
+	get():
+		var durability_addition: float = 0.0
+		var durability_mult: float = 0.0
+		for upgrade_id: String in UpgradeCollection.get_upgrades():
+			var template: UpgradeTemplate = Content.get_upgrade_template(upgrade_id)
+			durability_addition += template.durability
+		for upgrade_id: String in UpgradeCollection.get_upgrades():
+			var template: UpgradeTemplate = Content.get_upgrade_template(upgrade_id)
+			durability_mult += template.durability_mult
+		return durability_addition * (1.0 + durability_mult)
+var jump_height: float:
+	get():
+		var jump_height_addition: float = 0.0
+		var jump_height_mult: float = 0.0
+		for upgrade_id: String in UpgradeCollection.get_upgrades():
+			var template: UpgradeTemplate = Content.get_upgrade_template(upgrade_id)
+			jump_height_addition += template.jump_height
+		for upgrade_id: String in UpgradeCollection.get_upgrades():
+			var template: UpgradeTemplate = Content.get_upgrade_template(upgrade_id)
+			jump_height_mult += template.jump_height_mult
+		return -(200.0 + jump_height_addition) * (1.0 + jump_height_mult)
+
 
 func _ready() -> void:
 	_pda.push_state_to_stack(PlayerPDAIdleState.new())
 	_pickaxe_pda.push_state_to_stack(PickaxePDAIdleState.new())
-	light.base_scale = remap(Health.current, 0.0, UpgradeConstants.HEALTH_BASE, 0.0, 0.5)
+	light.base_scale = remap(Health.current, 0.0, Health.INITIAL, 0.0, 0.5)
 	
 	Health.current_changed.connect(_on_current_health_changed)
 	alive.changed.connect(_on_alive_changed)
@@ -67,13 +113,14 @@ func _play_footstep() -> void:
 
 
 func _on_current_health_changed(_previous: float, current: float) -> void:
-	light.base_scale = remap(current, 0.0, UpgradeConstants.HEALTH_BASE, 0.0, 0.5)
+	light.base_scale = remap(current, 0.0, Health.INITIAL, 0.0, 0.5)
 
 
 func _on_alive_changed(current: bool, _previous: bool) -> void:
 	if current == true:
 		return
 	_pda.clear_stack()
+	_pickaxe_pda.clear_stack()
 
 
 func _handle_ray_cast() -> void:

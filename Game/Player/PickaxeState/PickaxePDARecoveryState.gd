@@ -6,7 +6,7 @@ var _tween_time: float = 1.0
 var _tween: Tween
 
 func on_state_pushed() -> void:
-	_tween_time /= UpgradeCollection.calculate_upgrades(UpgradeConstants.TYPE.MINING_SPEED)
+	_tween_time /= pda.owner.mining_speed
 	_start_tween()
 
 

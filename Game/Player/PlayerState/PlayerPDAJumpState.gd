@@ -3,7 +3,7 @@ extends PlayerPDAState
 
 
 func on_state_pushed() -> void:
-	pda.owner.velocity.y = UpgradeCollection.calculate_upgrades(UpgradeConstants.TYPE.JUMP_HEIGHT)
+	pda.owner.velocity.y = pda.owner.jump_height
 	App.sfx.play(DefaultSoundEffects.JUMP)
 
 

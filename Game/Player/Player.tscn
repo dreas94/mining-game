@@ -446,6 +446,16 @@ position = Vector2(0, -3.5)
 texture = ExtResource("2_65y41")
 hframes = 6
 
+[node name="Face" type="Sprite2D" parent="Goblin"]
+
+[node name="Torso" type="Sprite2D" parent="Goblin"]
+
+[node name="ArmRight" type="Sprite2D" parent="Goblin"]
+
+[node name="ArmLeft" type="Sprite2D" parent="Goblin"]
+
+[node name="Legs" type="Sprite2D" parent="Goblin"]
+
 [node name="Pickaxe" type="Sprite2D" parent="Goblin"]
 modulate = Color(0.415686, 0.415686, 0.415686, 1)
 light_mask = 2

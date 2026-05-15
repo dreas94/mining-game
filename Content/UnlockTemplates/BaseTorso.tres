@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UnlockTemplate" load_steps=3 format=3 uid="uid://du1q7aaebabnh"]
+
+[ext_resource type="Script" uid="uid://b32dd5ll3d8gm" path="res://Game/Unlocks/UnlockTemplate.gd" id="1_6crgf"]
+[ext_resource type="Texture2D" uid="uid://86nj8vqd82sj" path="res://Content/ItemTextures/Ore0.png" id="2_gg7ks"]
+
+[resource]
+script = ExtResource("1_6crgf")
+texture = ExtResource("2_gg7ks")
+mining_power = 0.0
+mining_speed = 0.0
+health = 0.0
+durability = 0.0
+jump_height = 0.0
+metadata/_custom_type_script = "uid://b32dd5ll3d8gm"

@@ -15,19 +15,18 @@ extends Resource
 		return largest_num
 @export var cost_id: Array[String] = []
 @export var cost_value: Array[int] = []
-@export_category("Upgrade")
-@export var number_of_upgrade: int:
-	get():
-		var largest_num: int = 0
-		for num: int in [upgrade_type.size(), upgrade_value_type.size(), upgrade_value.size()]:
-			if largest_num != 0 and largest_num <= num:
-				continue
-			largest_num = num
-		return largest_num
-@export var upgrade_type: Array[UpgradeConstants.TYPE] = []
-@export var upgrade_value_type: Array[UpgradeConstants.VALUE_TYPE] = []
-@export var upgrade_value: Array[float] = []
-
+@export_category("Added Stats")
+@export var mining_power: float = 0.0
+@export var mining_speed: float = 0.0
+@export var health: float = 0.0
+@export var durability: float = 0.0
+@export var jump_height: float = 0.0
+@export_category("Multiplied Stats")
+@export var mining_power_mult: float = 0.0
+@export var mining_speed_mult: float = 0.0
+@export var health_mult: float = 0.0
+@export var durability_mult: float = 0.0
+@export var jump_height_mult: float = 0.0
 
 func get_file_name() -> String:
 	return resource_path.get_file().get_basename()

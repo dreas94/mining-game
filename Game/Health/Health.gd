@@ -8,16 +8,20 @@ const INITIAL: float = 100.0
 var current: float:
 	get(): return _current
 var maximum: float:
-	get(): return _maximum
+	get():
+		var health_addition: float = 0.0
+		var health_mult: float = 0.0
+		for upgrade_id: String in UpgradeCollection.get_upgrades():
+			var template: UpgradeTemplate = Content.get_upgrade_template(upgrade_id)
+			health_addition += template.health
+		for upgrade_id: String in UpgradeCollection.get_upgrades():
+			var template: UpgradeTemplate = Content.get_upgrade_template(upgrade_id)
+			health_mult += template.health_mult
+		return (INITIAL + health_addition) * (1.0 + health_mult)
 # used to change how much of current health is 
 # recovered when one lose maximum health
 var _current: float = INITIAL
 var _maximum: float = INITIAL
-
-
-func _ready() -> void:
-	UpgradeCollection.upgrade_added.connect(_update_health_maximum)
-	UpgradeCollection.upgrade_removed.connect(_update_health_maximum)
 
 
 func add_health(ammount: float) -> void:
@@ -53,7 +57,3 @@ func reset_health(ammount: float = INITIAL) -> void:
 	_maximum = ammount
 	_current = clamp_health(ammount)
 	reset.emit(ammount)
-
-
-func _update_health_maximum(_upgrade_id: String, _upgrade: Upgrade) -> void:
-	reset_health(UpgradeCollection.calculate_upgrades(UpgradeConstants.TYPE.HEALTH))

@@ -3,7 +3,7 @@ extends PickaxePDAState
 var move_toward_scale: float = 200.0
 
 func on_state_pushed() -> void:
-	move_toward_scale *= UpgradeCollection.calculate_upgrades(UpgradeConstants.TYPE.MINING_SPEED)
+	move_toward_scale *= pda.owner.mining_speed
 
 
 func physics_process(delta: float) -> void:

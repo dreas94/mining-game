@@ -10,8 +10,3 @@ enum TYPE {
 		JUMP_HEIGHT}
 
 enum VALUE_TYPE {GENERIC, PERCENTAGE}
-
-const MINING_SPEED_SCALE_BASE: float = 1.0
-const DAMAGE_BASE: float = 25.0
-const HEALTH_BASE: float = 100.0
-const JUMP_HEIGHT_BASE: float = 200.0

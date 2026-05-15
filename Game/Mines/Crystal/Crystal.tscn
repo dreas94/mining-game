@@ -17,7 +17,6 @@ self_modulate = Color(0.546875, 1, 0.98938, 1)
 texture = ExtResource("1_wmyqt")
 
 [node name="PointLight2D" parent="." instance=ExtResource("2_43jxx")]
-texture_scale = 0.202379
 scale_range = 0.02
 base_scale = 0.2
 
