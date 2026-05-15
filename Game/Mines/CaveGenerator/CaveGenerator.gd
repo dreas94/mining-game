@@ -47,5 +47,5 @@ func generate(new_tile_map: BreakableTileMapLayer):
 				var noise_val: float = simplex_noise.get_noise_2d(x, y)
 				if noise_val > 0.2 and noise_val < 0.3:
 					new_tile_map.create_cell_data(Vector2i(x,y), load("uid://degpd00i4ni5c"))
-				elif noise_val > 0.1:
+				elif noise_val > 0.05:
 					new_tile_map.create_cell_data(Vector2i(x,y), load("uid://dnloess7co135"))

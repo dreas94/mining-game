@@ -48,7 +48,7 @@ func _start_tween() -> void:
 	_tween.tween_property(pda.owner.pickaxe_sprite, "rotation_degrees", 0, 1.5).from(25.0)
 
 
-func physics_process(delta: float) -> void:
+func physics_process(_delta: float) -> void:
 	_handle_input()
 
 

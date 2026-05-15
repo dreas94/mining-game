@@ -10,6 +10,7 @@ func _ready() -> void:
 	visible = false
 	Game.state.changed.connect(_on_game_state_changed)
 	Health.current_changed.connect(_on_current_health_changed)
+	UpgradeCollection.upgrade_added.connect(_on_upgrade_added)
 	health_bar.max_value = Health.maximum
 	health_bar.value = Health.current
 	damage_bar.max_value = Health.maximum
@@ -43,3 +44,11 @@ func _on_current_health_changed(_previous: float, current: float) -> void:
 
 func update_label() -> void:
 	label.text = str("%0.2f" % Health.current)
+
+
+func _on_upgrade_added(upgrade_id: String) -> void:
+	health_bar.max_value = Health.maximum
+	health_bar.value = Health.current
+	damage_bar.max_value = Health.maximum
+	damage_bar.value = Health.current
+	update_label()

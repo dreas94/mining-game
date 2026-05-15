@@ -9,11 +9,10 @@ texture_filter = 2
 script = ExtResource("1_w5vc3")
 light_energy = 1.0
 light_scale = 1.0
-_light_source = NodePath("PointLight2D")
+_light_source = NodePath("LightSource")
 
 [node name="Texture2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("1_r4j1w")
 
-[node name="PointLight2D" parent="." instance=ExtResource("2_et48t")]
-enabled = false
+[node name="LightSource" parent="." instance=ExtResource("2_et48t")]

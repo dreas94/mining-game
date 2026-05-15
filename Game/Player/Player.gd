@@ -9,9 +9,9 @@ signal mine_attempt_by_rid(damage: int, rid: RID)
 @export var camera: Camera2D
 @export var ray_2d: RayCast2D
 @export var light: AnimatedPointLight2D
-@export var speed: float = 100.0
-@export var acceleration: float = 100.0
-@export var deacceleration: float = acceleration * 4.0
+@export var speed: float = 50.0
+@export var acceleration: float = 400.0
+@export var deacceleration: float = acceleration
 @export var gravity: float = 400.0
 
 var _pickaxe_pda: PickaxePDA = PickaxePDA.new(self)

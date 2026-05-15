@@ -52,7 +52,7 @@ func _disabled() -> void:
 	breakable_tile_map_layer.clear_tilemaps()
 	player.mine_attempt_by_rid.disconnect(_attempt_to_clear_cell)
 	player.queue_free()
-	Health.reset_health()
+	Health.reset_health(Health.maximum)
 
 
 func _attempt_to_clear_cell(damage: int, rid: RID):

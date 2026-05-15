@@ -40,7 +40,7 @@ func _on_item_count_altered_in_item_collection(item_id: String, _new_quantity: i
 	if not item_id in template.cost_id:
 		return
 	
-	var new_total_value: int = 0
+	var new_total_value: int = 0.0
 	var first: bool = true
 	
 	for index: int in range(template.cost_id.size()):
@@ -50,7 +50,7 @@ func _on_item_count_altered_in_item_collection(item_id: String, _new_quantity: i
 		var cost: int = template.cost_value[index]
 		var quantity: int = ItemCollection.get_number_of_items_by_id(id)
 		var new_value: float = _cost_gauge.max_value - quantity
-		new_total_value = clampf(new_value, 0.0, float(cost))
+		new_total_value = clamp(new_value, 0.0, cost)
 		_cost_label.text = Content.get_item_template(id).item_name + ": " + str(quantity) + " / " + str(cost)
 	
 	_cost_gauge.value = new_total_value

@@ -2,7 +2,7 @@ class_name PickaxePDARecoveryState
 extends PickaxePDAState
 var _original_color: Color = Color(0.635, 0.161, 0.0)
 var _final_color: Color = Color(0.416, 0.416, 0.416)
-var _tween_time: float = 1.0
+var _tween_time: float = 0.1
 var _tween: Tween
 
 func on_state_pushed() -> void:

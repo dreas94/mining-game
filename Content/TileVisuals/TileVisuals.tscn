@@ -16,6 +16,7 @@ light_mask = 2
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
+light_mask = 2
 material = ExtResource("2_7ab37")
 anchors_preset = 8
 anchor_left = 0.5

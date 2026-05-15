@@ -20,8 +20,8 @@ func physics_process(delta: float) -> void:
 	var speed: float = pda.owner.speed
 	
 	if Input.is_action_pressed("run"):
-		pda.owner.velocity.x = move_toward(velocity_x, speed * move_direction, acceleration * delta)
+		pda.owner.velocity.x = move_toward(velocity_x, 2.0 * speed * move_direction, 2.0 * acceleration * delta)
 	else:
-		pda.owner.velocity.x = move_toward(velocity_x, 0.5 * speed * move_direction, acceleration * delta)
+		pda.owner.velocity.x = move_toward(velocity_x, speed * move_direction, acceleration * delta)
 	
 	super(delta)
