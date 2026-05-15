@@ -1,2 +1,2 @@
-class_name PlayerPDAState
+class_name PickaxePDAState
 extends PushDownAutomataState

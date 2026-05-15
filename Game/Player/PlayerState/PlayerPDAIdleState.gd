@@ -1,16 +1,13 @@
 class_name PlayerPDAIdleState
-extends PushDownAutomataState
-var _tween: Tween
+extends PlayerPDAState
 
 
 func on_state_pushed() -> void:
 	pda.owner.animation_player.play("Idle")
-	_start_tween()
 
 
 func on_state_reactivated() -> void:
 	pda.owner.animation_player.play("Idle")
-	_start_tween()
 
 
 func physics_process(delta) -> void:
@@ -25,12 +22,4 @@ func physics_process(delta) -> void:
 	var deacceleration: float = pda.owner.deacceleration
 	
 	pda.owner.velocity.x = move_toward(velocity_x, 0.0, deacceleration * delta)
-
-
-func _start_tween() -> void:
-	if _tween == null:
-		_tween = pda.owner.create_tween()
-		_tween.set_ease(Tween.EASE_IN_OUT)
-		_tween.set_loops()
-		_tween.tween_property(pda.owner.pickaxe_sprite, "rotation_degrees", 25.0, 1.5).from(0.0)
-		_tween.tween_property(pda.owner.pickaxe_sprite, "rotation_degrees", 0, 1.5).from(25.0)
+	super(delta)

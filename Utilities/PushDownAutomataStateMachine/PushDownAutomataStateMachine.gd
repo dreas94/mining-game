@@ -6,6 +6,9 @@ var state_stack: Array[PushDownAutomataState] = []
 
 
 func push_state_to_stack(new_state: PushDownAutomataState) -> void:
+	if not state_stack.is_empty():
+		state_stack[-1].on_state_deactivated()
+	
 	new_state.pda = self
 	
 	state_stack.append(new_state)

@@ -1,5 +1,5 @@
 class_name PlayerPDAWalkState
-extends PushDownAutomataState
+extends PlayerPDAState
 
 
 func on_state_pushed() -> void:
@@ -35,3 +35,5 @@ func physics_process(delta: float) -> void:
 		pda.owner.velocity.x = move_toward(velocity_x, speed * move_direction, acceleration * delta)
 	else:
 		pda.owner.velocity.x = move_toward(velocity_x, 0.5 * speed * move_direction, acceleration * delta)
+	
+	super(delta)

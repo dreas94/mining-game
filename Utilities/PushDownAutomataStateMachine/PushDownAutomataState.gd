@@ -22,6 +22,12 @@ func on_state_reactivated() -> void:
 	pass
 
 
+# This is called when the state on top of this state has just
+# been pushed.
+func on_state_deactivated() -> void:
+	pass
+
+
 # This is ticked every physics frame, going from the state
 # at the bottom of the stack towards the one on top.
 func physics_process(_delta) -> void:

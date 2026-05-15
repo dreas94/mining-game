@@ -1,5 +1,6 @@
 class_name iPlayer
 extends CharacterBody2D
+@warning_ignore("unused_signal")
 signal mine_attempt_by_rid(damage: int, rid: RID)
 
 @export var animation_player: AnimationPlayer
@@ -12,26 +13,18 @@ signal mine_attempt_by_rid(damage: int, rid: RID)
 @export var acceleration: float = 100.0
 @export var deacceleration: float = acceleration * 4.0
 @export var gravity: float = 400.0
-@export var mining_speed: float = 1.0#:
-	#set(value):
-		#if animation_tree != null:
-			#animation_tree.set("parameters/Mining Speed/scale", value)
-	#get:
-		#if animation_tree == null:
-			#return 1
-		#return animation_tree.get("parameters/Mining Speed/scale")
-enum PickaxeState {IDLE, READY, SWING, RECOVER}
-var _current_pickaxe_state: PickaxeState = PickaxeState.IDLE
+
+var _pickaxe_pda: PickaxePDA = PickaxePDA.new(self)
 var _pda: PlayerPDA = PlayerPDA.new(self)
 var alive: BoolAttribute = BoolAttribute.new(true)
-var _grid_position: Vector2i
+var last_tile_grid_pos_ray_casted: Vector2i = Vector2i.MAX
 var previous_move_direction: float = 0.0
 var move_direction: float = 1.0
-var _last_tile_grid_pos_ray_casted: Vector2i = Vector2i.MAX
 
 
 func _ready() -> void:
 	_pda.push_state_to_stack(PlayerPDAIdleState.new())
+	_pickaxe_pda.push_state_to_stack(PickaxePDAIdleState.new())
 	light.base_scale = remap(Health.current, 0.0, UpgradeConstants.HEALTH_BASE, 0.0, 0.5)
 	
 	Health.current_changed.connect(_on_current_health_changed)
@@ -41,99 +34,14 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if alive.value == false:
 		return
-	_grid_position = Mines.breakable_tile_map_layer.translate_to_grid_positon(global_position)
+	
 	if previous_move_direction != move_direction:
 		previous_move_direction = move_direction
 		
 	move_direction = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
-	
 	_handle_ray_cast()
-	_handle_collision()
-	_handle_input(delta)
-	_update_movement(delta)
-	
 	_pda.physics_update(delta)
-	
-	move_and_slide()
-
-
-func _recover_pickaxe() -> void:
-	if Input.is_action_pressed("mouse_left"):
-		_current_pickaxe_state = PickaxeState.READY
-	else:
-		_current_pickaxe_state = PickaxeState.IDLE
-
-
-func _enter_pickaxe_recovery() -> void:
-	_current_pickaxe_state = PickaxeState.RECOVER
-
-
-func _attempt_to_mine_by_rid(rid_to_mine: RID) -> void:
-	Health.sub_health(randf_range(1.0, 5.0))
-	_current_pickaxe_state = PickaxeState.SWING
-	var damage: float = UpgradeCollection.calculate_upgrades(UpgradeConstants.TYPE.DAMAGE)
-	mine_attempt_by_rid.emit(damage, rid_to_mine)
-	print("Pickaxe struck")
-
-
-func _handle_ray_cast() -> void:
-	if Game.state.active_state is GameStateCamp:
-		return
-	var previous_tile: Tile = Mines.tile_handler.get_tile_in_grid_position(_last_tile_grid_pos_ray_casted)
-	if not ray_2d.is_colliding():
-		if previous_tile == null:
-			return
-		previous_tile.tile_attributes.is_moused.value = false
-		_last_tile_grid_pos_ray_casted =  Vector2i.MAX
-		return
-	
-	if _current_pickaxe_state == PickaxeState.SWING:
-		return
-	
-	var tile: Tile = Mines.tile_handler.get_tile_based_on_rid(ray_2d.get_collider_rid())
-	
-	if tile == null:
-		return
-	
-	if previous_tile == tile:
-		return
-	
-	tile.tile_attributes.is_moused.value = true
-	_last_tile_grid_pos_ray_casted =  Mines.tile_handler.get_grid_position_of_tile(tile)
-	
-	if previous_tile == null:
-		return
-		
-	previous_tile.tile_attributes.is_moused.value = false
-	_last_tile_grid_pos_ray_casted = Mines.tile_handler.get_grid_position_of_tile(tile)
-	
-
-
-func _handle_collision() -> void:
-	if not ray_2d.is_colliding():
-		return
-	
-	if _current_pickaxe_state != PickaxeState.READY:
-		return
-	
-	_attempt_to_mine_by_rid(ray_2d.get_collider_rid())
-
-
-func _handle_input(delta: float) -> void:
-	if Game.state.active_state is GameStateMines:
-		match _current_pickaxe_state:
-			PickaxeState.IDLE when Input.is_action_pressed("mouse_left"):
-				_current_pickaxe_state = PickaxeState.READY
-			PickaxeState.READY when not Input.is_action_pressed("mouse_left"):
-				_current_pickaxe_state = PickaxeState.IDLE
-
-
-func _update_movement(delta: float) -> void:
-	#Gravity
-	if is_on_floor():
-		return
-	
-	velocity.y += gravity * delta
+	_pickaxe_pda.physics_update(delta)
 
 
 func _input(event: InputEvent) -> void:
@@ -165,10 +73,37 @@ func _on_current_health_changed(_previous: float, current: float) -> void:
 func _on_alive_changed(current: bool, _previous: bool) -> void:
 	if current == true:
 		return
-	var tile: Tile = Mines.tile_handler.get_tile_in_grid_position(_last_tile_grid_pos_ray_casted)
+	_pda.clear_stack()
+
+
+func _handle_ray_cast() -> void:
+	if Game.state.active_state is GameStateCamp:
+		return
+	
+	if _pickaxe_pda.state_stack[-1] is PickaxePDASwingState:
+		return
+	
+	var previous_tile: Tile = Mines.tile_handler.get_tile_in_grid_position(last_tile_grid_pos_ray_casted)
+	if not ray_2d.is_colliding():
+		if previous_tile == null:
+			return
+		previous_tile.tile_attributes.is_moused.value = false
+		last_tile_grid_pos_ray_casted =  Vector2i.MAX
+		return
+	
+	var tile: Tile = Mines.tile_handler.get_tile_based_on_rid(ray_2d.get_collider_rid())
+	
 	if tile == null:
 		return
 	
-	_pda.clear_stack()
+	if previous_tile == tile:
+		return
 	
-	tile.tile_attributes.is_moused.value = false
+	tile.tile_attributes.is_moused.value = true
+	last_tile_grid_pos_ray_casted =  Mines.tile_handler.get_grid_position_of_tile(tile)
+	
+	if previous_tile == null:
+		return
+		
+	previous_tile.tile_attributes.is_moused.value = false
+	last_tile_grid_pos_ray_casted = Mines.tile_handler.get_grid_position_of_tile(tile)
