@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=60 format=3 uid="uid://cvmpxeksqaf2m"]
+[gd_resource type="TileSet" format=3 uid="uid://cvmpxeksqaf2m"]
 
 [ext_resource type="Texture2D" uid="uid://coj62cas0dspx" path="res://Game/Mines/Textures/AutoTileV1.png" id="1_rrhwo"]
 

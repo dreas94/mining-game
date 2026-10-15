@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://chukukeygswrx"]
+[gd_scene format=3 uid="uid://chukukeygswrx"]
 
 [sub_resource type="Gradient" id="Gradient_cddov"]
 
@@ -21,28 +21,28 @@ fill_to = Vector2(0.5, 1)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ljv1u"]
 polygon = PackedVector2Array(157, 60, 74, 242, 172, 286, 290, 153)
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" unique_id=796194506]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=325417863]
 position = Vector2(526.5, 444)
 scale = Vector2(17.4531, 14.875)
 texture = SubResource("GradientTexture2D_ufa1q")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=536898840]
 color = Color(0.254782, 0.213409, 0.289063, 1)
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1962553002]
 position = Vector2(545, 520)
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_y6vf6")
 texture_scale = 4.0
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Node2D" type="Node2D" parent="." unique_id=1359675834]
 position = Vector2(208, 233)
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Node2D" unique_id=1540084316]
 occluder = SubResource("OccluderPolygon2D_ljv1u")
 
-[node name="Polygon2D" type="Polygon2D" parent="Node2D"]
+[node name="Polygon2D" type="Polygon2D" parent="Node2D" unique_id=1720882907]
 color = Color(1, 0, 0, 1)
 polygon = PackedVector2Array(157, 60, 74, 242, 172, 286, 290, 153)

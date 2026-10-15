@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="UpgradeTemplate" load_steps=2 format=3 uid="uid://bddun1lawxmnh"]
+[gd_resource type="Resource" script_class="UpgradeTemplate" format=3 uid="uid://bddun1lawxmnh"]
 
 [ext_resource type="Script" uid="uid://50pdk8k77qee" path="res://Game/Upgrades/UpgradeTemplate.gd" id="1_fcdc8"]
 
@@ -9,14 +9,5 @@ information = "You remember having a greater ability to recover, able to swing y
 number_of_costs = 1
 cost_id = Array[String](["Ore1"])
 cost_value = Array[int]([6])
-mining_power = 0.0
 mining_speed = 0.2
-health = 0.0
-durability = 0.0
-jump_height = 0.0
-mining_power_mult = 0.0
-mining_speed_mult = 0.0
-health_mult = 0.0
-durability_mult = 0.0
-jump_height_mult = 0.0
 metadata/_custom_type_script = "uid://50pdk8k77qee"

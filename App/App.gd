@@ -24,7 +24,7 @@ var is_paused: bool:
 
 @warning_ignore("untyped_declaration")
 func _set_readonly(_value) -> void:
-	Logger.error(self, _set_readonly, "This property can not be set outside initalization.")
+	CustomLogger.error(self, _set_readonly, "This property can not be set outside initalization.")
 
 
 func _ready() -> void:

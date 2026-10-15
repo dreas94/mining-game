@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqrfecj2jytt6"]
+[gd_scene format=3 uid="uid://cqrfecj2jytt6"]
 
 [ext_resource type="Script" uid="uid://b83q7lcqucams" path="res://Utilities/ScreenTransitions/FadeTransition/FadeTransition.gd" id="1_xa4g8"]
 
-[node name="FadeTransition" type="Control" node_paths=PackedStringArray("color_rect")]
+[node name="FadeTransition" type="Control" unique_id=1545202061 node_paths=PackedStringArray("color_rect")]
 visible = false
 top_level = true
 layout_mode = 3
@@ -16,7 +16,7 @@ size_flags_vertical = 3
 script = ExtResource("1_xa4g8")
 color_rect = NodePath("ColorRect")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1357437649]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

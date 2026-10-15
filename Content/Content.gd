@@ -21,7 +21,7 @@ var unlock_templates: ResourceProvider = ResourceProvider.new(
 
 
 func _init() -> void:
-	Logger.hint(self, _init, "Discovered %s ItemTemplates" % item_templates.get_count())
+	CustomLogger.hint(self, _init, "Discovered %s ItemTemplates" % item_templates.get_count())
 
 
 func get_item_template(file_name_without_extension: String) -> ItemTemplate:

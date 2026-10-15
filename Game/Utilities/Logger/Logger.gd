@@ -1,6 +1,6 @@
-class_name Logger
+class_name CustomLogger
 extends RefCounted
-## Static Logger
+## Static CustomLogger
 ##
 ## Provides pretty print logging in a static fashion.
 

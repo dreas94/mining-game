@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmf1sc4d0ro6q"]
+[gd_scene format=3 uid="uid://bmf1sc4d0ro6q"]
 
 [ext_resource type="Script" uid="uid://df1o2etpftif6" path="res://Utilities/ScreenTransitions/FillTransition/FillTransition.gd" id="1_ip1rn"]
 
-[node name="FillTransition" type="Control" node_paths=PackedStringArray("progress_bar")]
+[node name="FillTransition" type="Control" unique_id=1038988784 node_paths=PackedStringArray("progress_bar")]
+visible = false
 top_level = true
 layout_mode = 3
 anchors_preset = 15
@@ -15,7 +16,7 @@ grow_vertical = 2
 script = ExtResource("1_ip1rn")
 progress_bar = NodePath("ProgressBar")
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1314270944]
 custom_minimum_size = Vector2(1280, 920)
 layout_mode = 1
 offset_top = -100.0

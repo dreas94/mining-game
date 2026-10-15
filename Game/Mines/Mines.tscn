@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c72f4ti8pjn7d"]
+[gd_scene format=3 uid="uid://c72f4ti8pjn7d"]
 
 [ext_resource type="Script" uid="uid://cp4q2b1cr83xn" path="res://Game/Mines/Mines.gd" id="1_lsgo1"]
 [ext_resource type="Script" uid="uid://67r0vk0mah3l" path="res://Game/Tiles/TileHandler.gd" id="2_bgsr8"]
@@ -6,25 +6,25 @@
 [ext_resource type="TileSet" uid="uid://cvmpxeksqaf2m" path="res://Game/Mines/Tilemap.tres" id="3_ov2xx"]
 [ext_resource type="Script" uid="uid://btmipfumpmqtj" path="res://Game/Mines/CaveGenerator/CaveGenerator.gd" id="4_5xt6m"]
 
-[node name="World" type="Node2D" node_paths=PackedStringArray("breakable_tile_map_layer", "cave_generator", "tile_handler")]
+[node name="World" type="Node2D" unique_id=1521721374 node_paths=PackedStringArray("breakable_tile_map_layer", "cave_generator", "tile_handler")]
 script = ExtResource("1_lsgo1")
 breakable_tile_map_layer = NodePath("TileMapLayer")
 cave_generator = NodePath("TileMapLayer/Node")
 tile_handler = NodePath("TileHandler")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=811790521]
 color = Color(0.06, 0.06, 0.06, 1)
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=2086091983]
 light_mask = 3
 z_index = -1
 texture_filter = 1
 tile_set = ExtResource("3_ov2xx")
 script = ExtResource("3_5xt6m")
 
-[node name="Node" type="Node" parent="TileMapLayer"]
+[node name="Node" type="Node" parent="TileMapLayer" unique_id=1687888727]
 script = ExtResource("4_5xt6m")
 world_seed = "ijdsnfguiohsduhbisdaf"
 
-[node name="TileHandler" type="Node2D" parent="."]
+[node name="TileHandler" type="Node2D" parent="." unique_id=2012120321]
 script = ExtResource("2_bgsr8")

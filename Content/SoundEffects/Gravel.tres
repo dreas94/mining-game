@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SoundEffect" load_steps=24 format=3 uid="uid://7s5mb61hbs0s"]
+[gd_resource type="Resource" script_class="SoundEffect" format=3 uid="uid://7s5mb61hbs0s"]
 
 [ext_resource type="Script" uid="uid://c7d3ccupogtwi" path="res://App/Sound/SoundEffect.gd" id="1_lhc1g"]
 [ext_resource type="AudioStream" uid="uid://d1lsd75pwmmcp" path="res://Content/RawSounds/Gravel/Steps_gravel-001.ogg" id="2_jjb3k"]
@@ -50,9 +50,4 @@ stream_20/stream = ExtResource("15_2lr08")
 [resource]
 script = ExtResource("1_lhc1g")
 stream = SubResource("AudioStreamRandomizer_vni1x")
-bus = "Effects"
-volume_db = 0.0
-pitch_scale = 1.0
-fade_start = -1.0
-fade_time = -1.0
 metadata/_custom_type_script = "uid://d23jiu7f3wq8w"

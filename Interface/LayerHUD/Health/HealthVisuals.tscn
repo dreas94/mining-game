@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://ce5pt73vdvu5d"]
+[gd_scene format=3 uid="uid://ce5pt73vdvu5d"]
 
 [ext_resource type="Script" uid="uid://dqwikqse5jy46" path="res://Interface/LayerHUD/Health/HealthVisuals.gd" id="1_vpinq"]
 
-[node name="HealthVisuals" type="Control" node_paths=PackedStringArray("health_bar", "damage_bar", "label")]
+[node name="HealthVisuals" type="Control" unique_id=1837222043 node_paths=PackedStringArray("health_bar", "damage_bar", "label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,7 +16,7 @@ health_bar = NodePath("HealthBar")
 damage_bar = NodePath("HealthBar/DamageBar")
 label = NodePath("Label")
 
-[node name="HealthBar" type="ProgressBar" parent="."]
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=1699094975]
 custom_minimum_size = Vector2(240, 4)
 layout_mode = 1
 anchors_preset = 2
@@ -31,7 +31,7 @@ theme_type_variation = &"HealthBar"
 value = 50.0
 show_percentage = false
 
-[node name="DamageBar" type="ProgressBar" parent="HealthBar"]
+[node name="DamageBar" type="ProgressBar" parent="HealthBar" unique_id=404287899]
 z_index = -1
 custom_minimum_size = Vector2(500, 20)
 layout_mode = 1
@@ -44,7 +44,7 @@ theme_type_variation = &"DamageBar"
 value = 60.0
 show_percentage = false
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=307682423]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0

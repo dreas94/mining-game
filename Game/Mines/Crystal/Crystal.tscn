@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://wsaknvbipywn"]
+[gd_scene format=3 uid="uid://wsaknvbipywn"]
 
 [ext_resource type="Script" uid="uid://binxmhwpo22e2" path="res://Game/Mines/Crystal/Crystal.gd" id="1_7g2b5"]
 [ext_resource type="Texture2D" uid="uid://bohdggprdu2jb" path="res://Game/Mines/Crystal/Textures/Crystal.png" id="1_wmyqt"]
@@ -7,20 +7,20 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n547x"]
 size = Vector2(16, 16)
 
-[node name="Crystal" type="Node2D" node_paths=PackedStringArray("area")]
+[node name="Crystal" type="Node2D" unique_id=1640057508 node_paths=PackedStringArray("area")]
 texture_filter = 1
 script = ExtResource("1_7g2b5")
 area = NodePath("Area2D")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1532108185]
 self_modulate = Color(0.546875, 1, 0.98938, 1)
 texture = ExtResource("1_wmyqt")
 
-[node name="PointLight2D" parent="." instance=ExtResource("2_43jxx")]
+[node name="PointLight2D" parent="." unique_id=626923780 instance=ExtResource("2_43jxx")]
 scale_range = 0.02
 base_scale = 0.2
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=2017105958]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1704131963]
 shape = SubResource("RectangleShape2D_n547x")

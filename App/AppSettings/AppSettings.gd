@@ -45,20 +45,20 @@ func _init_platform() -> void:
 func _init_file() -> void:
 	
 	if FileAccess.file_exists(CFG_PATH):
-		Logger.hint(self, _init_file, "Loading config file.")
+		CustomLogger.hint(self, _init_file, "Loading config file.")
 		_cfg_file = ConfigFile.new()
 		_cfg_file.load(CFG_PATH)
 		return
 	
 	else:
-		Logger.hint(self, _init_file, "Creating config file.")
+		CustomLogger.hint(self, _init_file, "Creating config file.")
 		_cfg_file = ConfigFile.new()
 		_cfg_file.set_value(META_SECTION, VERSION_KEY, 0)
 		_cfg_file.save(CFG_PATH)
 	
 	# If the version is wrong, reset the settings
 	if _cfg_file.get_value(META_SECTION, VERSION_KEY, 0) != APP_CONFIG.settings_file_version:
-		Logger.hint(self, _init_file, "Config version %s, game version %s. Resetting to defaults.")
+		CustomLogger.hint(self, _init_file, "Config version %s, game version %s. Resetting to defaults.")
 		_cfg_file = ConfigFile.new()
 		_cfg_file.save(CFG_PATH)
 
@@ -80,7 +80,7 @@ func load_stored() -> void:
 		
 		@warning_ignore("unsafe_property_access")
 		if not typeof(value) == typeof(setting.current):
-			Logger.warn(self, load_stored, "%s %s value is not of correct type." % [section, key])
+			CustomLogger.warn(self, load_stored, "%s %s value is not of correct type." % [section, key])
 			break
 		
 		setting.set_stored(value)

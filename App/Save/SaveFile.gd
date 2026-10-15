@@ -48,7 +48,7 @@ func load_from_disk() -> void:
 	if not data.save_format_version == App.config.save_file_format_version:
 		var msg: String = "Save is format %s, game is %s."
 		msg = msg % [data.save_format_version, App.config.save_file_format_version]
-		Logger.warn(self, load_from_disk, msg)
+		CustomLogger.warn(self, load_from_disk, msg)
 		# TODO: Implement conversion steps here.
 	
 	_data = data

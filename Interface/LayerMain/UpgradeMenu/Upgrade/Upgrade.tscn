@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://btwucrs8x1cep"]
+[gd_scene format=3 uid="uid://btwucrs8x1cep"]
 
 [ext_resource type="Texture2D" uid="uid://kdl1xte7s72u" path="res://Content/ItemTextures/Ore2.png" id="1_bmebw"]
 [ext_resource type="Script" uid="uid://bqp6rmwcfhu3u" path="res://Interface/LayerMain/UpgradeMenu/Upgrade/Upgrade.gd" id="1_sxniy"]
 
-[node name="Upgrade" type="PanelContainer" node_paths=PackedStringArray("_cost_gauge", "_header_label", "_information_rich_text_label", "_upgrade_rich_text_label", "_cost_label", "_buy_button")]
+[node name="Upgrade" type="PanelContainer" unique_id=931927785 node_paths=PackedStringArray("_cost_gauge", "_header_label", "_information_rich_text_label", "_upgrade_rich_text_label", "_cost_label", "_buy_button")]
 custom_minimum_size = Vector2(700, 100)
 offset_right = 700.0
 offset_bottom = 100.0
@@ -17,54 +17,54 @@ _upgrade_rich_text_label = NodePath("HBoxContainer/VBoxContainer/Upgrade")
 _cost_label = NodePath("HBoxContainer/Cost")
 _buy_button = NodePath("HBoxContainer/Buy")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1549140937]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=422209202]
 custom_minimum_size = Vector2(103, 103)
 layout_mode = 2
 texture = ExtResource("1_bmebw")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1346992836]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Header" type="Label" parent="HBoxContainer/VBoxContainer"]
+[node name="Header" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=505310063]
 layout_mode = 2
 theme_type_variation = &"UpgradeHeader"
 text = "Upgrade Header"
 
-[node name="Information" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
+[node name="Information" type="RichTextLabel" parent="HBoxContainer/VBoxContainer" unique_id=1297061213]
 layout_mode = 2
 theme_type_variation = &"UpgradeTooltip"
 text = "Upgrade Tooltip"
 fit_content = true
 
-[node name="Upgrade" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
+[node name="Upgrade" type="RichTextLabel" parent="HBoxContainer/VBoxContainer" unique_id=1001446510]
 layout_mode = 2
 theme_type_variation = &"UpgradeTooltip"
 text = "Upgrade stats"
 fit_content = true
 
-[node name="Cost" type="Label" parent="HBoxContainer"]
+[node name="Cost" type="Label" parent="HBoxContainer" unique_id=242830936]
 layout_mode = 2
 text = "Cost"
 vertical_alignment = 1
 
-[node name="Buy" type="Button" parent="HBoxContainer"]
+[node name="Buy" type="Button" parent="HBoxContainer" unique_id=1356778913]
 custom_minimum_size = Vector2(72, 84)
 layout_mode = 2
 size_flags_horizontal = 8
 disabled = true
 text = "Buy"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+[node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=942154217]
 layout_mode = 2
 
-[node name="CostGauge" type="ProgressBar" parent="HBoxContainer2"]
+[node name="CostGauge" type="ProgressBar" parent="HBoxContainer2" unique_id=2080554816]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -74,7 +74,7 @@ value = 100.0
 fill_mode = 1
 show_percentage = false
 
-[node name="Control" type="Control" parent="HBoxContainer2"]
+[node name="Control" type="Control" parent="HBoxContainer2" unique_id=1347708197]
 custom_minimum_size = Vector2(72, 84)
 layout_mode = 2
 size_flags_horizontal = 8

@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dsygiaxq1ul0u"]
+[gd_scene format=3 uid="uid://dsygiaxq1ul0u"]
 
 [ext_resource type="Script" uid="uid://8syq0g1scran" path="res://Interface/LayerMain/LoseMenu/LoseMenu.gd" id="1_7xv5u"]
 
-[node name="LoseMenu" type="Control" node_paths=PackedStringArray("camp_button", "main_menu_button", "quit_button", "lose_label")]
+[node name="LoseMenu" type="Control" unique_id=1612301166 node_paths=PackedStringArray("camp_button", "main_menu_button", "quit_button", "lose_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,7 +15,7 @@ main_menu_button = NodePath("MarginContainer/VBoxContainer/VBoxContainer/MainMen
 quit_button = NodePath("MarginContainer/VBoxContainer/VBoxContainer/Exit")
 lose_label = NodePath("MarginContainer/VBoxContainer/MarginContainer/LoseLabel")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2140964450]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,41 +23,41 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1733324853]
 layout_mode = 2
 alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=1622551560]
 layout_mode = 2
 theme_override_constants/margin_bottom = 41
 
-[node name="LoseLabel" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer"]
+[node name="LoseLabel" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer" unique_id=1781748741]
 layout_mode = 2
 theme_type_variation = &"TitleLabel"
 text = "The Light Has Faded"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=232252469]
 custom_minimum_size = Vector2(258, 163)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="Camp" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="Camp" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1014003302]
 visible = false
 layout_mode = 2
 theme_type_variation = &"TitleButton"
 text = "Camp"
 
-[node name="MainMenu" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="MainMenu" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=63832644]
 visible = false
 layout_mode = 2
 theme_type_variation = &"TitleButton"
 text = "Main Menu"
 
-[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=136488438]
 visible = false
 layout_mode = 2
 theme_type_variation = &"TitleButton"

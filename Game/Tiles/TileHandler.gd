@@ -6,14 +6,14 @@ var _tiles: Dictionary = {}
 
 
 func instance_tile_to_grid_position(tile: Tile, grid_position: Vector2i = Vector2i.ZERO, global_pos: Vector2 = Vector2.ZERO) -> void:
-	Logger.hint(self, instance_tile_to_grid_position)
+	CustomLogger.hint(self, instance_tile_to_grid_position)
 	
 	if tile.get_tile_instance().get_parent() != null:
-		Logger.error(self, instance_tile_to_grid_position, "tile instance already part of a tile handler" + (get_path() as String))
+		CustomLogger.error(self, instance_tile_to_grid_position, "tile instance already part of a tile handler" + (get_path() as String))
 		return
 	
 	if _grid_array.has(grid_position):
-		Logger.error(self, instance_tile_to_grid_position, "grid position, already filled" + (get_path() as String))
+		CustomLogger.error(self, instance_tile_to_grid_position, "grid position, already filled" + (get_path() as String))
 		return
 	
 	_grid_array.append(grid_position)
@@ -27,10 +27,10 @@ func instance_tile_to_grid_position(tile: Tile, grid_position: Vector2i = Vector
 
 
 func instance_template_to_grid_position(template: TileTemplate, grid_position: Vector2i = Vector2i.ZERO, global_pos: Vector2 = Vector2.ZERO) -> Tile:
-	Logger.hint(self, instance_template_to_grid_position)
+	CustomLogger.hint(self, instance_template_to_grid_position)
 	
 	if _grid_array.has(grid_position):
-		Logger.error(self, instance_tile_to_grid_position, "grid position, already filled" + (get_path() as String))
+		CustomLogger.error(self, instance_tile_to_grid_position, "grid position, already filled" + (get_path() as String))
 		return
 	
 	var tile: Tile = Tile.new(template)
@@ -46,7 +46,7 @@ func instance_template_to_grid_position(template: TileTemplate, grid_position: V
 
 
 func remove_tile_from_handler(tile: Tile) -> void:
-	Logger.hint(self, remove_tile_from_handler)
+	CustomLogger.hint(self, remove_tile_from_handler)
 	
 	if not tile:
 		return
@@ -62,14 +62,14 @@ func remove_tile_from_handler(tile: Tile) -> void:
 
 
 func clear_handler() -> void:
-	Logger.hint(self, clear_handler)
+	CustomLogger.hint(self, clear_handler)
 	_grid_array.clear()
 	_tiles.clear()
 	for c: Node in get_children():
 		if c is TileInstance:
 			c.queue_free()
 		else:
-			Logger.warn(self, clear_handler, "Not a TileInstance -> %s" % c.name)
+			CustomLogger.warn(self, clear_handler, "Not a TileInstance -> %s" % c.name)
 
 
 func get_tiles() -> Dictionary:

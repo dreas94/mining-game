@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cedfub537lkht"]
+[gd_scene format=3 uid="uid://cedfub537lkht"]
 
 [ext_resource type="Script" uid="uid://delmr7geb6gv4" path="res://Interface/LayerMain/MainMenu/MainMenu.gd" id="1_bfnjg"]
 [ext_resource type="PackedScene" uid="uid://jv4mdpuaynue" path="res://Interface/Fluff/Background/Background.tscn" id="2_gjf61"]
 [ext_resource type="Material" uid="uid://dvdnygwk8g12t" path="res://Shader/Unshaded/Unshaded.tres" id="3_bwcia"]
 [ext_resource type="PackedScene" uid="uid://dbo2cxkdnlax7" path="res://Interface/LayerMain/ControlsMenu/ControlsMenu.tscn" id="4_bwcia"]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("start_button", "controls_button", "quit_button", "tab_container", "controls_menu", "background")]
+[node name="MainMenu" type="Control" unique_id=572881397 node_paths=PackedStringArray("start_button", "controls_button", "quit_button", "tab_container", "controls_menu", "background")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,7 +20,7 @@ tab_container = NodePath("MarginContainer/TabContainer")
 controls_menu = NodePath("MarginContainer/TabContainer/ControlsMenu")
 background = NodePath("CenterContainer/Background/Background")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=282169245]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,12 +28,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Background" type="Control" parent="CenterContainer"]
+[node name="Background" type="Control" parent="CenterContainer" unique_id=398438430]
 layout_mode = 2
 
-[node name="Background" parent="CenterContainer/Background" instance=ExtResource("2_gjf61")]
+[node name="Background" parent="CenterContainer/Background" unique_id=401411067 instance=ExtResource("2_gjf61")]
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=836075113]
 material = ExtResource("3_bwcia")
 layout_mode = 1
 anchors_preset = 15
@@ -42,7 +42,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TabContainer" type="TabContainer" parent="MarginContainer"]
+[node name="TabContainer" type="TabContainer" parent="MarginContainer" unique_id=650617789]
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -50,7 +50,7 @@ size_flags_vertical = 4
 current_tab = 1
 tabs_visible = false
 
-[node name="MainMenu" type="PanelContainer" parent="MarginContainer/TabContainer"]
+[node name="MainMenu" type="PanelContainer" parent="MarginContainer/TabContainer" unique_id=2027911339]
 visible = false
 use_parent_material = true
 custom_minimum_size = Vector2(256, 0)
@@ -58,47 +58,47 @@ layout_mode = 2
 theme_type_variation = &"TitlePanelContainer"
 metadata/_tab_index = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/MainMenu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/MainMenu" unique_id=688514621]
 use_parent_material = true
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer" unique_id=716508973]
 use_parent_material = true
 layout_mode = 2
 
-[node name="Title" type="Label" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer/MarginContainer"]
+[node name="Title" type="Label" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer/MarginContainer" unique_id=1674072872]
 use_parent_material = true
 layout_mode = 2
 theme_type_variation = &"TitleLabel"
 text = "These Shadows Of Mine"
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer" unique_id=236805081]
 use_parent_material = true
 layout_mode = 2
 
-[node name="Start" type="Button" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer"]
+[node name="Start" type="Button" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer" unique_id=1549912765]
 use_parent_material = true
 layout_mode = 2
 theme_type_variation = &"TitleButton"
 text = "Start"
 
-[node name="Controls" type="Button" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer"]
+[node name="Controls" type="Button" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer" unique_id=1514035266]
 use_parent_material = true
 layout_mode = 2
 theme_type_variation = &"TitleButton"
 text = "Controls"
 
-[node name="Exit" type="Button" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer"]
+[node name="Exit" type="Button" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer" unique_id=708366993]
 use_parent_material = true
 layout_mode = 2
 theme_type_variation = &"TitleButton"
 text = "Exit"
 
-[node name="HSeparator2" type="HSeparator" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer" unique_id=1760510928]
 use_parent_material = true
 layout_mode = 2
 
-[node name="Disclaimer" type="RichTextLabel" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer"]
+[node name="Disclaimer" type="RichTextLabel" parent="MarginContainer/TabContainer/MainMenu/VBoxContainer" unique_id=514398037]
 use_parent_material = true
 layout_mode = 2
 theme_type_variation = &"Disclaimer"
@@ -107,6 +107,6 @@ text = "The following game experience contains only movement options, destructiv
 Feel free to document in your own words about these elements."
 fit_content = true
 
-[node name="ControlsMenu" parent="MarginContainer/TabContainer" instance=ExtResource("4_bwcia")]
+[node name="ControlsMenu" parent="MarginContainer/TabContainer" unique_id=420410545 instance=ExtResource("4_bwcia")]
 layout_mode = 2
 metadata/_tab_index = 1

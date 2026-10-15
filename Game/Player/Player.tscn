@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cr7vr5ke2lgfn"]
+[gd_scene format=3 uid="uid://cr7vr5ke2lgfn"]
 
 [ext_resource type="Script" uid="uid://bwd7weq3u2ywv" path="res://Game/Player/Player.gd" id="1_4672b"]
 [ext_resource type="Texture2D" uid="uid://drjxkesrh35pn" path="res://Game/Player/Textures/Little Guy.png" id="2_65y41"]
@@ -409,7 +409,7 @@ size = Vector2(8, 9)
 [sub_resource type="CircleShape2D" id="CircleShape2D_o2hno"]
 radius = 20.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "character_sprite", "pickaxe_sprite", "camera", "ray_2d", "light") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" unique_id=1720014766 node_paths=PackedStringArray("animation_player", "character_sprite", "pickaxe_sprite", "camera", "ray_2d", "light") groups=["Player"]]
 light_mask = 3
 collision_layer = 2
 script = ExtResource("1_4672b")
@@ -420,7 +420,7 @@ camera = NodePath("Camera2D")
 ray_2d = NodePath("RayCast2D")
 light = NodePath("PointLight2D")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=229130201]
 z_index = -2
 anchors_preset = 8
 anchor_left = 0.5
@@ -435,10 +435,10 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.1, 0.1, 0.1, 1)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=593672172]
 zoom = Vector2(5, 5)
 
-[node name="Goblin" type="Sprite2D" parent="."]
+[node name="Goblin" type="Sprite2D" parent="." unique_id=1633610782]
 self_modulate = Color(0.0588235, 0.662745, 0.184314, 1)
 light_mask = 2
 texture_filter = 1
@@ -446,17 +446,17 @@ position = Vector2(0, -3.5)
 texture = ExtResource("2_65y41")
 hframes = 6
 
-[node name="Face" type="Sprite2D" parent="Goblin"]
+[node name="Face" type="Sprite2D" parent="Goblin" unique_id=411210199]
 
-[node name="Torso" type="Sprite2D" parent="Goblin"]
+[node name="Torso" type="Sprite2D" parent="Goblin" unique_id=705703135]
 
-[node name="ArmRight" type="Sprite2D" parent="Goblin"]
+[node name="ArmRight" type="Sprite2D" parent="Goblin" unique_id=1270754234]
 
-[node name="ArmLeft" type="Sprite2D" parent="Goblin"]
+[node name="ArmLeft" type="Sprite2D" parent="Goblin" unique_id=839172314]
 
-[node name="Legs" type="Sprite2D" parent="Goblin"]
+[node name="Legs" type="Sprite2D" parent="Goblin" unique_id=866816934]
 
-[node name="Pickaxe" type="Sprite2D" parent="Goblin"]
+[node name="Pickaxe" type="Sprite2D" parent="Goblin" unique_id=68466281]
 modulate = Color(0.415686, 0.415686, 0.415686, 1)
 light_mask = 2
 texture_filter = 1
@@ -465,18 +465,16 @@ scale = Vector2(0.75, 0.75)
 texture = ExtResource("3_sfkwu")
 offset = Vector2(2, -2)
 
-[node name="SoulSmoke" parent="." instance=ExtResource("3_o2hno")]
+[node name="SoulSmoke" parent="." unique_id=1975188913 instance=ExtResource("3_o2hno")]
 visible = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_kt3un")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=224120363]
+libraries/ = SubResource("AnimationLibrary_kt3un")
 
-[node name="Hitbox" type="CollisionShape2D" parent="."]
+[node name="Hitbox" type="CollisionShape2D" parent="." unique_id=2141645112]
 shape = SubResource("RectangleShape2D_4672b")
 
-[node name="PickupArea" type="Area2D" parent="."]
+[node name="PickupArea" type="Area2D" parent="." unique_id=1577423929]
 collision_layer = 0
 collision_mask = 32
 input_pickable = false
@@ -487,10 +485,10 @@ gravity_point_center = Vector2(0, 0)
 gravity_direction = Vector2(0, 0)
 gravity = 300.0
 
-[node name="PickupShape" type="CollisionShape2D" parent="PickupArea"]
+[node name="PickupShape" type="CollisionShape2D" parent="PickupArea" unique_id=1285779253]
 shape = SubResource("CircleShape2D_o2hno")
 
-[node name="PointLight2D" parent="." instance=ExtResource("5_kt3un")]
+[node name="PointLight2D" parent="." unique_id=455104283 instance=ExtResource("5_kt3un")]
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=703933318]
 target_position = Vector2(0, 16)

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="TileTemplate" load_steps=3 format=3 uid="uid://dnloess7co135"]
+[gd_resource type="Resource" script_class="TileTemplate" format=3 uid="uid://dnloess7co135"]
 
 [ext_resource type="Script" uid="uid://beghyqhtkssl1" path="res://Game/Tiles/TileTemplate.gd" id="1_0kw3r"]
 [ext_resource type="Resource" uid="uid://edgc1eayqcvw" path="res://Content/ItemTemplates/Ore1.tres" id="1_kmc77"]

@@ -105,7 +105,7 @@ func has_file(save_file: AppSaveFile) -> bool:
 
 func save_to_file(save_file: AppSaveFile, data: Dictionary) -> void:
 	if not has_file(save_file):
-		Logger.error(self, save_to_file, "Can't save. File does not belong to profile.")
+		CustomLogger.error(self, save_to_file, "Can't save. File does not belong to profile.")
 		return
 	save_file.put_data(data)
 	save_file.save_to_disk()

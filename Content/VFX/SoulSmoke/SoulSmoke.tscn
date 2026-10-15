@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1hoesfdl604e"]
+[gd_scene format=3 uid="uid://d1hoesfdl604e"]
 
 [ext_resource type="Texture2D" uid="uid://cickcm17b0wo4" path="res://Content/VFX/SoulSmoke/Textures/smoke_01.png" id="1_faxnf"]
 
@@ -6,9 +6,9 @@
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="SoulSmoke" type="Node2D"]
+[node name="SoulSmoke" type="Node2D" unique_id=1055066736]
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1540827282]
 amount = 50
 texture = ExtResource("1_faxnf")
 lifetime_randomness = 0.5

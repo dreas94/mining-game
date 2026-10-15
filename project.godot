@@ -12,8 +12,12 @@ config_version=5
 
 config/name="These Shadows of Mine"
 run/main_scene="uid://d4liuh80no827"
-config/features=PackedStringArray("4.4", "GL Compatibility")
+config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="uid://bl512thg5rqir"
+
+[audio]
+
+buses/default_bus_layout="uid://d155fxpwn38ss"
 
 [autoload]
 

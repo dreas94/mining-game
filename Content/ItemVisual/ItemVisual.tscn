@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://coj6a5b0wvrd8"]
+[gd_scene format=3 uid="uid://coj6a5b0wvrd8"]
 
 [ext_resource type="Script" uid="uid://bv4cf38veip7t" path="res://Content/ItemVisual/ItemVisuals.gd" id="1_0hht3"]
 
-[node name="ItemVisual" type="Node2D" node_paths=PackedStringArray("graphic_sprite")]
+[node name="ItemVisual" type="Node2D" unique_id=2120628848 node_paths=PackedStringArray("graphic_sprite")]
 script = ExtResource("1_0hht3")
 graphic_sprite = NodePath("Sprite2D")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1223700418]

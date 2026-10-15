@@ -14,7 +14,7 @@ func _init(_save_file: AppSaveFile) -> void:
 
 func enter(_previous_state: SimpleState) -> void:
 	#iCardTooltip.kill_all.set_true(self)
-	Logger.hint(self, enter)
+	CustomLogger.hint(self, enter)
 	
 	App.can_save = false
 	entered.emit()

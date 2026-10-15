@@ -46,7 +46,7 @@ func update_label() -> void:
 	label.text = str("%0.2f" % Health.current)
 
 
-func _on_upgrade_added(upgrade_id: String) -> void:
+func _on_upgrade_added(_upgrade_id: String) -> void:
 	health_bar.max_value = Health.maximum
 	health_bar.value = Health.current
 	damage_bar.max_value = Health.maximum
