@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bwd7weq3u2ywv" path="res://Game/Player/Player.gd" id="1_4672b"]
 [ext_resource type="Texture2D" uid="uid://drjxkesrh35pn" path="res://Game/Player/Textures/Little Guy.png" id="2_65y41"]
+[ext_resource type="Texture2D" uid="uid://xw3eujwvmnhc" path="res://Game/Player/Textures/Wisp.png" id="3_65y41"]
 [ext_resource type="PackedScene" uid="uid://d1hoesfdl604e" path="res://Content/VFX/SoulSmoke/SoulSmoke.tscn" id="3_o2hno"]
 [ext_resource type="Texture2D" uid="uid://cq254veb6dqms" path="res://Game/Player/Textures/Pickaxe.png" id="3_sfkwu"]
 [ext_resource type="PackedScene" uid="uid://dsr0f5ealpe4e" path="res://Content/VFX/LightSource/LightSource.tscn" id="5_kt3un"]
@@ -13,7 +14,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Goblin:frame")
+tracks/0/path = NodePath("Node2D/Goblin:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -25,14 +26,14 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Goblin/Pickaxe:position")
+tracks/1/path = NodePath("Node2D/Pickaxe:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(5.5, 5.5)]
+"values": [Vector2(5.5, 2)]
 }
 
 [sub_resource type="Animation" id="Animation_ee8ni"]
@@ -42,7 +43,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Goblin/Pickaxe:rotation")
+tracks/0/path = NodePath("Node2D/Pickaxe:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -59,7 +60,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Goblin/Pickaxe:rotation")
+tracks/0/path = NodePath("Node2D/Pickaxe:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -74,7 +75,7 @@ length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Goblin:frame")
+tracks/0/path = NodePath("Node2D/Goblin:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -86,7 +87,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Goblin:flip_h")
+tracks/1/path = NodePath("Node2D/Goblin:flip_h")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -98,7 +99,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Goblin/Pickaxe:position")
+tracks/2/path = NodePath("Node2D/Pickaxe:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -110,7 +111,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Goblin/Pickaxe:flip_h")
+tracks/3/path = NodePath("Node2D/Pickaxe:flip_h")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -122,7 +123,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Goblin/Pickaxe:offset")
+tracks/4/path = NodePath("Node2D/Pickaxe:offset")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -134,7 +135,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Goblin/Pickaxe:modulate")
+tracks/5/path = NodePath("Node2D/Pickaxe:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -146,7 +147,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Goblin/Pickaxe:rotation")
+tracks/6/path = NodePath("Node2D/Pickaxe:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -163,7 +164,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Goblin/Pickaxe:rotation")
+tracks/0/path = NodePath("Node2D/Pickaxe:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -179,7 +180,7 @@ length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Goblin/Pickaxe:rotation")
+tracks/0/path = NodePath("Node2D/Pickaxe:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -194,7 +195,7 @@ resource_name = "Recover_Pickaxe"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Goblin/Pickaxe:modulate")
+tracks/0/path = NodePath("Node2D/Pickaxe:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -225,7 +226,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Goblin:frame")
+tracks/0/path = NodePath("Node2D/Goblin:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -251,7 +252,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Goblin/Pickaxe:position")
+tracks/2/path = NodePath("Node2D/Pickaxe:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -267,7 +268,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Goblin/Pickaxe:rotation")
+tracks/0/path = NodePath("Node2D/Pickaxe:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -279,7 +280,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Goblin/Pickaxe:modulate")
+tracks/1/path = NodePath("Node2D/Pickaxe:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -309,7 +310,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Goblin/Pickaxe:rotation")
+tracks/0/path = NodePath("Node2D/Pickaxe:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -321,7 +322,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Goblin/Pickaxe:modulate")
+tracks/1/path = NodePath("Node2D/Pickaxe:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -352,7 +353,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Goblin:frame")
+tracks/0/path = NodePath("Node2D/Goblin:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -378,14 +379,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Goblin/Pickaxe:position")
+tracks/2/path = NodePath("Node2D/Pickaxe:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(5.5, 3.5)]
+"values": [Vector2(5.5, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kt3un"]
@@ -409,16 +410,17 @@ size = Vector2(8, 9)
 [sub_resource type="CircleShape2D" id="CircleShape2D_o2hno"]
 radius = 20.0
 
-[node name="Player" type="CharacterBody2D" unique_id=1720014766 node_paths=PackedStringArray("animation_player", "character_sprite", "pickaxe_sprite", "camera", "ray_2d", "light") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" unique_id=1720014766 node_paths=PackedStringArray("animation_player", "wisp_sprite", "character_sprite", "pickaxe_sprite", "camera", "ray_2d", "light") groups=["Player"]]
 light_mask = 3
 collision_layer = 2
 script = ExtResource("1_4672b")
 animation_player = NodePath("AnimationPlayer")
-character_sprite = NodePath("Goblin")
-pickaxe_sprite = NodePath("Goblin/Pickaxe")
+wisp_sprite = NodePath("Wisp")
+character_sprite = NodePath("Node2D")
+pickaxe_sprite = NodePath("Node2D/Pickaxe")
 camera = NodePath("Camera2D")
 ray_2d = NodePath("RayCast2D")
-light = NodePath("PointLight2D")
+light = NodePath("Wisp/PointLight2D")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=229130201]
 z_index = -2
@@ -433,12 +435,26 @@ offset_right = 192.0
 offset_bottom = 107.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.1, 0.1, 0.1, 1)
+color = Color(0.101960786, 0.101960786, 0.101960786, 1)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=593672172]
 zoom = Vector2(5, 5)
 
-[node name="Goblin" type="Sprite2D" parent="." unique_id=1633610782]
+[node name="SoulSmoke" parent="." unique_id=1975188913 instance=ExtResource("3_o2hno")]
+visible = false
+
+[node name="Wisp" type="Sprite2D" parent="." unique_id=640733825]
+light_mask = 3
+visibility_layer = 3
+texture_filter = 1
+position = Vector2(0, -11)
+texture = ExtResource("3_65y41")
+
+[node name="PointLight2D" parent="Wisp" unique_id=455104283 instance=ExtResource("5_kt3un")]
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1456490280]
+
+[node name="Goblin" type="Sprite2D" parent="Node2D" unique_id=1633610782]
 self_modulate = Color(0.0588235, 0.662745, 0.184314, 1)
 light_mask = 2
 texture_filter = 1
@@ -446,17 +462,27 @@ position = Vector2(0, -3.5)
 texture = ExtResource("2_65y41")
 hframes = 6
 
-[node name="Face" type="Sprite2D" parent="Goblin" unique_id=411210199]
+[node name="Face" type="Sprite2D" parent="Node2D" unique_id=411210199]
+visible = false
+position = Vector2(0, -3.5)
 
-[node name="Torso" type="Sprite2D" parent="Goblin" unique_id=705703135]
+[node name="Torso" type="Sprite2D" parent="Node2D" unique_id=705703135]
+visible = false
+position = Vector2(0, -3.5)
 
-[node name="ArmRight" type="Sprite2D" parent="Goblin" unique_id=1270754234]
+[node name="ArmRight" type="Sprite2D" parent="Node2D" unique_id=1270754234]
+visible = false
+position = Vector2(0, -3.5)
 
-[node name="ArmLeft" type="Sprite2D" parent="Goblin" unique_id=839172314]
+[node name="ArmLeft" type="Sprite2D" parent="Node2D" unique_id=839172314]
+visible = false
+position = Vector2(0, -3.5)
 
-[node name="Legs" type="Sprite2D" parent="Goblin" unique_id=866816934]
+[node name="Legs" type="Sprite2D" parent="Node2D" unique_id=866816934]
+visible = false
+position = Vector2(0, -3.5)
 
-[node name="Pickaxe" type="Sprite2D" parent="Goblin" unique_id=68466281]
+[node name="Pickaxe" type="Sprite2D" parent="Node2D" unique_id=68466281]
 modulate = Color(0.415686, 0.415686, 0.415686, 1)
 light_mask = 2
 texture_filter = 1
@@ -464,9 +490,6 @@ position = Vector2(5.5, 5)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("3_sfkwu")
 offset = Vector2(2, -2)
-
-[node name="SoulSmoke" parent="." unique_id=1975188913 instance=ExtResource("3_o2hno")]
-visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=224120363]
 libraries/ = SubResource("AnimationLibrary_kt3un")
@@ -487,8 +510,6 @@ gravity = 300.0
 
 [node name="PickupShape" type="CollisionShape2D" parent="PickupArea" unique_id=1285779253]
 shape = SubResource("CircleShape2D_o2hno")
-
-[node name="PointLight2D" parent="." unique_id=455104283 instance=ExtResource("5_kt3un")]
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=703933318]
 target_position = Vector2(0, 16)

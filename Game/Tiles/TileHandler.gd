@@ -90,11 +90,8 @@ func has_tile_at_grid_position(grid_position: Vector2i) -> bool:
 	return _tiles.has(grid_position)
 
 
-func get_tile_based_on_rid(rid: RID) -> Tile:
-	if not rid.is_valid():
-		return null
-	
-	var grid_position: Vector2i = Mines.breakable_tile_map_layer.get_coords_for_body_rid(rid)
+func get_tile_based_on_local_position(local_position: Vector2) -> Tile:
+	var grid_position: Vector2i = Mines.breakable_tile_map_layer.local_to_map(local_position)
 	
 	if not has_tile_at_grid_position(grid_position):
 		return null

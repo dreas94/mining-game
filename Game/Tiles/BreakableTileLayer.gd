@@ -36,14 +36,14 @@ func is_target_position_close_enough_to_player(player_cell: Vector2i, target_cel
 	
 
 
-func attempt_to_clear_cell(damage: int, rid: RID, player_position: Vector2):
+func attempt_to_clear_cell(damage: int, local_position: Vector2, player_position: Vector2):
 	var player_cell: Vector2i = local_to_map(player_position)
 	var cell: Vector2i
 	
-	if rid == null:
+	if local_position == null:
 		return
 	
-	cell = get_coords_for_body_rid(rid)
+	cell = local_to_map(local_position)
 	
 	if cell == null:
 		return

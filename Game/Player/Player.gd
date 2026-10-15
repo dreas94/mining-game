@@ -1,10 +1,11 @@
 class_name iPlayer
 extends CharacterBody2D
 @warning_ignore("unused_signal")
-signal mine_attempt_by_rid(damage: int, rid: RID)
+signal mine_attempt_by_local_position(damage: int, local_position: Vector2)
 
 @export var animation_player: AnimationPlayer
-@export var character_sprite: Sprite2D
+@export var wisp_sprite: Sprite2D
+@export var character_sprite: Node2D
 @export var pickaxe_sprite: Sprite2D
 @export var camera: Camera2D
 @export var ray_2d: RayCast2D
@@ -20,6 +21,8 @@ var alive: BoolAttribute = BoolAttribute.new(true)
 var last_tile_grid_pos_ray_casted: Vector2i = Vector2i.MAX
 var previous_move_direction: float = 0.0
 var move_direction: float = 1.0
+var _wisp_tween: Tween
+var _wisp_destination: Vector2
 
 ## Stats
 var mining_power: float:
@@ -72,9 +75,12 @@ func _ready() -> void:
 	_pda.push_state_to_stack(PlayerPDAIdleState.new())
 	_pickaxe_pda.push_state_to_stack(PickaxePDAIdleState.new())
 	light.base_scale = remap(Health.current, 0.0, Health.INITIAL, 0.0, 0.5)
+	light.scale_range = remap(Health.current, 0.0, Health.INITIAL, 0.0, 0.2)
 	
 	Health.current_changed.connect(_on_current_health_changed)
 	alive.changed.connect(_on_alive_changed)
+	
+	_wisp_new_destination()
 
 
 func _physics_process(delta: float) -> void:
@@ -114,6 +120,7 @@ func _play_footstep() -> void:
 
 func _on_current_health_changed(_previous: float, current: float) -> void:
 	light.base_scale = remap(current, 0.0, Health.INITIAL, 0.0, 0.5)
+	light.scale_range = remap(Health.current, 0.0, Health.INITIAL, 0.0, 0.2)
 
 
 func _on_alive_changed(current: bool, _previous: bool) -> void:
@@ -138,7 +145,7 @@ func _handle_ray_cast() -> void:
 		last_tile_grid_pos_ray_casted =  Vector2i.MAX
 		return
 	
-	var tile: Tile = Mines.tile_handler.get_tile_based_on_rid(ray_2d.get_collider_rid())
+	var tile: Tile = Mines.tile_handler.get_tile_based_on_local_position(ray_2d.get_collision_point() - ray_2d.get_collision_normal())
 	
 	if tile == null:
 		return
@@ -154,3 +161,18 @@ func _handle_ray_cast() -> void:
 		
 	previous_tile.tile_attributes.is_moused.value = false
 	last_tile_grid_pos_ray_casted = Mines.tile_handler.get_grid_position_of_tile(tile)
+
+
+func _wisp_new_destination() -> void:
+	_wisp_destination.x = randf_range(-5, 5)
+	_wisp_destination.y = randf_range(-7.5, 3.5)
+	
+	if _wisp_tween != null and _wisp_tween.is_running():
+		_wisp_tween.kill()
+		_wisp_tween = null
+	
+	_wisp_tween = create_tween()
+	_wisp_tween.set_ease(Tween.EASE_IN_OUT)
+	_wisp_tween.set_trans(Tween.TRANS_CUBIC)
+	_wisp_tween.tween_property(wisp_sprite, "position", _wisp_destination, 2.0)
+	_wisp_tween.tween_callback(_wisp_new_destination)

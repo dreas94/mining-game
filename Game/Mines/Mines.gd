@@ -18,7 +18,7 @@ func _enabled() -> void:
 	add_child(player)
 	player.light.enabled = true
 	player.global_position = Vector2(8.0, -8.0)
-	player.mine_attempt_by_rid.connect(_attempt_to_clear_cell)
+	player.mine_attempt_by_local_position.connect(_attempt_to_clear_cell)
 	Health.reset_health(Health.maximum)
 	Health.current_changed.connect(_on_current_health_changed)
 	App.music.play(DefaultMusic.BEYOND)
@@ -50,13 +50,13 @@ func _disabled() -> void:
 	Health.current_changed.disconnect(_on_current_health_changed)
 	tile_handler.clear_handler()
 	breakable_tile_map_layer.clear_tilemaps()
-	player.mine_attempt_by_rid.disconnect(_attempt_to_clear_cell)
+	player.mine_attempt_by_local_position.disconnect(_attempt_to_clear_cell)
 	player.queue_free()
 	Health.reset_health(Health.maximum)
 
 
-func _attempt_to_clear_cell(damage: int, rid: RID):
-	breakable_tile_map_layer.attempt_to_clear_cell(damage, rid, player.position)
+func _attempt_to_clear_cell(damage: int, local_position: Vector2):
+	breakable_tile_map_layer.attempt_to_clear_cell(damage, local_position, player.position)
 
 
 func _on_current_health_changed(_previous: float, current: float) -> void:

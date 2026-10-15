@@ -23,4 +23,4 @@ func handle_ray_cast_collision() -> void:
 	if not pda.owner.ray_2d.is_colliding():
 		return
 	
-	pda.push_state_to_stack(PickaxePDASwingState.new(pda.owner.ray_2d.get_collider_rid()))
+	pda.push_state_to_stack(PickaxePDASwingState.new(pda.owner.ray_2d.get_collision_point() - pda.owner.ray_2d.get_collision_normal()))
