@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cfl6yyigh3cqv"]
+
+[ext_resource type="Script" uid="uid://wdqdiaflyxr4" path="res://Game/Body/Parts/Arms/Arms.gd" id="1_h774g"]
+
+[node name="Arms" type="Node2D" unique_id=875759982 node_paths=PackedStringArray("arm_left", "arm_right")]
+script = ExtResource("1_h774g")
+arm_left = NodePath("ArmLeft")
+arm_right = NodePath("ArmRight")
+
+[node name="ArmLeft" type="Sprite2D" parent="." unique_id=1073148043]
+
+[node name="ArmRight" type="Sprite2D" parent="." unique_id=474396015]
