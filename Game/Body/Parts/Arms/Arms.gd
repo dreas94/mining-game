@@ -7,12 +7,16 @@ extends BodyPart
 
 @export var torso_connection_left: Vector2:
 	set(value):
+		if arm_left == null:
+			return
 		_torso_connection_left = value
 		arm_left.offset = value
 	get():
 		return _torso_connection_left
 @export var torso_connection_right: Vector2:
 	set(value):
+		if arm_right == null:
+			return
 		_torso_connection_right = value
 		arm_right.offset = value
 	get():

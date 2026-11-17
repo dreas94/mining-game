@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://caslife40rs0" path="res://Game/Body/Body.gd" id="1_pl6rm"]
 [ext_resource type="Script" uid="uid://wdqdiaflyxr4" path="res://Game/Body/Parts/Arms/Arms.gd" id="2_chk2l"]
 [ext_resource type="Script" uid="uid://bpq6nwccbcnty" path="res://Game/Body/Parts/Head.gd" id="2_utwiv"]
-[ext_resource type="Script" uid="uid://bvtsq6avtbehp" path="res://Game/Body/Parts/BodyPart.gd" id="3_depb0"]
 [ext_resource type="Script" uid="uid://drdlm03h27jgw" path="res://Game/Body/Parts/Legs.gd" id="3_hxh7i"]
 [ext_resource type="Texture2D" uid="uid://b4kri8of2bho6" path="res://Game/Player/Textures/Leg.png" id="4_p01fd"]
+[ext_resource type="Script" uid="uid://c5y0ubftaf3dk" path="res://Game/Body/Parts/Torso.gd" id="6_p01fd"]
 
 [node name="Body" type="Node2D" unique_id=2032382010 node_paths=PackedStringArray("head", "arms", "legs", "torso")]
 script = ExtResource("1_pl6rm")
@@ -14,8 +14,9 @@ arms = NodePath("Arms")
 legs = NodePath("Legs")
 torso = NodePath("Torso")
 
-[node name="Head" type="Node2D" parent="." unique_id=696063763]
+[node name="Head" type="Node2D" parent="." unique_id=696063763 node_paths=PackedStringArray("head_sprite")]
 script = ExtResource("2_utwiv")
+head_sprite = NodePath("HeadSprite")
 
 [node name="HeadSprite" type="Sprite2D" parent="Head" unique_id=143543386]
 
@@ -23,8 +24,6 @@ script = ExtResource("2_utwiv")
 script = ExtResource("2_chk2l")
 arm_left = NodePath("LeftSprite")
 arm_right = NodePath("RightSprite")
-torso_connection_left = Vector2(0, 1)
-torso_connection_right = Vector2(0, 1)
 
 [node name="LeftSprite" type="Sprite2D" parent="Arms" unique_id=842676359]
 offset = Vector2(0, 1)
@@ -36,8 +35,6 @@ offset = Vector2(0, 1)
 script = ExtResource("3_hxh7i")
 leg_left = NodePath("LeftSprite")
 leg_right = NodePath("RightSprite")
-torso_connection_left = Vector2(0, 1)
-torso_connection_right = Vector2(0, 1)
 
 [node name="RightSprite" type="Sprite2D" parent="Legs" unique_id=1974496548]
 texture = ExtResource("4_p01fd")
@@ -47,7 +44,8 @@ offset = Vector2(0, 1)
 texture = ExtResource("4_p01fd")
 offset = Vector2(0, 1)
 
-[node name="Torso" type="Node2D" parent="." unique_id=733432245]
-script = ExtResource("3_depb0")
+[node name="Torso" type="Node2D" parent="." unique_id=733432245 node_paths=PackedStringArray("torso_sprite")]
+script = ExtResource("6_p01fd")
+torso_sprite = NodePath("TorsoSprite")
 
 [node name="TorsoSprite" type="Sprite2D" parent="Torso" unique_id=1093408775]
