@@ -4,8 +4,18 @@ extends BodyPart
 
 @export var torso_sprite: Sprite2D
 
+@export var torso_position: Vector2:
+	set(value):
+		if torso_sprite == null:
+			return
+		_torso_position = value
+		torso_sprite.position = value
+	get():
+		return _torso_position
 @export var arm_connection_position_left: Vector2:
 	set(value):
+		if _body == null:
+			return
 		if _body.arms == null:
 			return
 		_arm_connection_position_left = value
@@ -14,14 +24,19 @@ extends BodyPart
 		return _arm_connection_position_left
 @export var arm_connection_position_right: Vector2:
 	set(value):
+		if _body == null:
+			return
 		if _body.arms == null:
 			return
+		
 		_arm_connection_position_right = value
-		_body.arms.arm_right.position = _arm_connection_position_left
+		_body.arms.arm_right.position = arm_connection_position_right
 	get():
 		return _arm_connection_position_right
 @export var legs_connection_position_right: Vector2:
 	set(value):
+		if _body == null:
+			return
 		if _body.legs == null:
 			return
 		_legs_connection_position_right = value
@@ -30,6 +45,8 @@ extends BodyPart
 		return _legs_connection_position_right
 @export var legs_connection_position_left: Vector2:
 	set(value):
+		if _body == null:
+			return
 		if _body.legs == null:
 			return
 		_legs_connection_position_left = value
@@ -38,6 +55,8 @@ extends BodyPart
 		return _legs_connection_position_left
 @export var head_connection_position: Vector2:
 	set(value):
+		if _body == null:
+			return
 		if _body.head == null:
 			return
 		_head_connection_position = value
@@ -45,8 +64,30 @@ extends BodyPart
 	get():
 		return _head_connection_position
 
+var _torso_position: Vector2 = Vector2.ZERO
 var _arm_connection_position_left: Vector2 = Vector2.ZERO
 var _arm_connection_position_right: Vector2 = Vector2.ZERO
 var _legs_connection_position_left: Vector2 = Vector2.ZERO
 var _legs_connection_position_right: Vector2 = Vector2.ZERO
 var _head_connection_position: Vector2 = Vector2.ZERO
+
+
+func _ready() -> void:
+	super()
+	print("torso is ready")
+	torso_position = _torso_position
+	arm_connection_position_left = _arm_connection_position_left
+	arm_connection_position_right = _arm_connection_position_right
+	legs_connection_position_left = _legs_connection_position_left
+	legs_connection_position_right = _legs_connection_position_right
+	head_connection_position = _head_connection_position
+
+
+func setup_body_part(dict: Dictionary[String, Variant]) -> void:
+	super(dict)
+	torso_sprite = dict["sprite"]
+	arm_connection_position_left = dict["arm_connection_position_left"]
+	arm_connection_position_right = dict["arm_connection_position_right"]
+	legs_connection_position_left = dict["legs_connection_position_left"]
+	legs_connection_position_right = dict["legs_connection_position_right"]
+	head_connection_position = dict["head_connection_position"]

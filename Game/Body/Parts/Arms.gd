@@ -24,3 +24,18 @@ extends BodyPart
 
 var _torso_connection_left: Vector2 = Vector2.ZERO
 var _torso_connection_right: Vector2 = Vector2.ZERO
+
+
+func _ready() -> void:
+	super()
+	torso_connection_left = _torso_connection_left
+	torso_connection_right = _torso_connection_right
+	print("arms is ready")
+
+
+func setup_body_part(dict: Dictionary[String, Variant]) -> void:
+	super(dict)
+	arm_left = dict["sprite_left"]
+	arm_right = dict["sprite_right"]
+	torso_connection_left = dict["torso_connection_left"]
+	torso_connection_right = dict["torso_connection_right"]

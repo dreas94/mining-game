@@ -1,7 +1,7 @@
 class_name BodyPDA
 extends PushDownAutomataStateMachine
 
-func _init(body: Body) -> void:
+func _init(body: iBody) -> void:
 	owner = body
 
 

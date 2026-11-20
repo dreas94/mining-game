@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ArmsTemplate" format=3 uid="uid://cu7wr0sd8v61c"]
+
+[ext_resource type="Texture2D" uid="uid://b4kri8of2bho6" path="res://Game/Player/Textures/Leg.png" id="1_5wslv"]
+[ext_resource type="Script" uid="uid://ddplydnyfutb" path="res://Game/Unlocks/BodyPartTemplate/Variants/ArmsTemplate.gd" id="1_ju2am"]
+
+[resource]
+script = ExtResource("1_ju2am")
+arms_texture_left = ExtResource("1_5wslv")
+arms_texture_right = ExtResource("1_5wslv")
+torso_connection_left = Vector2(0, -1)
+torso_connection_right = Vector2(0, -1)
+metadata/_custom_type_script = "uid://ddplydnyfutb"

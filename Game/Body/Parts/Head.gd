@@ -9,13 +9,21 @@ extends BodyPart
 		if head_sprite == null:
 			return
 		_torso_connection = value
+		head_sprite.offset = value
 	get():
 		return _torso_connection
 
 var _torso_connection: Vector2 = Vector2.ZERO
 
 
+func _ready() -> void:
+	super()
+	_torso_connection = torso_connection
+	print("head is ready")
+
+
 func setup_body_part(dict: Dictionary[String, Variant]) -> void:
-	id = dict[id]
+	super(dict)
 	head_sprite = dict["sprite"]
+	torso_connection = dict["torso_connection"]
 	torso_connection = dict["torso_connection"]
