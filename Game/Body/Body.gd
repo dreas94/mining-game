@@ -26,8 +26,24 @@ extends Node2D
 var _pda: BodyPDA = BodyPDA.new(self)
 
 
+func _ready() -> void:
+	BodyPartCollection.unlock_toggled.connect(on_unlock_toggled)
+
+
 func _physics_process(delta: float) -> void:
 	if _pda == null:
 		return
 		
 	_pda.physics_update(delta)
+
+
+func on_unlock_toggled(new_unlock_id: String, _previous_unlock_id: String) -> void:
+	var template: BodyPartTemplate = Content.get_unlock_template(new_unlock_id)
+	if template is HeadTemplate:
+		head.setup_body_part(new_unlock_id, template.head_texture, template.torso_connection)
+	elif template is TorsoTemplate:
+		torso.setup_body_part(new_unlock_id, template.torso_texture, template.head_connection_position, template.torso_position, template.arm_connection_position_left, template.arm_connection_position_right, template.legs_connection_position_left, template.legs_connection_position_right)
+	elif template is ArmsTemplate:
+		arms.setup_body_part(new_unlock_id, template.arms_texture_left, template.arms_texture_right, template.torso_connection_left, template.torso_connection_right)
+	elif template is LegsTemplate:
+		legs.setup_body_part(new_unlock_id, template.legs_texture_left, template.legs_texture_right, template.torso_connection_left, template.torso_connection_right)

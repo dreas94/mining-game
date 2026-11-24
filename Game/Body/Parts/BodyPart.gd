@@ -12,9 +12,5 @@ func _ready() -> void:
 	_body = get_parent()
 
 
-func setup_body_part(dict: Dictionary[String, Variant]) -> void:
-	id = dict["id"]
-
-
-func body_part_flip_h(value: bool) -> void:
-	scale.x = 1.0 if value == false else -1.0
+func body_part_flip_h(_value: bool) -> void:
+	pass

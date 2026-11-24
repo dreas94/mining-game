@@ -22,8 +22,15 @@ func _ready() -> void:
 	print("head is ready")
 
 
-func setup_body_part(dict: Dictionary[String, Variant]) -> void:
-	super(dict)
-	head_sprite = dict["sprite"]
-	torso_connection = dict["torso_connection"]
-	torso_connection = dict["torso_connection"]
+func setup_body_part(id_string: String, texture: Texture2D, pos: Vector2) -> void:
+	id = id_string
+	head_sprite.texture = texture
+	torso_connection = pos
+
+
+func body_part_flip_h(value: bool) -> void:
+	if head_sprite.flip_h == value:
+		return
+	
+	_body.torso.head_connection_position *= -1
+	head_sprite.flip_h = value

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://7hl5tj3sjcvw"]
+
+[ext_resource type="Script" uid="uid://d0vlic67ki7ex" path="res://Interface/LayerMain/IdentityMenu/IdentityToggle/identityToggle.gd" id="1_l8gs3"]
+
+[node name="IdentityToggle" type="CheckButton" unique_id=960045615]
+script = ExtResource("1_l8gs3")

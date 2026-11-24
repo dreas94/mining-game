@@ -461,6 +461,7 @@ position = Vector2(0, 0.5)
 [node name="Node2D" type="Node2D" parent="." unique_id=1456490280]
 
 [node name="Goblin" type="Sprite2D" parent="Node2D" unique_id=1633610782]
+visible = false
 self_modulate = Color(0.0588235, 0.662745, 0.184314, 1)
 light_mask = 2
 texture_filter = 1
@@ -489,6 +490,7 @@ visible = false
 position = Vector2(0, -3.5)
 
 [node name="Pickaxe" type="Sprite2D" parent="Node2D" unique_id=68466281]
+visible = false
 modulate = Color(0.415686, 0.415686, 0.415686, 1)
 light_mask = 2
 texture_filter = 1

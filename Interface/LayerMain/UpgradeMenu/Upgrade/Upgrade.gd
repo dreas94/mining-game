@@ -40,7 +40,7 @@ func _on_item_count_altered_in_item_collection(item_id: String, _new_quantity: i
 	if not item_id in template.cost_id:
 		return
 	
-	var new_total_value: int = 0.0
+	var new_total_value: int = 0
 	var first: bool = true
 	
 	for index: int in range(template.cost_id.size()):

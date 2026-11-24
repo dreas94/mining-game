@@ -8,7 +8,7 @@ const SCRIPT_EXTENSIONS: Array[String] = ["gd", "gdc"]
 
 const ITEM_TEMPLATE_DIR: String = CONTENT_DIR + "ItemTemplates"
 const UPGRADE_TEMPLATE_DIR: String = CONTENT_DIR + "UpgradeTemplates"
-const UNLOCK_TEMPLATE_DIR: String = CONTENT_DIR + "UnlockTemplates"
+const UNLOCK_TEMPLATE_DIR: String = CONTENT_DIR + "BodyPartTemplates"
 
 var item_templates: ResourceProvider = ResourceProvider.new(
 		ITEM_TEMPLATE_DIR, RESOURCE_EXTENSIONS)
@@ -32,5 +32,5 @@ func get_upgrade_template(file_name_without_extension: String) -> UpgradeTemplat
 	return upgrade_templates.get_resource(file_name_without_extension) as UpgradeTemplate
 
 
-func get_unlock_template(file_name_without_extension: String) -> UnlockTemplate:
-	return unlock_templates.get_resource(file_name_without_extension) as UnlockTemplate
+func get_unlock_template(file_name_without_extension: String) -> BodyPartTemplate:
+	return unlock_templates.get_resource(file_name_without_extension)

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="TorsoTemplate" format=3 uid="uid://ccgesuku8r6ps"]
+
+[ext_resource type="Script" uid="uid://74hqn22ybgvb" path="res://Game/Unlocks/BodyPartTemplate/Variants/TorsoTemplate.gd" id="1_51l5a"]
+[ext_resource type="Texture2D" uid="uid://bm87ptesqswb8" path="res://Game/Player/Textures/Torso.png" id="2_phrsi"]
+
+[resource]
+script = ExtResource("1_51l5a")
+torso_texture = ExtResource("2_phrsi")
+torso_position = Vector2(0, -2)
+head_connection_position = Vector2(1, 0)
+arm_connection_position_left = Vector2(5.5, 0.5)
+arm_connection_position_right = Vector2(-5.5, 0.5)
+legs_connection_position_right = Vector2(3.5, 2.5)
+legs_connection_position_left = Vector2(-3.5, 2.5)
+name = "Goblin"
+metadata/_custom_type_script = "uid://74hqn22ybgvb"

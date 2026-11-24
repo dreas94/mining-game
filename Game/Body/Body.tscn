@@ -2,13 +2,9 @@
 
 [ext_resource type="Script" uid="uid://caslife40rs0" path="res://Game/Body/Body.gd" id="1_pl6rm"]
 [ext_resource type="Script" uid="uid://wdqdiaflyxr4" path="res://Game/Body/Parts/Arms.gd" id="2_chk2l"]
-[ext_resource type="Texture2D" uid="uid://drjxkesrh35pn" path="res://Game/Player/Textures/Little Guy.png" id="2_epqs3"]
 [ext_resource type="Script" uid="uid://bpq6nwccbcnty" path="res://Game/Body/Parts/Head.gd" id="2_utwiv"]
 [ext_resource type="Script" uid="uid://drdlm03h27jgw" path="res://Game/Body/Parts/Legs.gd" id="3_hxh7i"]
-[ext_resource type="Texture2D" uid="uid://b4kri8of2bho6" path="res://Game/Player/Textures/Leg.png" id="4_p01fd"]
-[ext_resource type="Texture2D" uid="uid://v6pfgmhajren" path="res://Game/Player/Textures/Face.png" id="4_ycofd"]
 [ext_resource type="Script" uid="uid://c5y0ubftaf3dk" path="res://Game/Body/Parts/Torso.gd" id="6_p01fd"]
-[ext_resource type="Texture2D" uid="uid://bm87ptesqswb8" path="res://Game/Player/Textures/Torso.png" id="9_ycofd"]
 
 [node name="Body" type="Node2D" unique_id=2032382010 node_paths=PackedStringArray("head", "arms", "legs", "torso")]
 script = ExtResource("1_pl6rm")
@@ -17,72 +13,64 @@ arms = NodePath("Arms")
 legs = NodePath("Legs")
 torso = NodePath("Torso")
 
-[node name="Goblin2" type="Sprite2D" parent="." unique_id=1708274430]
-self_modulate = Color(0.0588235, 0.662745, 0.184314, 1)
-light_mask = 2
-texture_filter = 1
-position = Vector2(0, -3.5)
-texture = ExtResource("2_epqs3")
-hframes = 6
-
 [node name="Torso" type="Node2D" parent="." unique_id=733432245 node_paths=PackedStringArray("torso_sprite")]
 script = ExtResource("6_p01fd")
 torso_sprite = NodePath("TorsoSprite")
 torso_position = Vector2(0, -2)
-arm_connection_position_left = Vector2(-5.5, 1.5)
-arm_connection_position_right = Vector2(5.5, 1.5)
-legs_connection_position_right = Vector2(3.5, 3.5)
-legs_connection_position_left = Vector2(-3.5, 3.5)
-head_connection_position = Vector2(0, -2)
+arm_connection_position_right = Vector2(5.5, 0.5)
+arm_connection_position_left = Vector2(-5.5, 0.5)
+legs_connection_position_right = Vector2(3.5, 2.5)
+legs_connection_position_left = Vector2(-3.5, 2.5)
+head_connection_position = Vector2(1, 0)
 
 [node name="TorsoSprite" type="Sprite2D" parent="Torso" unique_id=1093408775]
 light_mask = 2
 texture_filter = 1
 position = Vector2(0, -2)
-texture = ExtResource("9_ycofd")
 
 [node name="Head" type="Node2D" parent="." unique_id=696063763 node_paths=PackedStringArray("head_sprite")]
-position = Vector2(0, -2)
+position = Vector2(1, 0)
 script = ExtResource("2_utwiv")
 head_sprite = NodePath("HeadSprite")
-torso_connection = Vector2(1, 2)
 
 [node name="HeadSprite" type="Sprite2D" parent="Head" unique_id=143543386]
 light_mask = 2
 texture_filter = 1
-texture = ExtResource("4_ycofd")
-offset = Vector2(1, 2)
 
 [node name="Arms" type="Node2D" parent="." unique_id=211929543 node_paths=PackedStringArray("arm_left", "arm_right")]
 script = ExtResource("2_chk2l")
 arm_left = NodePath("LeftSprite")
 arm_right = NodePath("RightSprite")
+torso_connection_left = Vector2(0, 1)
+torso_connection_right = Vector2(0, 1)
 
 [node name="LeftSprite" type="Sprite2D" parent="Arms" unique_id=842676359]
 light_mask = 2
 texture_filter = 1
-position = Vector2(-5.5, 1.5)
-texture = ExtResource("4_p01fd")
+position = Vector2(-5.5, 0.5)
+offset = Vector2(0, 1)
 
 [node name="RightSprite" type="Sprite2D" parent="Arms" unique_id=1765607073]
 light_mask = 2
 texture_filter = 1
-position = Vector2(5.5, 1.5)
-texture = ExtResource("4_p01fd")
+position = Vector2(5.5, 0.5)
+offset = Vector2(0, 1)
 
-[node name="Legs" type="Node2D" parent="." unique_id=1743009140 node_paths=PackedStringArray("leg_left", "leg_right")]
+[node name="Legs" type="Node2D" parent="." unique_id=1743009140 node_paths=PackedStringArray("leg_right", "leg_left")]
 script = ExtResource("3_hxh7i")
-leg_left = NodePath("LeftSprite")
 leg_right = NodePath("RightSprite")
+leg_left = NodePath("LeftSprite")
+torso_connection_left = Vector2(0, 1)
+torso_connection_right = Vector2(0, 1)
 
 [node name="RightSprite" type="Sprite2D" parent="Legs" unique_id=1974496548]
 light_mask = 2
 texture_filter = 1
-position = Vector2(3.5, 3.5)
-texture = ExtResource("4_p01fd")
+position = Vector2(3.5, 2.5)
+offset = Vector2(0, 1)
 
 [node name="LeftSprite" type="Sprite2D" parent="Legs" unique_id=336554231]
 light_mask = 2
 texture_filter = 1
-position = Vector2(-3.5, 3.5)
-texture = ExtResource("4_p01fd")
+position = Vector2(-3.5, 2.5)
+offset = Vector2(0, 1)

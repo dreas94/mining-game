@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="HeadTemplate" format=3 uid="uid://d1y5rsfqk2cn6"]
+
+[ext_resource type="Texture2D" uid="uid://v6pfgmhajren" path="res://Game/Player/Textures/Face.png" id="1_16tfx"]
+[ext_resource type="Script" uid="uid://bd4jdpwmrv3b7" path="res://Game/Unlocks/BodyPartTemplate/Variants/HeadTemplate.gd" id="1_g5whx"]
+
+[resource]
+script = ExtResource("1_g5whx")
+head_texture = ExtResource("1_16tfx")
+name = "Goblin"
+metadata/_custom_type_script = "uid://bd4jdpwmrv3b7"

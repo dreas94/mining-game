@@ -13,7 +13,7 @@ content_margin_left = 10.0
 content_margin_top = 5.0
 content_margin_right = 10.0
 
-[node name="Identity" type="Control" unique_id=273544417 node_paths=PackedStringArray("_vbox_container")]
+[node name="Identity" type="Control" unique_id=273544417 node_paths=PackedStringArray("_face_vbox_container", "_torso_vbox_container", "_arms_vbox_container", "_legs_vbox_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,7 +21,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vnj1m")
-_vbox_container = NodePath("MarginContainer/PanelContainer/VBoxContainer")
+_face_vbox_container = NodePath("MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/TabContainer/Face/VBoxContainer")
+_torso_vbox_container = NodePath("MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/TabContainer/Torso/VBoxContainer2")
+_arms_vbox_container = NodePath("MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/TabContainer/Arms/VBoxContainer3")
+_legs_vbox_container = NodePath("MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/TabContainer/Legs/VBoxContainer4")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1464299704]
 layout_mode = 1
@@ -45,28 +48,43 @@ layout_mode = 2
 text = "Who am I?"
 horizontal_alignment = 1
 
-[node name="TabContainer" type="TabContainer" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=969989085]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=1263590896]
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=969989085]
 custom_minimum_size = Vector2(900, 350)
 layout_mode = 2
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_saan6")
 theme_override_styles/tab_selected = SubResource("StyleBoxFlat_vnj1m")
 current_tab = 0
 
-[node name="Face" type="PanelContainer" parent="MarginContainer/PanelContainer/VBoxContainer/TabContainer" unique_id=1819036813]
+[node name="Face" type="PanelContainer" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/TabContainer" unique_id=1819036813]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="Torso" type="PanelContainer" parent="MarginContainer/PanelContainer/VBoxContainer/TabContainer" unique_id=1034950549]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/TabContainer/Face" unique_id=408841450]
+layout_mode = 2
+
+[node name="Torso" type="PanelContainer" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/TabContainer" unique_id=1034950549]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="Arms" type="PanelContainer" parent="MarginContainer/PanelContainer/VBoxContainer/TabContainer" unique_id=1400150109]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/TabContainer/Torso" unique_id=1517159748]
+layout_mode = 2
+
+[node name="Arms" type="PanelContainer" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/TabContainer" unique_id=1400150109]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="Legs" type="PanelContainer" parent="MarginContainer/PanelContainer/VBoxContainer/TabContainer" unique_id=1020206189]
+[node name="VBoxContainer3" type="VBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/TabContainer/Arms" unique_id=905008707]
+layout_mode = 2
+
+[node name="Legs" type="PanelContainer" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/TabContainer" unique_id=1020206189]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 3
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/TabContainer/Legs" unique_id=184398210]
+layout_mode = 2

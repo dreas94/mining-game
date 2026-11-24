@@ -12,16 +12,6 @@ extends BodyPart
 		torso_sprite.position = value
 	get():
 		return _torso_position
-@export var arm_connection_position_left: Vector2:
-	set(value):
-		if _body == null:
-			return
-		if _body.arms == null:
-			return
-		_arm_connection_position_left = value
-		_body.arms.arm_left.position = _arm_connection_position_left
-	get():
-		return _arm_connection_position_left
 @export var arm_connection_position_right: Vector2:
 	set(value):
 		if _body == null:
@@ -33,6 +23,16 @@ extends BodyPart
 		_body.arms.arm_right.position = arm_connection_position_right
 	get():
 		return _arm_connection_position_right
+@export var arm_connection_position_left: Vector2:
+	set(value):
+		if _body == null:
+			return
+		if _body.arms == null:
+			return
+		_arm_connection_position_left = value
+		_body.arms.arm_left.position = _arm_connection_position_left
+	get():
+		return _arm_connection_position_left
 @export var legs_connection_position_right: Vector2:
 	set(value):
 		if _body == null:
@@ -83,11 +83,20 @@ func _ready() -> void:
 	head_connection_position = _head_connection_position
 
 
-func setup_body_part(dict: Dictionary[String, Variant]) -> void:
-	super(dict)
-	torso_sprite = dict["sprite"]
-	arm_connection_position_left = dict["arm_connection_position_left"]
-	arm_connection_position_right = dict["arm_connection_position_right"]
-	legs_connection_position_left = dict["legs_connection_position_left"]
-	legs_connection_position_right = dict["legs_connection_position_right"]
-	head_connection_position = dict["head_connection_position"]
+func setup_body_part(id_string: String, texture: Texture2D, head_position: Vector2, torso_pos: Vector2, arm_position_left: Vector2, arm_position_right: Vector2, leg_position_left: Vector2, leg_position_right: Vector2) -> void:
+	id = id_string
+	torso_sprite.texture = texture
+	torso_position = torso_pos
+	head_connection_position = head_position
+	arm_connection_position_left = arm_position_left
+	arm_connection_position_right = arm_position_right
+	legs_connection_position_left = leg_position_left
+	legs_connection_position_right = leg_position_right
+
+
+func body_part_flip_h(value: bool) -> void:
+	if torso_sprite.flip_h == value:
+		return
+	
+	torso_position.x *= -1
+	torso_sprite.flip_h = value

@@ -7,6 +7,7 @@
 script = ExtResource("1_ju2am")
 arms_texture_left = ExtResource("1_5wslv")
 arms_texture_right = ExtResource("1_5wslv")
-torso_connection_left = Vector2(0, -1)
-torso_connection_right = Vector2(0, -1)
+torso_connection_left = Vector2(0, 1)
+torso_connection_right = Vector2(0, 1)
+name = "Goblin"
 metadata/_custom_type_script = "uid://ddplydnyfutb"

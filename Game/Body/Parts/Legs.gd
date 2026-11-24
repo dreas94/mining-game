@@ -2,8 +2,8 @@
 class_name BodyPartLegs
 extends BodyPart
 
-@export var leg_left: Sprite2D
 @export var leg_right: Sprite2D
+@export var leg_left: Sprite2D
 
 @export var torso_connection_left: Vector2:
 	set(value):
@@ -33,9 +33,21 @@ func _ready() -> void:
 	print("legs is ready")
 
 
-func setup_body_part(dict: Dictionary[String, Variant]) -> void:
-	super(dict)
-	leg_left = dict["sprite_left"]
-	leg_right = dict["sprite_right"]
-	torso_connection_left = dict["torso_connection_left"]
-	torso_connection_right = dict["torso_connection_right"]
+func setup_body_part(id_string: String, texture_left: Texture2D, texture_right: Texture2D, connection_left: Vector2, connection_right: Vector2) -> void:
+	id = id_string
+	leg_left.texture = texture_left
+	leg_right.texture = texture_right
+	torso_connection_left = connection_left
+	torso_connection_right = connection_right
+
+
+func body_part_flip_h(value: bool) -> void:
+	if leg_right.flip_h == value:
+		return
+	if leg_left.flip_h == value:
+		return
+	
+	_body.torso.arm_connection_position_right.x *= -1
+	leg_right.flip_h = value
+	_body.torso.arm_connection_position_left.x *= -1
+	leg_left.flip_h = value

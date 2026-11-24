@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LegsTemplate" format=3 uid="uid://cblr4ixb3hrq1"]
+
+[ext_resource type="Texture2D" uid="uid://b4kri8of2bho6" path="res://Game/Player/Textures/Leg.png" id="1_77e6w"]
+[ext_resource type="Script" uid="uid://harr0f23wnj3" path="res://Game/Unlocks/BodyPartTemplate/Variants/LegsTemplate.gd" id="1_jqlsv"]
+
+[resource]
+script = ExtResource("1_jqlsv")
+legs_texture_left = ExtResource("1_77e6w")
+legs_texture_right = ExtResource("1_77e6w")
+torso_connection_left = Vector2(0, 1)
+torso_connection_right = Vector2(0, 1)
+name = "Goblin"
+metadata/_custom_type_script = "uid://harr0f23wnj3"

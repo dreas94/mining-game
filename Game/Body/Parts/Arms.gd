@@ -33,9 +33,21 @@ func _ready() -> void:
 	print("arms is ready")
 
 
-func setup_body_part(dict: Dictionary[String, Variant]) -> void:
-	super(dict)
-	arm_left = dict["sprite_left"]
-	arm_right = dict["sprite_right"]
-	torso_connection_left = dict["torso_connection_left"]
-	torso_connection_right = dict["torso_connection_right"]
+func setup_body_part(id_string: String, texture_left: Texture2D, texture_right: Texture2D, connection_left: Vector2, connection_right: Vector2) -> void:
+	id = id_string
+	arm_left.texture = texture_left
+	arm_right.texture = texture_right
+	torso_connection_left = connection_left
+	torso_connection_right = connection_right
+
+
+func body_part_flip_h(value: bool) -> void:
+	if arm_right.flip_h == value:
+		return
+	if arm_left.flip_h == value:
+		return
+	
+	_body.torso.arm_connection_position_right.x *= -1
+	arm_right.flip_h = value
+	_body.torso.arm_connection_position_left.x *= -1
+	arm_left.flip_h = value
