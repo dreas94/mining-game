@@ -1,12 +1,13 @@
-class_name PickaxePDARecoveryState
-extends PickaxePDAState
+class_name ArmsPDARecoveryState
+extends BodyPartPDAState
 var _original_color: Color = Color(0.635, 0.161, 0.0)
-var _final_color: Color = Color(0.416, 0.416, 0.416)
+var _final_color: Color = Color(1.0, 1.0, 1.0)
 var _tween_time: float = 0.1
 var _tween: Tween
 
 func on_state_pushed() -> void:
-	_tween_time /= pda.owner.mining_speed
+	_original_color = pda.owner.arm_right.modulate
+	_tween_time /= Mines.player.mining_speed
 	_start_tween()
 
 
@@ -35,5 +36,5 @@ func _start_tween() -> void:
 	
 	_tween = pda.owner.create_tween()
 	_tween.set_parallel(true)
-	_tween.tween_property(pda.owner.pickaxe_sprite,"modulate", _final_color, _tween_time).from(_original_color)
+	_tween.tween_property(pda.owner.arm_right,"modulate", _final_color, _tween_time).from(_original_color)
 	_tween.tween_callback(pop_state_from_stack).set_delay(_tween_time)

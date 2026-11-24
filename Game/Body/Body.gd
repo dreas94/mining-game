@@ -1,4 +1,3 @@
-@tool
 class_name iBody
 extends Node2D
 
@@ -23,18 +22,15 @@ extends Node2D
 		torso.body_part_flip_h(value)
 		flip_h = value
 
-var _pda: BodyPDA = BodyPDA.new(self)
 
+var player_ref: WeakRef
 
 func _ready() -> void:
+	player_ref = weakref(get_parent())
 	BodyPartCollection.unlock_toggled.connect(on_unlock_toggled)
-
-
-func _physics_process(delta: float) -> void:
-	if _pda == null:
-		return
-		
-	_pda.physics_update(delta)
+	for unlock_id: String in BodyPartCollection.get_toggled_unlocks():
+		on_unlock_toggled(unlock_id, "")
+	
 
 
 func on_unlock_toggled(new_unlock_id: String, _previous_unlock_id: String) -> void:

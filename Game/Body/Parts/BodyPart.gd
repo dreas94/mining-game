@@ -1,4 +1,3 @@
-@tool
 class_name BodyPart
 extends Node2D
 

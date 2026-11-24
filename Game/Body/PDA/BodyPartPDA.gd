@@ -1,8 +1,8 @@
-class_name PickaxePDA
+class_name BodyPartPDA
 extends PushDownAutomataStateMachine
 
-func _init(player: iPlayer) -> void:
-	owner = player
+func _init(body_part: BodyPartArms) -> void:
+	owner = body_part
 
 
 func physics_update(delta: float) -> void:

@@ -1,2 +1,2 @@
-class_name PickaxePDAState
+class_name BodyPartPDAState
 extends PushDownAutomataState

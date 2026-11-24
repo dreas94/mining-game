@@ -6,7 +6,6 @@ signal mine_attempt_by_local_position(damage: int, local_position: Vector2)
 @export var animation_player: AnimationPlayer
 @export var wisp_sprite: Sprite2D
 @export var character_sprite: Node2D
-@export var pickaxe_sprite: Sprite2D
 @export var camera: Camera2D
 @export var ray_2d: RayCast2D
 @export var light: AnimatedPointLight2D
@@ -14,8 +13,8 @@ signal mine_attempt_by_local_position(damage: int, local_position: Vector2)
 @export var acceleration: float = 400.0
 @export var deacceleration: float = acceleration
 @export var gravity: float = 400.0
+@export var body: iBody
 
-var _pickaxe_pda: PickaxePDA = PickaxePDA.new(self)
 var _pda: PlayerPDA = PlayerPDA.new(self)
 var alive: BoolAttribute = BoolAttribute.new(true)
 var last_tile_grid_pos_ray_casted: Vector2i = Vector2i.MAX
@@ -73,7 +72,6 @@ var jump_height: float:
 
 func _ready() -> void:
 	_pda.push_state_to_stack(PlayerPDAIdleState.new())
-	_pickaxe_pda.push_state_to_stack(PickaxePDAIdleState.new())
 	light.base_scale = remap(Health.current, 0.0, Health.INITIAL, 0.0, 0.5)
 	light.scale_range = remap(Health.current, 0.0, Health.INITIAL, 0.0, 0.2)
 	
@@ -93,7 +91,6 @@ func _physics_process(delta: float) -> void:
 	move_direction = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 	_handle_ray_cast()
 	_pda.physics_update(delta)
-	_pickaxe_pda.physics_update(delta)
 
 
 func _input(event: InputEvent) -> void:
@@ -127,14 +124,15 @@ func _on_alive_changed(current: bool, _previous: bool) -> void:
 	if current == true:
 		return
 	_pda.clear_stack()
-	_pickaxe_pda.clear_stack()
+	#_pickaxe_pda.clear_stack()
 
 
 func _handle_ray_cast() -> void:
 	if Game.state.active_state is GameStateCamp:
 		return
 	
-	if _pickaxe_pda.state_stack[-1] is PickaxePDASwingState:
+	## FIX THIS FUTURE ANDREAS
+	if body.arms._pda.state_stack[-1] is ArmPDASwingState:
 		return
 	
 	var previous_tile: Tile = Mines.tile_handler.get_tile_in_grid_position(last_tile_grid_pos_ray_casted)

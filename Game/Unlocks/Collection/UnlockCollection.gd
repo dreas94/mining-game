@@ -26,7 +26,8 @@ func toggle_unlock(unlock_id: String) -> void:
 			continue
 		if not _unlocks[key].toggled:
 			continue
-		previous_unlock_id = key
+		if unlock_id != key:
+			previous_unlock_id = key
 		break
 	
 	_unlocks[unlock_id].toggled = true
@@ -43,6 +44,17 @@ func remove_unlock(unlock_id: String) -> void:
 
 func get_unlocks() -> Dictionary[String, bool]:
 	return _unlocks.duplicate()
+
+
+func get_toggled_unlocks() -> Array[String]:
+	var toggled_array: Array[String] = []
+	for key: String in _unlocks:
+		if not _unlocks[key].toggled:
+			continue
+		
+		toggled_array.append(key)
+	
+	return toggled_array
 
 
 class BodyPartUnlock:

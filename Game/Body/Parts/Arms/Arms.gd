@@ -1,4 +1,3 @@
-@tool
 class_name BodyPartArms
 extends BodyPart
 
@@ -24,13 +23,21 @@ extends BodyPart
 
 var _torso_connection_left: Vector2 = Vector2.ZERO
 var _torso_connection_right: Vector2 = Vector2.ZERO
-
+var _pda: BodyPartPDA = BodyPartPDA.new(self)
 
 func _ready() -> void:
 	super()
+	_pda.push_state_to_stack(ArmsPDAIdleState.new())
 	torso_connection_left = _torso_connection_left
 	torso_connection_right = _torso_connection_right
 	print("arms is ready")
+
+
+func _physics_process(delta: float) -> void:
+	if _pda == null:
+		return
+		
+	_pda.physics_update(delta)
 
 
 func setup_body_part(id_string: String, texture_left: Texture2D, texture_right: Texture2D, connection_left: Vector2, connection_right: Vector2) -> void:
